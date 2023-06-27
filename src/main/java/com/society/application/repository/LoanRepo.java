@@ -1,10 +1,14 @@
 package com.society.application.repository;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.society.application.dto.LoanWithLoanMasterDTO;
 import com.society.application.model.Loan;
 
 @Repository
@@ -29,6 +33,13 @@ public interface LoanRepo extends JpaRepository<Loan, Integer> {
 	
 	@Query(value="select * from loan where type='Gold'",nativeQuery=true)
 	List<Loan> searchGoldLoan();
+	
+	//@Query("select  ln from Loan ln INNER JOIN FETCH  LoanMaster  lm on ln.loanPlanName = lm.id where ln.id =:id")
+	
+	@Query("SELECT new  com.society.application.dto.LoanWithLoanMasterDTO(ln, lm) " +
+            "FROM Loan ln INNER JOIN LoanMaster lm ON ln.loanPlanName = lm.id " +
+            "WHERE ln.id = :id")
+	Optional<LoanWithLoanMasterDTO> findLoanWithLoanMasterById(@Param("id") Integer id);
 
 	
 }

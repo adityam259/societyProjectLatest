@@ -3,8 +3,8 @@
 	onload="getAllLoans();getAllLoanId();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post" action="updateLoanRegularEMIRepaymentGroup"
-		id="form1" modelAttribute="updateLoan">
+	
+		
 		<%
          String status = (String)request.getAttribute("status");
          if(status!=null && "success".equals(status)){
@@ -130,7 +130,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="phoneno" type="text" readonly="readonly"
 													id="phoneno" class="form-control"
 													PlaceHolder="Enter Mobile No" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorMobileNo"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Mobile No</span>
 											</div>
@@ -143,7 +143,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="cspName" type="text" readonly="readonly"
 													id="cspName" class="form-control"
 													PlaceHolder="Enter Branch Name" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatortxtBranchName"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Branch Name</span>
 											</div>
@@ -158,7 +158,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name=loanPlanName type="text" readonly="readonly"
 													id="loanPlanName" class="form-control"
 													PlaceHolder="Enter Plan Name" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName"
+												
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Loan Plan Name</span>
 											</div>
@@ -171,7 +171,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="planTerm" type="text" readonly="readonly"
 													id="planTerm" class="form-control"
 													PlaceHolder="Enter Plan Term" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorPlanTerm"
+											
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Plan Term</span>
 											</div>
@@ -183,7 +183,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 											<div class="col-sm-7">
 												<input name="mode" type="text" readonly="readonly" id="mode"
 													class="form-control" PlaceHolder="Enter Loan Mode" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorLoanMode"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Loan Mode</span>
 											</div>
@@ -196,7 +196,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="loanAmount" type="text" readonly="readonly"
 													id="loanAmount" class="form-control"
 													PlaceHolder="Enter Loan Amount" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidator2"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Loan Amount</span>
 											</div>
@@ -209,7 +209,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="loanROI" type="text" readonly="readonly"
 													id="loanROI" class="form-control"
 													PlaceHolder="Enter Loan ROI" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorLoanROI"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Loan ROI</span>
 											</div>
@@ -234,7 +234,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<input name="emiAmount" type="text" readonly="readonly"
 													id="emiAmount" class="form-control"
 													PlaceHolder="Enter Emi Amount" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorEmiAmount"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Emi Amount</span>
 											</div>
@@ -281,6 +281,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 						<div class="col-md-12">
 							<div class="box box-danger">
 								<div class="box-header with-border">
+								
+								
+								<form id="fileUploadForm">
+								
+								
 									<h3 class="box-title">Payment Details</h3>
 								</div>
 								<div class="box-body">
@@ -355,11 +360,10 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<select name="ctl00$ContentPlaceHolder1$ddlCSPName"
-													id="ContentPlaceHolder1_ddlCSPName" class="form-control"
-													style="width: 100%;">
-													<option value="001">Main Office - 001</option>
-												</select>
+												<input name="branchName"
+													type="text" 
+													id="branchName"
+													class="form-control" PlaceHolder="Pay Branch" />
 											</div>
 										</div>
 										<div class="form-group row">
@@ -384,11 +388,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="ctl00$ContentPlaceHolder1$txtPaymentDate"
+													<input name="payDate"
+													readonly="readonly"
 														type="text" value="01/08/2022"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtPaymentDate\&#39;,\&#39;\&#39;)&#39;, 0)"
 														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtPaymentDate"
+														id="payDate"
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -419,14 +424,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												Amount<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtPayableAmount"
+												<input name="emiAmount1"
 													type="text"
-													onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtPayableAmount\&#39;,\&#39;\&#39;)&#39;, 0)"
-													onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;return isNumberKey(this, event);"
-													id="ContentPlaceHolder1_txtPayableAmount"
+													id="emiAmount1"
 													class="form-control" PlaceHolder="Enter Payable Amount"
 													onpaste="return false" autocomplete="off" /> <span
-													id="ContentPlaceHolder1_RequiredFieldValidatorPayableAmount"
+													
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Payable Amount</span>
 											</div>
@@ -436,9 +439,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												class="col-sm-4 control-label">Net Amt.<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtTotalPayableAmt"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtTotalPayableAmt"
+												<input name="loanAmount1"
+													type="text" 
+													id="loanAmount1"
 													class="form-control" PlaceHolder="Enter Total Payable Amt." />
 												<span
 													id="ContentPlaceHolder1_RequiredFieldValidatorTotalPayableAmt"
@@ -452,9 +455,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													By<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<select name="ctl00$ContentPlaceHolder1$ddlPaymode"
+													<select name="paymode"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlPaymode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														id="ContentPlaceHolder1_ddlPaymode" class="form-control"
+														id="paymode" class="form-control"
 														style="width: 100%;">
 														<option selected="selected" value="Cash">Cash</option>
 														<option value="Cheque">Cheque</option>
@@ -475,14 +478,13 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Code<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorCode"
+													<input name="advisorCode"
 														type="text"
-														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtAdvisorCode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtAdvisorCode"
+												
+														id="advisorCode"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Code" /> <span
-														id="ContentPlaceHolder1_RequiredFieldValidator6"
+													
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Advisor/Collector Code</span>
 												</div>
@@ -491,12 +493,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Name<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorName"
-														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtAdvisorName"
+													<input name="advisorName"
+														type="text" 
+														id="advisorName"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Name" /> <span
-														id="ContentPlaceHolder1_RequiredFieldValidator7"
+
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Advisor/Collector Name</span>
 												</div>
@@ -505,8 +507,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 										<div class="form-group row">
 											<label class="col-sm-5 control-label">Remarks</label>
 											<div class="col-sm-7">
-												<textarea name="ctl00$ContentPlaceHolder1$txtRemarks"
-													rows="2" cols="20" id="ContentPlaceHolder1_txtRemarks"
+												<textarea name="remarks" readonly="readonly"
+													rows="2" cols="20" id="remarks"
 													class="form-control" Placeholder="Enter Remarks if any">
 </textarea>
 											</div>
@@ -516,14 +518,18 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 								<div class="box-footer">
 									<div class="row col-md-12">
 										
+										<input type="hidden" name="loanmasterID" id ="loanmasterID" >
 										
-										<input type="submit" name="save" value="Save Data" id="save"
-											class="btn btn-success pull-right margin-r-5" />
+									
+											
+											<button id="submitBtn" type="button" class="btn btn-success pull-right margin-r-5">Save-Data</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					
+					</form>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="box box-success"
@@ -540,6 +546,33 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
+
+
+        <script>
+		$(document).ready(function() {
+			$('#submitBtn').click(function() {
+				var form = $('#fileUploadForm')[0];
+				var data = new FormData(form);
+				$.ajax({
+					url: 'updateLoanRegularEMIRepaymentGroup',
+					type: 'POST',
+					enctype: 'multipart/form-data',
+					data: data,
+					processData: false,
+					contentType: false,
+					cache: false,
+					success: function(response) {
+						console.log(response);
+						alert(response);
+						window.location.href = "LoanRepayment5c22";
+					},
+					error: function(xhr, status, error) {
+						console.log(xhr.responseText);
+					}
+				});
+			});
+		});
+	</script>
 
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
@@ -875,7 +908,7 @@ document.getElementById('ContentPlaceHolder1_RequiredFieldValidator7').dispose =
 }
 //]]>
 </script>
-	</form>
+	
 </body>
 
 <!-- Dk/Admin/LoanRepayment.aspx?Type=Gold EDB D 09:27:11 GMT -->
