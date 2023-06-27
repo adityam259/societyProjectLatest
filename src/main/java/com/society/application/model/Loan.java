@@ -84,10 +84,10 @@ public class Loan {
 	private String paymode;
 	private String charges;
 	private String remarks;
+	private String branchname;
 	@Transient
 	private String loanPlanNameView;
 	private String modeRegOrIrr;
-	
 
 	public String getModeRegOrIrr() {
 		return modeRegOrIrr;
@@ -695,6 +695,14 @@ public class Loan {
 
 	public void setTotItemWt(String totItemWt) {
 		this.totItemWt = totItemWt;
+	}
+
+	public String getBranchname() {
+		return branchname;
+	}
+
+	public void setBranchname(String branchname) {
+		this.branchname = branchname;
 	}
 
 	@Override

@@ -3,6 +3,7 @@
 <%@page import="com.society.application.model.Member"%>
 <%@page import="com.society.application.model.BranchMaster"%>
 <%@page import="com.society.application.model.LoanMaster"%>
+<%@page import="com.society.application.model.ClientMaster"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- Dk/Admin/LoanApplication.aspx?Type=Approval EDB D 09:27:09 GMT -->
@@ -151,7 +152,7 @@ input:checked+.slider:before {
 <script src="dist/js/LoanModuleJs.js"></script>
 </head>
 <body
-	onload="getListOfLoanId();callGetAllMasterData();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
+	onload="getListOfLoanId();callGetAllMasterData();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();"
 	class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
@@ -178,7 +179,6 @@ input:checked+.slider:before {
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -190,7 +190,8 @@ input:checked+.slider:before {
 					</ol>
 				</section>
 				<%
-				List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+				//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+				List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 				%>
 				<%
 				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
@@ -198,10 +199,8 @@ input:checked+.slider:before {
 				<%
 				List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster");
 				%>
-					<input name="id" type="hidden" 
-														id="id" class="form-control"
-														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
-														data-mask="" />
+				<input name="id" type="hidden" id="id" class="form-control"
+					data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;" data-mask="" />
 
 				<section class="content">
 					<div id="ContentPlaceHolder1_idSearch" class="row">
@@ -221,11 +220,11 @@ input:checked+.slider:before {
 												List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 												%>
 												<div class="col-sm-8">
-													<select name="searchLoanId" onchange="getByLoanId('approve')"
-														id="searchLoanId1" class="form-control select2"
-														style="width: 100%;">
-													<option selected="selected" value="">Select Loan ID</option>
-														
+													<select name="searchLoanId"
+														onchange="getByLoanId('approve')" id="searchLoanId1"
+														class="form-control select2" style="width: 100%;">
+														<option selected="selected" value="">Select Loan
+															ID</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -279,7 +278,8 @@ input:checked+.slider:before {
 													class="form-control select2" style="width: 100%;">
 													<%
 													if (memberList != null && !memberList.isEmpty()) {
-														for (Member member : memberList) {
+														for (/* Member member : memberList */
+																ClientMaster member : memberList) {
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName()%></option>
 													<%
@@ -316,7 +316,7 @@ input:checked+.slider:before {
 														<i class="fa fa-calendar"></i>
 													</div>
 													<input name="DOB" type="text" value="01/08/2022"
-														readonly="readonly" id="DOB" class="form-control"
+														readonly="readonly" id="dob" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
@@ -809,26 +809,19 @@ input:checked+.slider:before {
 											<label for="txtProcessingFee" class="col-sm-4 control-label">Approval
 												Status</label>
 											<div class="col-sm-8">
-												<select name="approvalStatus" 
-														id="approvalStatus" class="form-control select2"
-														style="width: 100%;">
-														
+												<select name="approvalStatus" id="approvalStatus"
+													class="form-control select2" style="width: 100%;">
 													<option selected="selected" value="reject">Reject</option>
 													<option selected="selected" value="approved">Approved</option>
-													
-														
-													</select>
-												
+												</select>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-
-									<input type="submit"
-											name="ctl00$ContentPlaceHolder1$btnSave" value="Approve"
-											id="ContentPlaceHolder1_btnSave"
+										<input type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
+											value="Approve" id="ContentPlaceHolder1_btnSave"
 											class="btn btn-success pull-right margin-r-5" />
 									</div>
 								</div>
@@ -907,7 +900,6 @@ input:checked+.slider:before {
                 })
                 //Money Euro
                 $('[data-mask]').inputmask()
-            
                 //iCheck for checkbox and radio inputs
                 $('span[type="checkbox"].minimal').iCheck({
                     checkboxClass: 'icheckbox_minimal-blue',

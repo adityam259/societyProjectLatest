@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="com.society.application.model.LoanPlanMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Member"%>
@@ -111,6 +112,7 @@ input:checked+.slider:before {
 .slider.round:before {
 	border-radius: 50%;
 }
+
 /* profile pic */
 canvas {
 	height: 175px;
@@ -174,9 +176,8 @@ canvas {
 	%>
 	<form method="post" action="updateLoan" id="form1"
 		name="updateLoanDetails" modelAttribute="updateLoan">
-		
+
 		<script type="text/javascript">
-         
          
          function callback(ids){
           	var input = {
@@ -213,7 +214,7 @@ canvas {
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			
+
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -241,8 +242,8 @@ canvas {
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="loanDate" type="date"
-														id="loanDate" class="form-control"
+													<input name="loanDate" type="date" id="loanDate"
+														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
@@ -255,29 +256,29 @@ canvas {
 											<label class="col-sm-4 control-label">Search Member <strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-											<% List<Member> memberList = (List<Member>) request.getAttribute("memberList"); %>
-											<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
-											<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
-											
-											
-											
-								
+												<% //List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											         List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
+											    %>
+												<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
+												<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
+
 												<select name="searchMemberCode" id="searchMemberCode"
 													onchange="displayMemberDetails()"
 													class="form-control select2" style="width: 100%;">
-									<option value="">Select Member</option>
-													
+													<option value="">Select Member</option>
+
 													<%if(memberList!=null && !memberList.isEmpty()){ 
-														for(Member member: memberList){
+														for(/* Member member: memberList */
+														    ClientMaster member: memberList
+																){
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName() %></option>
 													<%} 
 													}%>
-													</select>
-													<span
+												</select> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Select
-														Member Code</span>
+													Member Code</span>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -376,7 +377,7 @@ canvas {
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
 													<option value="">Select Branch</option>
-													
+
 													<%if(branchList!=null && !branchList.isEmpty()){ 
 														for(BranchMaster branch: branchList){
 													%>
@@ -395,13 +396,13 @@ canvas {
 													<select name="loanPlanName" id="loanPlanName"
 														class="form-control" style="width: 100%;"
 														onchange="displayLoanMasterDetails()">
-													<option value="">Select loan Plan Master	</option>
-														
-													<%if(loanMasterList!=null && !loanMasterList.isEmpty()){ 
+														<option value="">Select loan Plan Master</option>
+
+														<%if(loanMasterList!=null && !loanMasterList.isEmpty()){ 
 													for(LoanMaster loanPlan: loanMasterList){
 													%>
-													<option value="<%=loanPlan.getId()%>"><%=loanPlan.getLoanName() %></option>
-													<%} 
+														<option value="<%=loanPlan.getId()%>"><%=loanPlan.getLoanName() %></option>
+														<%} 
 													}%>
 													</select>
 												</div>
@@ -420,9 +421,9 @@ canvas {
 													Term <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-												<input name="planTerm" type="text" readonly="readonly"
+													<input name="planTerm" type="text" readonly="readonly"
 														id="planTerm" class="form-control" PlaceHolder="Plan Term" />
-													
+
 												</div>
 											</div>
 											<div class="form-group row">
@@ -431,8 +432,9 @@ canvas {
 												</label>
 												<div class="col-sm-3">
 													<input name="mode" type="text" readonly="readonly"
-														id="mode" class="form-control" PlaceHolder="Enter Mode" style="width:80px"/>
-													<span id="ContentPlaceHolder1_RequiredFieldValidator1"
+														id="mode" class="form-control" PlaceHolder="Enter Mode"
+														style="width: 80px" /> <span
+														id="ContentPlaceHolder1_RequiredFieldValidator1"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Mode</span>
 												</div>
@@ -530,8 +532,8 @@ canvas {
 												<label for="txtMembersRelativesNameRelationGu"
 													class="col-sm-4 control-label">Guarantor Name </label>
 												<div class="col-sm-8">
-													<input name="guarantorName" type="text" 
-														id="guarantorName" class="form-control" />
+													<input name="guarantorName" type="text" id="guarantorName"
+														class="form-control" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -539,8 +541,8 @@ canvas {
 													class="col-sm-4 control-label">Address </label>
 												<div class="col-sm-8">
 													<input name="addressGuarantor" type="text"
-														 id="addressGuarantor"
-														class="form-control" Placeholder="Enter Address" />
+														id="addressGuarantor" class="form-control"
+														Placeholder="Enter Address" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -548,8 +550,8 @@ canvas {
 													class="col-sm-4 control-label">Pin Code </label>
 												<div class="col-sm-8">
 													<input name="pincodeGuarantor" type="text"
-														id="pincodeGuarantor"
-														class="form-control" PlaceHolder="Enter Pin Code" />
+														id="pincodeGuarantor" class="form-control"
+														PlaceHolder="Enter Pin Code" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -557,8 +559,8 @@ canvas {
 												</label>
 												<div class="col-sm-8">
 													<input name="guarantorphone" type="text"
-														 id="guarantorphone"
-														class="form-control" Placeholder="Enter Phone" />
+														id="guarantorphone" class="form-control"
+														Placeholder="Enter Phone" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -605,8 +607,8 @@ canvas {
 													class="col-sm-4 control-label">Name</label>
 												<div class="col-sm-8">
 													<input name="memberRelativesName" type="text"
-														 id="memberRelativesName"
-														class="form-control" Placeholder="Enter Co-Applicant Name" />
+														id="memberRelativesName" class="form-control"
+														Placeholder="Enter Co-Applicant Name" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -622,17 +624,15 @@ canvas {
 												<label for="txtPincodeco" class="col-sm-4 control-label">Pincode
 												</label>
 												<div class="col-sm-8">
-													<input name="pincodeco" type="text" 
-														id="pincodeco" class="form-control"
-														Placeholder="Enter Pincode" />
+													<input name="pincodeco" type="text" id="pincodeco"
+														class="form-control" Placeholder="Enter Pincode" />
 												</div>
 											</div>
 											<div class="form-group row">
 												<label for="txtPhoneco" class="col-sm-4 control-label">Phone</label>
 												<div class="col-sm-8">
-													<input name="phoneco" type="text" 
-														id="phoneco" class="form-control"
-														Placeholder="Enter Phone" />
+													<input name="phoneco" type="text" id="phoneco"
+														class="form-control" Placeholder="Enter Phone" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -664,8 +664,8 @@ canvas {
 													Fee<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="processingFee" type="text" 
-														id="processingFee" class="form-control" />
+													<input name="processingFee" type="text" id="processingFee"
+														class="form-control" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -673,8 +673,8 @@ canvas {
 													Amt<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="legalAmt" type="text" 
-														id="legalAmt" class="form-control" />
+													<input name="legalAmt" type="text" id="legalAmt"
+														class="form-control" />
 												</div>
 											</div>
 										</div>
@@ -699,8 +699,7 @@ canvas {
 												<label for="txtGST" class="col-sm-4 control-label">GST<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input name="GST" type="text"  id="GST"
-														class="form-control" />
+													<input name="GST" type="text" id="GST" class="form-control" />
 												</div>
 											</div>
 											<div class="form-group row">
@@ -708,8 +707,8 @@ canvas {
 													Amt<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="insuranceAmt" type="text"
-														id="insuranceAmt" class="form-control" />
+													<input name="insuranceAmt" type="text" id="insuranceAmt"
+														class="form-control" />
 												</div>
 											</div>
 										</div>
@@ -719,8 +718,8 @@ canvas {
 													Name <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="advisorName" type="text" 
-														id="advisorName" class="form-control"
+													<input name="advisorName" type="text" id="advisorName"
+														class="form-control"
 														placeholder="Enter Advisor/Collector Name" /> <span
 														id="advisorName"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -744,7 +743,7 @@ canvas {
 			</div>
 			<!-- /.content-wrapper -->
 			<%-- <jsp:include page="../footer.jsp" /> --%>
-			</div>
-			</form>
+		</div>
+	</form>
 </body>
 </html>

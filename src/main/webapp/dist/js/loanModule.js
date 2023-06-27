@@ -244,7 +244,6 @@ function getByLoanIdRegularEmiRepayment() {
 		});
 }
 
-
 function getByLoanIdIrRegularEmiRepayment() {
 	var searchLoanId = document.getElementById("searchLoanId1");
 	var input = {
@@ -320,6 +319,15 @@ function getRegularLoanData() {
 			if (data.loanDate != null) {
 				document.getElementById("loanDate").value = data.loanDate;
 			}
+			if (data.loanDate != null) {
+				document.getElementById("memberRelativesName").value = data.relativeDetails;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("phoneno").value = data.phoneno;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("branchName").value = data.branchname;
+			}
 			if (data.loanPlanName != null) {
 				document.getElementById("loanName").value = data.loanPlanNameView;
 			}
@@ -328,6 +336,21 @@ function getRegularLoanData() {
 				document.getElementById("planTerm").value = data.planTerm;
 			}else{
 				document.getElementById("planTerm").value = "";
+			}
+			if (data.loanType != null) {
+				document.getElementById("loanType").value = data.loanType;
+			}else{
+				document.getElementById("loanType").value = "";
+			}
+			if (data.loanAmount != null) {
+				document.getElementById("loanAmount").value = data.loanAmount;
+			}else{
+				document.getElementById("loanAmount").value = "";
+			}
+			if (data.loanROI != null) {
+				document.getElementById("loanROI").value = data.loanROI;
+			}else{
+				document.getElementById("loanROI").value = "";
 			}
 			//roiType
 			if (data.roiType != null) {
@@ -419,14 +442,12 @@ function getRegularLoanData() {
 			}else{
 				document.getElementById("totalPayableAmt").value = "";
 			}
-			
 			//paymode
 			if (data.paymode != null) {
 				document.getElementById("paymode").value = data.paymode;
 			}else{
 				document.getElementById("paymode").value = "";
 			}
-			
 			//advisorName
 			if (data.advisorName != null) {
 				document.getElementById("advisorName").value = data.paymode;
@@ -440,17 +461,75 @@ function getRegularLoanData() {
 				document.getElementById("remarks").value = "";
 			}
 			//
-			
-			
-
-			
 		})
 		.catch(function(error) {
 			alert(error.message);
 		});
-
 }
 
 function getByNoc(){
 	alert("no data")
+}
+
+function displayLoanDetailsOfRegularEMIRepaymentSelectedId() {
+	
+	//alert("Function is ruuning")
+	var id = document.getElementById("searchLoanId1");
+	var input = {
+		"id": id.value
+	}
+	$.ajax({
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(input),
+		url: 'fetchRegularEMIRepayment',
+		asynch: false,
+		success: function(response) {
+			
+        var loanData = response.data.loan;
+        var loanMasterData = response.data.loanMaster;
+		
+		document.getElementById("id").value = loanData.id;
+		document.getElementById("loanDate").value = loanData.loanDate;
+		document.getElementById("cspName").value = loanData.searchMemberCode;
+		document.getElementById("memberRelativesName").value = loanData.relativeDetails;
+		document.getElementById("phoneno").value = loanData.phoneno;
+		document.getElementById("branchName").value = loanData.cspName;
+		document.getElementById("loanName").value = loanData.loanPlanName;
+		document.getElementById("planTerm").value = loanData.planTerm;
+		document.getElementById("loanType").value = loanData.mode;
+		document.getElementById("loanAmount").value = loanData.loanAmount;
+		document.getElementById("loanROI").value = loanData.loanROI;
+		document.getElementById("roiType").value = loanData.roiType;
+		document.getElementById("emiAmount").value = loanData.emiAmount;
+//		document.getElementById("totalInterest").value = loanData.loanDate;
+//		document.getElementById("totalPrinciple").value = loanData.loanDate;
+//		document.getElementById("totalPayble").value = loanData.loanDate;
+		
+
+        //document.getElementById("branchName").value = loanMasterData.branchName;
+        //document.getElementById("payDate").value = loanData.payDate;
+        //document.getElementById("emiAmount").value = loanMasterData.emiAmount;
+        //document.getElementById("loanAmount").value = loanMasterData.loanAmount;
+        document.getElementById("paymode").value = loanData.paymode;
+        document.getElementById("advisorCode").value = loanMasterData.advisorCode;
+        document.getElementById("advisorName").value = loanMasterData.advisorName;
+        document.getElementById("remarks").value = loanData.remarks;
+//        document.getElementById("totalInterestDue").value = loanData.emiAmount;
+//        document.getElementById("totalPrincipleDue").value = loanData.emiAmount;
+//        document.getElementById("totalDueAmt").value = loanData.emiAmount;
+//        document.getElementById("dueDate").value = loanData.emiAmount;
+//        document.getElementById("cspName").value = loanData.emiAmount;
+//        document.getElementById("advancePaid").value = loanData.emiAmount;
+//        document.getElementById("paymentDate").value = loanData.emiAmount;
+//        document.getElementById("deductLateFine").value = loanData.emiAmount;
+//        document.getElementById("payableAmount").value = loanData.emiAmount;
+//        document.getElementById("totalPayableAmt").value = loanData.emiAmount;
+
+
+		},
+		error: function() {
+			alert("Device control failed");
+		}
+	});
 }

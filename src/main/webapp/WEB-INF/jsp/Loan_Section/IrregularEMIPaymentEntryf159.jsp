@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Loan"%>
 <%@page import="com.society.application.model.Member"%>
@@ -109,10 +110,8 @@
 
 		}
 		%>
-		<input name="id" type="hidden" 
-														id="id" class="form-control"
-														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
-														data-mask="" />
+		<input name="id" type="hidden" id="id" class="form-control"
+			data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;" data-mask="" />
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -122,7 +121,7 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-		
+
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -141,7 +140,8 @@
 									<div class="box-body">
 										<div class="col-md-6">
 											<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 											%>
 											<%
 											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
@@ -157,11 +157,12 @@
 													<%
 													List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 													%>
+													<!-- onchange="getRegularLoanData()" -->
 													<select name="searchLoanId" onchange="getRegularLoanData()"
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
-														<option selected="selected" value="">Select Loan Id
-														</option>
+														<option selected="selected" value="">Select Loan
+															Id</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -457,15 +458,15 @@
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-											
+
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
 													<option value="">Select Branch</option>
 													<% if(branchList!=null && !branchList.isEmpty()){
 														for(BranchMaster branch :branchList ){
 															%>
-															<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
-															<%
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
 														}
 													}
 													%>
@@ -604,10 +605,9 @@
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-										 
-											<input type="submit"
-											name="btnSave" value="Save Data" id="btnSave"
-											class="btn btn-success pull-right margin-r-5" />
+
+										<input type="submit" name="btnSave" value="Save Data"
+											id="btnSave" class="btn btn-success pull-right margin-r-5" />
 									</div>
 								</div>
 							</div>
@@ -663,11 +663,11 @@
 		<script src="dist/js/demo.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-		
 
-		
 
-		
+
+
+
 
 
 		<script type="text/javascript">

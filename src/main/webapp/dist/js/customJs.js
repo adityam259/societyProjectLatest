@@ -1,4 +1,3 @@
-
 function callGetAllMasterData() {
 	//relativeRelation
 	const select = document.getElementById("relativeRelation");
@@ -37,7 +36,7 @@ function callGetAllMasterData() {
 				option.innerHTML = value.name
 				selectmaritalStatus.appendChild(option)
 			})
-
+			
 		},
 		error: function() {
 			alert("Device control failed");
@@ -324,7 +323,7 @@ function callGetAllMasterData() {
                                 <td>${value.branchName}</td>
                                 <td>${value.memberName}</td>
                                 <td>${value.transferDate}</td>
-                            </tr>`
+                         </tr>`
 					);
 				}).join('');
 				const tabelBody = document.querySelector("#tableBody");
@@ -383,7 +382,7 @@ function gettableAdvisor() {
                            		<td>${value.id}</td>
                                 <td>${value.memberName}</td>
                                 <td>${value.position}</td>
-                            </tr>`
+                          </tr>`
 					);
 				}).join('');
 				const tableBodyAdvisor = document.querySelector("#tableBodyAdvisor");
@@ -474,7 +473,6 @@ function getAllmis() {
 				document.getElementById("mISTermType1").innerHTML = data[i].mISTermType;
 				document.getElementById("mISComN1").innerHTML = data[i].mISComN;
 				document.getElementById("mISMinimumAmount1").innerHTML = data[i].mISMinimumAmount;
-
 			}
 		}
 		,

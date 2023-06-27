@@ -38,10 +38,10 @@ import com.society.application.repository.RateMasterRepo;
 
 @Controller
 public class GoldLoanController {
-	
+
 	@Autowired
 	MemberRepo memberRepo;
-	
+
 	@Autowired
 	BranchMasterRepo branchMasterRepo;
 
@@ -65,7 +65,7 @@ public class GoldLoanController {
 
 	@Autowired
 	MemberRepo membRepo;
-	
+
 	@Autowired
 	ClientMasterRepo clientMasterRepo;
 
@@ -124,11 +124,10 @@ public class GoldLoanController {
 	@GetMapping("/getAllLoanMasterData")
 	@ResponseBody
 	public List<LoanMaster> getAllLoanMasterData() {
-	  List<LoanMaster> allGoldLoan = loanMasterRepo.findAll();
-	  List<LoanMaster> filterGoldLoan = allGoldLoan.stream()
-	    .filter(p -> p.getType().equals("Loan"))
-	    .collect(Collectors.toList());
-	  return filterGoldLoan;
+		List<LoanMaster> allGoldLoan = loanMasterRepo.findAll();
+		List<LoanMaster> filterGoldLoan = allGoldLoan.stream().filter(p -> p.getType().equals("Loan"))
+				.collect(Collectors.toList());
+		return filterGoldLoan;
 	}
 
 	@GetMapping("/goldLoanMaster")
@@ -228,7 +227,7 @@ public class GoldLoanController {
 			return "Gold_Loan/GoldLoanApplication7475";
 		}
 	}
-	
+
 	@PostMapping("/saveLoanGoldPayment")
 	public String saveLoanGoldPayment(@ModelAttribute("loanGoldApplication") Loan loan, Model model) {
 		loan.setType("Gold");
@@ -253,8 +252,8 @@ public class GoldLoanController {
 			return "Gold_Loan/GoldLoanApplicationf780";
 		}
 	}
-	
-	//updateGoldLoanApproval
+
+	// updateGoldLoanApproval
 	@PostMapping("/updateGoldLoanApproval")
 	public String updateGoldLoanApproval(@ModelAttribute("loanGoldApplication") Loan loan, Model model) {
 		loan.setType("Gold");
@@ -280,8 +279,6 @@ public class GoldLoanController {
 		}
 	}
 
-	
-
 	@GetMapping("/getAllLoans")
 	@ResponseBody
 	public List<Loan> getAllLoans() {
@@ -300,7 +297,6 @@ public class GoldLoanController {
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
-	
 		return "Gold_Loan/GoldLoanApplication9c5a";
 	}
 
@@ -343,15 +339,14 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		return "Gold_Loan/RegularLoanStatement9d5e";
 	}
-	
+
 	@PostMapping("/getByGoldLoanIdRegularEmiRepayment")
 	@ResponseBody
 	public Loan getByLoanIdRegularEmiRepayment(@RequestBody GenericGetById id) {
 		Optional<Loan> loanPlanMaster = loanRepo.findById(Integer.parseInt(id.getId()));
-		//Optional<LoanMaster> loanMaster = loanMasterRepo.findById(Integer.parseInt(loanPlanMaster.get().getLoanPlanName()));
-		//loanPlanMaster.get().setLoanPlanNameView(loanMaster.get().getLoanName());
-		
-		
+		// Optional<LoanMaster> loanMaster =
+		// loanMasterRepo.findById(Integer.parseInt(loanPlanMaster.get().getLoanPlanName()));
+		// loanPlanMaster.get().setLoanPlanNameView(loanMaster.get().getLoanName());
 		return loanPlanMaster.get();
 	}
 
@@ -417,13 +412,21 @@ public class GoldLoanController {
 		return "Gold_Loan/GoldLoanSearch";
 	}
 
+	/*
+	 * @PostMapping("/getMemberDeailsById")
+	 * 
+	 * @ResponseBody public Member getMemberDeailsById(@RequestBody GenericGetById
+	 * id) { Optional<Member> memberData =
+	 * membRepo.findById(Integer.parseInt(id.getId())); return memberData.get(); }
+	 */
+
 	@PostMapping("/getMemberDeailsById")
 	@ResponseBody
-	public Member getMemberDeailsById(@RequestBody GenericGetById id) {
-		Optional<Member> memberData = membRepo.findById(Integer.parseInt(id.getId()));
+	public ClientMaster getMemberDeailsById(@RequestBody GenericGetById id) {
+		Optional<ClientMaster> memberData = clientMasterRepo.findById(Integer.parseInt(id.getId()));
 		return memberData.get();
 	}
-	
+
 	@PostMapping("/getLoanMasterDeailsById")
 	@ResponseBody
 	public LoanMaster getLoanMasterDeailsById(@RequestBody GenericGetById id) {
@@ -443,7 +446,7 @@ public class GoldLoanController {
 	public String regularEMIRepayment(@ModelAttribute("updateLoan") Loan loan, Model model) {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
 		if (getLoan.get() != null) {
-			//as of now no action as complete field is not visible in view 
+			// as of now no action as complete field is not visible in view
 		}
 		List<Loan> loanList = loanRepo.searchGoldLoan();
 		model.addAttribute("loanList", loanList);
@@ -456,12 +459,12 @@ public class GoldLoanController {
 		model.addAttribute("status", "success");
 		return "Gold_Loan/LoanRepayment9d5e";
 	}
-	
+
 	@PostMapping("/updateLoanirRegularEMIRepayment")
 	public String updateLoanirRegularEMIRepayment(@ModelAttribute("updateLoan") Loan loan, Model model) {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
 		if (getLoan.get() != null) {
-			//as of now no action as complete field is not visible in view 
+			// as of now no action as complete field is not visible in view
 		}
 		List<Loan> loanList = loanRepo.searchGoldLoan();
 		model.addAttribute("loanList", loanList);
@@ -479,7 +482,7 @@ public class GoldLoanController {
 	public String closeLoanRegularEMIRepayment(@ModelAttribute("updateLoan") Loan loan, Model model) {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
 		if (getLoan.get() != null) {
-				//few fields are no tthere so not saving close status
+			// few fields are no tthere so not saving close status
 		}
 		model.addAttribute("status", "success");
 		return "Gold_Loan/LoanPreSettlement9d5e";
@@ -488,7 +491,7 @@ public class GoldLoanController {
 	private Loan updateWrapper(Loan loanFromUser, Loan dbLoan) {
 		return dbLoan;
 	}
-	
+
 	/*
 	 * @PostMapping("/getMemberDeailsById")
 	 * 
@@ -496,10 +499,10 @@ public class GoldLoanController {
 	 * id) { Optional<Member> memberData =
 	 * membRepo.findById(Integer.parseInt(id.getId())); return memberData.get(); }
 	 */
-	
+
 	@PostMapping("/getMemberDeailsById1")
 	@ResponseBody
-	public List<ClientMaster> getMemberDeailsByIds(@RequestBody ClientMaster model){
+	public List<ClientMaster> getMemberDeailsByIds(@RequestBody ClientMaster model) {
 		List<ClientMaster> list = clientMasterRepo.findByid(model.getId());
 		return list;
 	}

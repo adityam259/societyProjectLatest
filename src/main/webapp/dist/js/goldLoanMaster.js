@@ -153,7 +153,6 @@ function validateGoldLoanMaster() {
 	} else {
 		return false;
 	}
-
 }
 
 function getAllGoldLoan() {
@@ -214,7 +213,6 @@ function goldLoanTodaysDate() {
 	} else {
 		return false;
 	}
-
 }
 
 function validateItemMaster() {
@@ -241,8 +239,6 @@ function validateItemMaster() {
 	}
 }
 
-
-
 function validateLockerMaster() {
 	var status = true;
 	const lockerLocation = document.getElementById("lockerLocation");
@@ -266,7 +262,6 @@ function validateLockerMaster() {
 		return false;
 	}
 }
-
 
 //getAllRates
 function getAllRates() {
@@ -298,7 +293,6 @@ function getAllRates() {
 	});
 }
 
-
 //getAllItemMaster
 function getAllItemMaster() {
 	$.ajax({
@@ -312,7 +306,6 @@ function getAllItemMaster() {
 				const tableData2 = data.map(function(value) {
 					return (
 						`<tr>
-                           		
                                 <td>${value.id}</td>
                                 <td>${value.itemType}</td>
                                 <td>${value.itemName}</td>
@@ -328,7 +321,6 @@ function getAllItemMaster() {
 		}
 	});
 }
-
 
 //getAllLockerMaster
 function getAllLockerMaster() {
@@ -389,7 +381,6 @@ function validatePurityMaster() {
 		return false;
 	}
 }
-
 
 //getAllLockerMaster
 function getAllPurityMaster() {
@@ -630,7 +621,6 @@ function validateGoldLoanApplciation() {
 			span.textContent = "item Qty cannot be empty.";
 			//status = false;
 		}
-	
 	
 		const grossWt = document.getElementById("grossWt");
 		if (grossWt.value === '') {
@@ -1024,7 +1014,6 @@ function displayMemberDetails() {
 		}
 	};
 	xhr.send(JSON.stringify(input));
-
 }
 
 function displayMemberDetailsSaving() {
@@ -1186,11 +1175,6 @@ function displayLoanDetailsSelectedId() {
 			document.getElementById("emiAmount").value = data.emiAmount;
 			document.getElementById("id").value = data.id;
 			document.getElementById("cspName").value = data.cspName;
-
-
-
-
-
 		},
 		error: function() {
 			alert("Device control failed");
@@ -1212,8 +1196,6 @@ function popUp() {
 	popup.appendChild(cancel);
 	document.body.appendChild(popup);
 }
-
-
 
 function getByGoldLoanId(type) {
 	var searchLoanId = document.getElementById("searchLoanId1");
@@ -1424,16 +1406,12 @@ function getByGoldLoanId(type) {
 				document.getElementById("approvalStatus").value = data.approvalStatus;
 
 			}
-
 		}
 		})
 		.catch(function(error) {
 			  alert('Error occurred: ' + error.message + '\nStack trace: ' + error.stack);
-
 		});
-
 }
-
 
 function getByGoldLoanIdRegularEmiRepayment() {
 	var searchLoanId = document.getElementById("searchLoanId1");

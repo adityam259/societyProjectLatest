@@ -62,7 +62,7 @@ function  CategoryDataFetchinDropDown() {
                     for (var i = 0; i < data.length; i++) {
                          appenddata1 += "<option value = '"+data[i].categoryName +"'>" +data[i].categoryName +" </option>";
                     }
-                    $("#caste").append(appenddata1);
+                    //$("#caste").append(appenddata1);
                     $("#categoryName").append(appenddata1);
 		},
 		error: function() {
