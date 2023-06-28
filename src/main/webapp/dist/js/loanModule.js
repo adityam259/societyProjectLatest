@@ -320,6 +320,9 @@ function getRegularLoanData() {
 				document.getElementById("loanDate").value = data.loanDate;
 			}
 			if (data.loanDate != null) {
+				document.getElementById("cspName").value = data.cspName;
+			}
+			if (data.loanDate != null) {
 				document.getElementById("memberRelativesName").value = data.relativeDetails;
 			}
 			if (data.loanDate != null) {
@@ -328,8 +331,35 @@ function getRegularLoanData() {
 			if (data.loanDate != null) {
 				document.getElementById("branchName").value = data.branchname;
 			}
-			if (data.loanPlanName != null) {
-				document.getElementById("loanName").value = data.loanPlanNameView;
+			if(data.loanDate != null){
+				document.getElementById("remarks").value = data.remarks;
+			}
+			if(data.loanDate != null){
+				document.getElementById("advisorCode").value = data.advisorCode;
+			}
+			if(data.loanDate != null){
+				document.getElementById("advisorName").value = data.advisorName;
+			}
+			if(data.loanDate != null){
+				document.getElementById("payDate").value = data.payDate;
+			}
+			if(data.loanDate != null){
+				document.getElementById("paymode").value = data.paymode;
+			}
+			if(data.loanDate != null){
+				document.getElementById("remarks").value = data.remarks;
+			}
+			if(data.loanDate != null){
+				document.getElementById("remarks").value = data.remarks;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("loanName").value = data.loanName;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("planTerm").value = data.planTerm;
+			}
+			if (loanDate != null) {
+				document.getElementById("advancePaid").value = data.advancePaid;
 			}
 			//planTerm
 			if (data.planTerm != null) {
@@ -448,14 +478,25 @@ function getRegularLoanData() {
 			}else{
 				document.getElementById("paymode").value = "";
 			}
+			//payDate
+			if (data.payDate != null) {
+				document.getElementById("payDate").value = data.payDate;
+			}else{
+				document.getElementById("payDate").value = "";
+			}
 			//advisorName
 			if (data.advisorName != null) {
-				document.getElementById("advisorName").value = data.paymode;
+				document.getElementById("advisorName").value = data.advisorName;
 			}else{
 				document.getElementById("advisorName").value = "";
 			}
+			if (data.advisorCode != null) {
+				document.getElementById("advisorCode").value = data.advisorCode;
+			}else{
+				document.getElementById("advisorCode").value = "";
+			}
 			//remarks
-				if (data.remarks != null) {
+			if (data.remarks != null) {
 				document.getElementById("remarks").value = data.remarks;
 			}else{
 				document.getElementById("remarks").value = "";
@@ -529,6 +570,46 @@ function displayLoanDetailsOfRegularEMIRepaymentSelectedId() {
 
 		},
 		error: function() {
+			alert("Device control failed");
+		}
+	});
+}
+
+function searchNormalLoanDocument(){
+	let id = document.getElementById("searchLoanId1").value;
+	let printType = document.getElementById("printType").value;
+	var input = {
+		"id":id,
+		"printType":printType,
+	};
+	const myJson = JSON.stringify(input);
+	//alert(id)
+	$.ajax({
+		type:"POST",
+		contentType: "application/json",
+		data: myJson,
+		url: 'searchNormalLoanDocument',
+		async: false,
+		success: function(data){
+			if(data.length){
+				var advisor = data[0];
+				
+				document.getElementById("loanDate").value = advisor.loanDate;
+				document.getElementById("loanName").value = advisor.searchMemberCode;
+				document.getElementById("memberRelativesName").value = advisor.relativeDetails;
+				document.getElementById("phoneno").value = advisor.phoneno;
+				document.getElementById("loanName").value = advisor.loanPlanName;
+				document.getElementById("planTerm").value = advisor.planTerm;
+				document.getElementById("loanMode").value = advisor.mode;
+				document.getElementById("loanAmount").value = advisor.loanAmount;
+				document.getElementById("ROI").value = advisor.loanROI;
+				document.getElementById("roiType").value = advisor.roiType;
+				document.getElementById("emiAmount").value = advisor.emiAmount;
+			}else{
+				alert("No data found");
+			}
+		}, 
+		error: function(){
 			alert("Device control failed");
 		}
 	});

@@ -158,7 +158,7 @@
 													List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 													%>
 													<!-- onchange="getRegularLoanData()" -->
-													<select name="searchLoanId" onchange="getRegularLoanData()"
+													<select name="searchLoanId" onchange="getRegularLoanData();"
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
 														<option selected="selected" value="">Select Loan
@@ -252,7 +252,7 @@
 											</label>
 											<div class="col-sm-7">
 												<input name="cspName" type="text" readonly="readonly"
-													id="cspName" class="form-control"
+													id="branchName" class="form-control"
 													PlaceHolder="Enter Branch Name" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatortxtBranchName"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -318,7 +318,7 @@
 												ROI <strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="ROI" type="text" readonly="readonly" id="ROI"
+												<input name="loanROI" type="text" readonly="readonly" id="loanROI"
 													class="form-control" PlaceHolder="Enter Loan ROI" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorLoanROI"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -494,8 +494,8 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="paymentDate" type="date" value="01/08/2022"
-														id="paymentDate" class="form-control"
+													<input name="payDate" type="date" value="01/08/2022"
+														id="payDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
@@ -557,7 +557,7 @@
 														<option value="Online">Online</option>
 														<option value="NEFT">NEFT</option>
 														<option value="SBAccount">SBAccount</option>
-														<option value="Flexi">Flexi</option>
+														<!-- <option value="Flexi">Flexi</option> -->
 
 													</select>
 												</div>
@@ -663,16 +663,8 @@
 		<script src="dist/js/demo.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-
-
-
-
-
-
-
 		<script type="text/javascript">
 //<![CDATA[
-
 var Page_ValidationActive = false;
 if (typeof(ValidatorOnLoad) == "function") {
     ValidatorOnLoad();
@@ -766,6 +758,5 @@ document.getElementById('ContentPlaceHolder1_RequiredFieldValidator7').dispose =
 </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/LoanRepayment.aspx?Type=Normal EDB D 09:27:09 GMT -->
 </html>

@@ -318,7 +318,8 @@ public class LoanModuleController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -351,7 +352,8 @@ public class LoanModuleController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -364,7 +366,8 @@ public class LoanModuleController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -377,7 +380,8 @@ public class LoanModuleController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -448,13 +452,15 @@ public class LoanModuleController {
 		Optional<Loan> loanData = loanRepo.findById(loan.getId());
 		if (loanData.isPresent()) {
 			loanData.get().setModeRegOrIrr("irregular");
-			loanRepo.save(loanData.get());
+			//loanRepo.save(loanData.get());
+			loanRepo.save(loan);
 		}
 		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -488,6 +494,13 @@ public class LoanModuleController {
 			response.setData(optionalLoan);
 		}
 		return response;
+	}
+	
+	@PostMapping("/searchNormalLoanDocument")
+	@ResponseBody
+	public List<Loan> searchRegularEMIStatementInTable(@RequestBody Loan loan){
+		List<Loan> list = loanRepo.findByid(loan.getId());
+		return list;
 	}
 
 }

@@ -37,4 +37,6 @@ public interface LoanRepo extends JpaRepository<Loan, Integer> {
 			+ "FROM Loan ln INNER JOIN LoanMaster lm ON ln.loanPlanName = lm.id " + "WHERE ln.id = :id")
 	Optional<LoanWithLoanMasterDTO> findLoanWithLoanMasterById(@Param("id") Integer id);
 
+	List<Loan> findByid(int id);
+
 }
