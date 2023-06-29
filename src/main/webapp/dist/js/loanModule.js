@@ -329,7 +329,22 @@ function getRegularLoanData() {
 				document.getElementById("phoneno").value = data.phoneno;
 			}
 			if (data.loanDate != null) {
-				document.getElementById("branchName").value = data.branchname;
+				document.getElementById("loanName").value = data.loanPlanName;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("planTerm").value = data.planTerm;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("loanType").value = data.loanType;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("loanAmount").value = data.loanAmount;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("loanROI").value = data.loanROI;
+			}
+			if (data.loanDate != null) {
+				document.getElementById("roiType").value = data.roiType;
 			}
 			if(data.loanDate != null){
 				document.getElementById("remarks").value = data.remarks;
@@ -345,12 +360,6 @@ function getRegularLoanData() {
 			}
 			if(data.loanDate != null){
 				document.getElementById("paymode").value = data.paymode;
-			}
-			if(data.loanDate != null){
-				document.getElementById("remarks").value = data.remarks;
-			}
-			if(data.loanDate != null){
-				document.getElementById("remarks").value = data.remarks;
 			}
 			if (data.loanDate != null) {
 				document.getElementById("loanName").value = data.loanName;
@@ -613,4 +622,108 @@ function searchNormalLoanDocument(){
 			alert("Device control failed");
 		}
 	});
+}
+
+function LoanNOCTable() {
+    var searchLoanId = document.getElementById("searchLoanId1").value;
+
+    var requestData = {
+        id: searchLoanId
+    };
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: 'searchNormalLoanDocument',
+        data: JSON.stringify(requestData),
+        success: function(data) {
+            var tableData = '';
+            if (data != null) {
+                tableData += `
+                    <tr>
+                        <td>${data.id}</td>
+                        <td>${data.loanPlanName}</td>
+                        <td>${data.loanType}</td>
+                        <td>${data.loanPurpose}</td>
+                        <td>${data.guarantorName}</td>
+                        <td>${data.branchname}</td>
+                        <td>${data.phoneno}</td>
+                        <td>${data.address}</td>
+                    </tr>`;
+            } else {
+                tableData += '<tr><td colspan="8">No data found</td></tr>';
+            }
+
+            var tableBody = document.querySelector("#loanNOC");
+            tableBody.innerHTML = tableData;
+        },
+        error: function() {
+            alert("Failed to fetch loan data");
+        }
+    });
+}
+
+function searchLoanDataInTable() {
+	var branchnameElement = document.getElementById("branchname");
+    var branchname;
+
+    if (branchnameElement.tagName === "SELECT") {
+        // For <select> element, retrieve the selected value
+        branchname = branchnameElement.options[branchnameElement.selectedIndex].text;
+    } else {
+        // For <input> element, retrieve the input value directly
+        branchname = branchnameElement.value;
+    }
+
+    //alert("Branch Name: " + branchname);
+    var input = {
+        //branchname: document.getElementById("branchname").value,
+        branchname: branchname,
+        fDate: document.getElementById("fDate").value,
+        tDate: document.getElementById("tDate").value,
+        memberRelativesName: document.getElementById("memberRelativesName").value,
+        id: parseInt(document.getElementById("id").value),
+        searchMemberCode: document.getElementById("searchMemberCode").value,
+        loanPurpose: document.getElementById("loanPurpose").value,
+        advisorCode: document.getElementById("advisorCode").value,
+    };
+    //alert("Branch Name: " + branchname);
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(input),
+        url: 'searchLoanDataInTable',
+        async: false,
+        success: function (data) {
+            const tableData1 = data.map(function (value) {
+                return (
+                    `<tr>
+                         <td>${value.advisorName}</td> 
+                         <td>${value.dob}</td>   
+                         <td>${value.age}</td>  
+                         <td>${value.phoneno}</td>  
+                         <td>${value.address}</td>  
+                         <td>${value.loanPlanName}</td>    
+                         <td>${value.loanDate}</td>
+                         <td>${value.loanAmount}</td>
+                         <td>${value.loanPurpose}</td>  		
+                     </tr>`
+                );
+            }).join('');
+            const tableBody1 = document.querySelector("#tableBody");
+            tableBody1.innerHTML = tableData1;
+        },
+        error: function () {
+            alert("Error fetching loan data.");
+        }
+    });
+}
+
+// Helper function to format the loanDate value
+function formatDate(dateValue) {
+    var date = new Date(dateValue);
+    var year = date.getFullYear();
+    var month = ("0" + (date.getMonth() + 1)).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+    return year + "-" + month + "-" + day;
 }

@@ -3,6 +3,7 @@
 <%@page import="com.society.application.model.Member"%>
 <%@page import="com.society.application.model.BranchMaster"%>
 <%@page import="com.society.application.model.LoanMaster"%>
+<%@page import="com.society.application.model.ClientMaster"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <!-- Dk/Admin/LoanRepayment.aspx?Type=Normal EDB D 09:27:09 GMT -->
@@ -95,8 +96,8 @@
 <body onload="getListOfLoanId()" class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post" modelAttribute="rd"
-		action="closeDataRepayment" id="form1">
+	<form method="post" modelAttribute="rd" action="closeDataRepayment"
+		id="form1">
 		<%
 		String status = (String) request.getAttribute("status");
 		if (status != null && "success".equals(status)) {
@@ -109,10 +110,8 @@
 
 		}
 		%>
-		<input name="id" type="hidden" 
-														id="id" class="form-control"
-														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
-														data-mask="" />
+		<input name="id" type="hidden" id="id" class="form-control"
+			data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;" data-mask="" />
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -122,7 +121,6 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-		
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -141,7 +139,8 @@
 									<div class="box-body">
 										<div class="col-md-6">
 											<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 											%>
 											<%
 											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
@@ -160,8 +159,8 @@
 													<select name="searchLoanId" onchange="getRegularLoanData()"
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
-														<option selected="selected" value="">Select Loan Id
-														</option>
+														<option selected="selected" value="">Select Loan
+															Id</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -251,7 +250,7 @@
 											</label>
 											<div class="col-sm-7">
 												<input name="cspName" type="text" readonly="readonly"
-													id="cspName" class="form-control"
+													id="branchName" class="form-control"
 													PlaceHolder="Enter Branch Name" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatortxtBranchName"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -317,7 +316,7 @@
 												ROI <strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="ROI" type="text" readonly="readonly" id="ROI"
+												<input name="ROI" type="text" readonly="readonly" id="loanROI"
 													class="form-control" PlaceHolder="Enter Loan ROI" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorLoanROI"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -457,15 +456,15 @@
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-											
+
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
 													<option value="">Select Branch</option>
 													<% if(branchList!=null && !branchList.isEmpty()){
 														for(BranchMaster branch :branchList ){
 															%>
-															<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
-															<%
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
 														}
 													}
 													%>
@@ -521,7 +520,7 @@
 												Amount<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="payableAmount" type="text" id="payableAmount"
+												<input name="payableAmount" type="text" id="totalPayableAmt"
 													class="form-control" PlaceHolder="Enter Payable Amount"
 													onpaste="return false" autocomplete="off" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorPayableAmount"
@@ -604,10 +603,8 @@
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-										 
-											<input type="submit"
-											name="btnSave" value="Close Loan" id="btnSave"
-											class="btn btn-success pull-right margin-r-5" />
+										<input type="submit" name="btnSave" value="Close Loan"
+											id="btnSave" class="btn btn-success pull-right margin-r-5" />
 									</div>
 								</div>
 							</div>
@@ -633,7 +630,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -663,13 +659,6 @@
 		<script src="dist/js/demo.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-		
-
-		
-
-		
-
-
 		<script type="text/javascript">
 //<![CDATA[
 

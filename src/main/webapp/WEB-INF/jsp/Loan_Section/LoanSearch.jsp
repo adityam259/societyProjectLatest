@@ -53,7 +53,7 @@
 							<div class="box-body">
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Branch :</label> <select name="branch" id="branch"
+										<label>Branch :</label> <select name="branchname" id="branchname"
 											class="form-control select2" style="width: 100%;">
 											<%
 													if (branchList != null && !branchList.isEmpty()) {
@@ -73,7 +73,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input name="fDate" type="text" value="01/08/2022" id="fDate"
+											<input name="fDate" type="date" value="01/08/2022" id="fDate"
 												class="form-control"
 												data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 												data-mask="" />
@@ -87,7 +87,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input name="tDate" type="text" value="01/08/2022" id="tDate"
+											<input name="tDate" type="date" value="01/08/2022" id="tDate"
 												class="form-control"
 												data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 												data-mask="" />
@@ -96,30 +96,30 @@
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Applicant Name :</label> <input name="applicantName"
-											type="text" id="applicantName" class="form-control"
+										<label>Applicant Name :</label> <input name="memberRelativesName"
+											type="text" id="memberRelativesName" class="form-control"
 											Placeholder="Enter Applicant Name" autocomplete="off" />
 									</div>
 								</div>
 								<div class="clearfix"></div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Loan ID :</label> <input name="loanID" type="text"
-											id="loanID" class="form-control" Placeholder="Enter Loan ID"
+										<label>Loan ID :</label> <input name="id" type="text"
+											id="id" class="form-control" Placeholder="Enter Loan ID"
 											autocomplete="off" />
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Member Code :</label> <input name="memberCode"
-											type="text" id="memberCode" class="form-control"
+										<label>Member Code :</label> <input name="searchMemberCode"
+											type="text" id="searchMemberCode" class="form-control"
 											Placeholder="Enter Member Code" autocomplete="off" />
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="form-group">
-										<label>Plan Name :</label> <select name="planName"
-											id="planName" class="form-control" style="width: 100%;">
+										<label>Plan Name :</label> <select name="loanPurpose"
+											id="loanPurpose" class="form-control" style="width: 100%;">
 											<%
 														if (loanMasterList != null && !loanMasterList.isEmpty()) {
 															for (LoanMaster loanPlan : loanMasterList) {
@@ -140,13 +140,12 @@
 									</div>
 								</div>
 								<div class="clearfix margin-bottom-10"></div>
-								<div class="text-center">
-									<a id="btnSearch" class="btn btn-success"
-										href="javascript:sendFormData()"><span
-										class="fa fa-search"></span> SEARCH</a> <a id="btnPrint"
-										class="btn btn-warning"><span class="fa fa-print"></span>
-										PRINT</a>
-								</div>
+									<div class="text-center">
+										<a id="btnSearch" class="btn btn-success" href="javascript:searchLoanDataInTable();"><span
+											class="fa fa-search"></span> SEARCH</a> <a id="btnPrint"
+											class="btn btn-warning"><span class="fa fa-print"></span>
+											PRINT</a>
+									</div>
 							</div>
 						</div>
 						<div class="box box-success"
@@ -154,11 +153,28 @@
 							<div class="box-header with-border">
 								<h3 class="box-title">Search Result</h3>
 								<div class="box-tools pull-right"></div>
+								<table cellspacing="0" cellpadding="3" rules="all"
+								class="display nowrap table table-hover table-striped table-bordered"
+								border="1" style="width: 100%; border-collapse: collapse;">
+								<caption></caption>
+								<tr style="color: White; background-color: #008385;">
+									<!-- <th scope="col">Sr. No.</th> -->
+									<th scope="col">Member Name</th>
+									<th scope="col">DOB</th>
+									<th scope="col">Age</th>
+									<th scope="col">Phone No.</th>
+									<th scope="col">Address</th>
+									<th scope="col">Loan Plan Name</th>
+									<th scope="col">Loan Date</th>
+									<th scope="col">Loan Amount</th>
+									<th scope="col">Loan Purpose</th>
+								</tr>
+								<tbody id="tableBody">
+								</tbody>
+							</table>
 							</div>
 							<div class="box-body">
 								<div class="clearfix margin-bottom-10"></div>
-								  <table id="responseTable"></table>
-
 							</div>
 						</div>
 					</div>

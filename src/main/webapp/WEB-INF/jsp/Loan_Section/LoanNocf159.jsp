@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Loan"%>
 <%@page import="com.society.application.model.Member"%>
@@ -7,13 +8,10 @@
 <body onload="getListOfLoanId()" class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post"
-		action=""
-		id="form1">
-		
+	<form method="post" action="" id="form1">
+
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -37,12 +35,13 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 					</ol>
 				</section>
 				<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 											%>
-											<%
+				<%
 											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
 											%>
-											<%
+				<%
 											List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster");
 											%>
 				<section class="content">
@@ -60,17 +59,18 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 													%>
 											<label>Select by Loan ID <strong style="color: Red">*</strong></label>
 											<select name="searchLoanId" id="searchLoanId1"
-												onchange="javascript:getByNoc()"
+												onchange="LoanNOCTable();"
 												class="form-control select2" style="width: 100%;">
+												<!-- onchange="javascript:getByNoc()" -->
 												<option selected="selected" value="">Select Loan Id
-														</option>
-														<%
+												</option>
+												<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
 														%>
-														<option value="<%=loan.getId()%>"><%=loan.getId()%>
-														</option>
-														<%
+												<option value="<%=loan.getId()%>"><%=loan.getId()%>
+												</option>
+												<%
 														}
 														}
 														%>
@@ -95,6 +95,25 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 								<div class="box-header with-border">
 									<h3 class="box-title">Search Result</h3>
 									<div class="box-tools pull-right"></div>
+									<table id="loanTable" cellspacing="0" cellpadding="3"
+										rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<thead>
+											<tr>
+												<th>Loan ID</th>
+												<th>Loan Plan Name</th>
+												<th>Loan Type</th>
+												<th>Loan Purpose</th>
+												<th>Guarantor Name</th>
+												<th>Branch Name</th>
+												<th>Phone</th>
+												<th>Address</th>
+											</tr>
+										</thead>
+										<tbody id="loanNOC"></tbody>
+									</table>
+
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>

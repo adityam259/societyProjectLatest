@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -285,12 +287,14 @@ public class LoanModuleController {
 		if (loanData.isPresent()) {
 			loanData.get().setModeRegOrIrr("close");
 			loanRepo.save(loanData.get());
+			//loanRepo.save(loan);
 		}
 		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -345,7 +349,7 @@ public class LoanModuleController {
 		// loanPlanMaster.get().setLoanPlanNameView(loanMaster.get().getLoanName());
 		return loanPlanMaster;
 	}
-
+	
 	@GetMapping("/irregularLoanStatementf159")
 	public String irregularLoanStatementf159(Model model) {
 		List<Loan> loanList = loanRepo.findAll();
@@ -407,7 +411,8 @@ public class LoanModuleController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -498,9 +503,52 @@ public class LoanModuleController {
 	
 	@PostMapping("/searchNormalLoanDocument")
 	@ResponseBody
-	public List<Loan> searchRegularEMIStatementInTable(@RequestBody Loan loan){
-		List<Loan> list = loanRepo.findByid(loan.getId());
-		return list;
+	public Loan searchRegularEMIStatementInTable(@RequestBody Loan loan) {
+	    Loan result = loanRepo.findByid(loan.getId());
+	    return result;
 	}
+	
+	@PostMapping("/searchLoanDataInTable")
+	@ResponseBody
+	public List<Loan> getSearchLoanDataInTable(@RequestBody Loan loan) {
+	    List<Loan> searchResults = new ArrayList<>();
 
+	    if (loan.getBranchname() != null) {
+	        List<Loan> branchname = loanRepo.findBybranchname(loan.getBranchname());
+	        searchResults.addAll(branchname);
+	    }
+
+	    if (loan.getfDate() != null && loan.gettDate() != null) {
+	        List<Loan> loanDate = loanRepo.findByloanDateBetween(loan.getfDate(), loan.gettDate());
+	        searchResults.addAll(loanDate);
+	    }
+
+	    if (loan.getMemberRelativesName() != null) {
+	        List<Loan> memberRelativesName = loanRepo.findBymemberRelativesName(loan.getMemberRelativesName());
+	        searchResults.addAll(memberRelativesName);
+	    }
+
+	    if (loan.getId() != 0) {
+	        Loan id = loanRepo.findByid(loan.getId());
+	        searchResults.add(id);
+	    }
+
+	    if (loan.getSearchMemberCode() != null) {
+	        List<Loan> searchMemberCode = loanRepo.findBysearchMemberCode(loan.getSearchMemberCode());
+	        searchResults.addAll(searchMemberCode);
+	    }
+
+	    if (loan.getLoanPurpose() != null) {
+	        List<Loan> loanPurpose = loanRepo.findByloanPurpose(loan.getLoanPurpose());
+	        searchResults.addAll(loanPurpose);
+	    }
+
+	    if (loan.getAdvisorCode() != null) {
+	        List<Loan> advisorCode = loanRepo.findByadvisorCode(loan.getAdvisorCode());
+	        searchResults.addAll(advisorCode);
+	    }
+
+	    return searchResults;
+	} 
+	
 }
