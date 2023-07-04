@@ -167,7 +167,7 @@ function getAllGoldLoan() {
 				const tableData1 = data.map(function(value) {
 					return (
 						`<tr>
-                           		 <td>${value.id}</td>
+                           		<td>${value.id}</td>
                                 <td>${value.loanName}</td>
                                 <td>${value.loanType}</td>
                                 <td>${value.emiCollection}</td>
@@ -276,7 +276,6 @@ function getAllRates() {
 				const tableData2 = data.map(function(value) {
 					return (
 						`<tr>
-                           		
                                 <td>${value.goldRateType}</td>
                                 <td>${value.goldRate}</td>
                                 <td>${value.silverRate}</td>
@@ -557,7 +556,8 @@ function validateGoldLoanApplciation() {
 		span.textContent = "emi Amount cannot be empty.";
 		//status = false;
 	}
-*/
+   */
+   
 	const loanPurpose = document.getElementById("loanPurpose");
 	if (loanPurpose.value === '') {
 		var span = document.getElementById("loanPurposeMsg");
@@ -613,7 +613,8 @@ function validateGoldLoanApplciation() {
 		span.textContent = "purity cannot be empty.";
 		status = false;
 	}
-	/*
+	
+	    /*
 		const itemQty = document.getElementById("itemQty");
 		if (itemQty.value === '') {
 			var span = document.getElementById("itemQtyMsg");
@@ -709,7 +710,8 @@ function validateGoldLoanApplciation() {
 		span.textContent = "gold Item cannot be empty.";
 		//status = false;
 	}
-*/
+    */
+    
 	const guarantorCode = document.getElementById("guarantorCode");
 	if (guarantorCode.value === '') {
 		var span = document.getElementById("guarantorCodeMsg");
@@ -821,7 +823,8 @@ function validateGoldLoanApplciation() {
 		span.textContent = "legal Amt cannot be empty.";
 		//status = false;
 	}
-*/
+    */
+    
 	const advisorCode = document.getElementById("advisorCode");
 	if (advisorCode.value === '') {
 		var span = document.getElementById("advisorCodeMsg");
@@ -861,6 +864,7 @@ function validateGoldLoanApplciation() {
 		span.textContent = "advisor Name cannot be empty.";
 		//status = false;
 	}*/
+	
 	if (status === true) {
 		document.myFormGoldLoanApplication.submit();
 		return true;
@@ -891,7 +895,6 @@ function getAllLoanPlanName() {
 		}
 	});
 }
-
 
 function getAllItemMasterName() {
 	const select = document.getElementById("itemName");
@@ -960,7 +963,6 @@ function getAllPurityMasterName() {
 	});
 }
 
-
 //get all member data
 function fetchAllMember() {
 	const searchMemberCode = document.getElementById("searchMemberCode");
@@ -977,7 +979,6 @@ function fetchAllMember() {
 				option.innerHTML = value.memberName
 				searchMemberCode.appendChild(option)
 			})
-
 		},
 		error: function() {
 			alert("Device control failed");
@@ -995,7 +996,6 @@ function displayMemberDetails() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'getMemberDeailsById', false);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
@@ -1025,7 +1025,6 @@ function displayMemberDetailsSaving() {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'getMemberDeailsById', false);
 	xhr.setRequestHeader('Content-Type', 'application/json');
-
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
@@ -1048,7 +1047,6 @@ function displayMemberDetailsSaving() {
 		}
 	};
 	xhr.send(JSON.stringify(input));
-
 }
 
 // SELECT MEMBER NAME AND DISPLAY MEMBER DETAILS
@@ -1058,7 +1056,6 @@ function displayLoanMasterDetails() {
 		"id": id.value
 	}
 	var url = 'getLoanMasterDeailsById';
-
 	fetch(url, {
 		method: 'POST',
 		headers: {
@@ -1103,7 +1100,6 @@ function displayLoanMasterDetails() {
 		.catch(function(error) {
 			alert(error.message);
 		});
-
 }
 
 function getAllLoanId() {
@@ -1171,10 +1167,18 @@ function displayLoanDetailsSelectedId() {
 			document.getElementById("mode").value = data.mode;
 			document.getElementById("loanAmount").value = data.loanAmount;
 			document.getElementById("loanROI").value = data.loanROI;
-			document.getElementById("ROIType").value = data.ROIType;
+			document.getElementById("ROIType").value = data.roiType;
 			document.getElementById("emiAmount").value = data.emiAmount;
 			document.getElementById("id").value = data.id;
 			document.getElementById("cspName").value = data.cspName;
+			document.getElementById("remarks").value = data.remarks;
+			document.getElementById("advisorName").value = data.advisorName;
+			document.getElementById("advisorCode").value = data.advisorCode;
+			document.getElementById("paymode").value = data.paymode;
+			document.getElementById("payDate").value = data.payDate;
+			document.getElementById("payAmount").value = data.emiAmount;
+			document.getElementById("netAmount").value = data.netWt;
+			document.getElementById("branchname").value = data.cspName;
 		},
 		error: function() {
 			alert("Device control failed");

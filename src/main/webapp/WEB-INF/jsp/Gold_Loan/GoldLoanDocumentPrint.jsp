@@ -5,10 +5,8 @@
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
 	<form method="post" action="#" id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -17,13 +15,14 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<script type="text/javascript">
-//<![CDATA[
-Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
-//]]>
-</script>
+				//<![CDATA[
+				Sys.WebForms.PageRequestManager._initialize(
+						'ctl00$ScriptManager1', 'form1', [], [], [], 90,
+						'ctl00');
+				//]]>
+			</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
-
 				<section class="content-header">
 					<h1 id="ContentPlaceHolder1_IdHeader">Gold Loan Document</h1>
 					<ol class="breadcrumb">
@@ -267,7 +266,6 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -298,186 +296,290 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
-            $(function () {
-                //Initialize Select2 Elements
-                $('.select2').select2();
-                //Datemask dd/mm/yyyy
-                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-                //Datemask2 mm/dd/yyyy
-                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-                //Date range picker
-                $('#reservation').daterangepicker()
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
-                $('#daterange-btn').daterangepicker(
-                 {
-                     ranges: {
-                         'Today': [moment(), moment()],
-                         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                         'This Month': [moment().startOf('month'), moment().endOf('month')],
-                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                     },
-                     startDate: moment().subtract(29, 'days'),
-                     endDate: moment()
-                 },
-                 function (start, end) {
-                     $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
-                 }
-               )
-                //Date picker
-                $('#datepicker').datepicker({
-                    autoclose: true
-                })
-                //Money Euro
-                $('[data-mask]').inputmask()
+			$(function() {
+				//Initialize Select2 Elements
+				$('.select2').select2();
+				//Datemask dd/mm/yyyy
+				$('#datemask').inputmask('dd/mm/yyyy', {
+					'placeholder' : 'dd/mm/yyyy'
+				})
+				//Datemask2 mm/dd/yyyy
+				$('#datemask2').inputmask('mm/dd/yyyy', {
+					'placeholder' : 'mm/dd/yyyy'
+				})
+				//Date range picker
+				$('#reservation').daterangepicker()
+				//Date range picker with time picker
+				$('#reservationtime').daterangepicker({
+					timePicker : true,
+					timePickerIncrement : 30,
+					locale : {
+						format : 'MM/DD/YYYY hh:mm A'
+					}
+				})
+				$('#daterange-btn')
+						.daterangepicker(
+								{
+									ranges : {
+										'Today' : [ moment(), moment() ],
+										'Yesterday' : [
+												moment().subtract(1, 'days'),
+												moment().subtract(1, 'days') ],
+										'Last 7 Days' : [
+												moment().subtract(6, 'days'),
+												moment() ],
+										'Last 30 Days' : [
+												moment().subtract(29, 'days'),
+												moment() ],
+										'This Month' : [
+												moment().startOf('month'),
+												moment().endOf('month') ],
+										'Last Month' : [
+												moment().subtract(1, 'month')
+														.startOf('month'),
+												moment().subtract(1, 'month')
+														.endOf('month') ]
+									},
+									startDate : moment().subtract(29, 'days'),
+									endDate : moment()
+								},
+								function(start, end) {
+									$('#daterange-btn span').html(
+											start.format('DD/MM/YYYY') + ' - '
+													+ end.format('DD/MM/YYYY'))
+								})
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose : true
+				})
+				//Money Euro
+				$('[data-mask]').inputmask()
 
-                //iCheck for checkbox and radio inputs
-                $('span[type="checkbox"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                })
-            })
-        </script>
-
-		<script type="text/javascript">
-//<![CDATA[
-var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoneDate"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorCodeName"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMobileNo"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorPlanTerm"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanMode"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanROI"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorEmiAmount"));
-//]]>
-</script>
-
-		<script type="text/javascript">
-//<![CDATA[
-var ContentPlaceHolder1_RequiredFieldValidatorLoneDate = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoneDate"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoneDate");
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.controltovalidate = "ContentPlaceHolder1_txtLoanDate";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.errormessage = "Enter Loan Date";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorLoneDate.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorCodeName = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorCodeName"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorCodeName");
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.controltovalidate = "ContentPlaceHolder1_txtCodeName";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.errormessage = "Enter Code & Name";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorCodeName.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorMobileNo = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorMobileNo"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMobileNo");
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.controltovalidate = "ContentPlaceHolder1_txtMobileNo";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.errormessage = "Enter Mobile No";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorMobileNo.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName");
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.controltovalidate = "ContentPlaceHolder1_txtLoanPlanName";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.errormessage = "Enter Loan Plan Name";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorPlanTerm = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorPlanTerm"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorPlanTerm");
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.controltovalidate = "ContentPlaceHolder1_txtPlanTerm";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.errormessage = "Enter Plan Term";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorLoanMode = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanMode"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanMode");
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.controltovalidate = "ContentPlaceHolder1_txtLoanMode";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.errormessage = "Enter Loan Mode";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorLoanMode.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator2 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator2"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2");
-ContentPlaceHolder1_RequiredFieldValidator2.controltovalidate = "ContentPlaceHolder1_txtLoanAmount";
-ContentPlaceHolder1_RequiredFieldValidator2.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator2.errormessage = "Enter Loan Amount";
-ContentPlaceHolder1_RequiredFieldValidator2.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator2.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator2.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorLoanROI = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanROI"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanROI");
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.controltovalidate = "ContentPlaceHolder1_txtLoanROI";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.errormessage = "Enter Loan ROI";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorLoanROI.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorEmiAmount = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorEmiAmount"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorEmiAmount");
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.controltovalidate = "ContentPlaceHolder1_txtEmiAmount";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.errormessage = "Enter Emi Amount";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.initialvalue = "";
-//]]>
-</script>
+				//iCheck for checkbox and radio inputs
+				$('span[type="checkbox"].minimal').iCheck({
+					checkboxClass : 'icheckbox_minimal-blue',
+					radioClass : 'iradio_minimal-blue'
+				})
+			})
+		</script>
 
 		<script type="text/javascript">
-//<![CDATA[
+			//<![CDATA[
+			var Page_Validators = new Array(
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoneDate"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorCodeName"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMobileNo"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorPlanTerm"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanMode"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanROI"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorEmiAmount"));
+			//]]>
+		</script>
 
-var Page_ValidationActive = false;
-if (typeof(ValidatorOnLoad) == "function") {
-    ValidatorOnLoad();
-}
+		<script type="text/javascript">
+			//<![CDATA[
+			var ContentPlaceHolder1_RequiredFieldValidatorLoneDate = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoneDate"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoneDate");
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.controltovalidate = "ContentPlaceHolder1_txtLoanDate";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.errormessage = "Enter Loan Date";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorLoneDate.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorCodeName = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorCodeName"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorCodeName");
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.controltovalidate = "ContentPlaceHolder1_txtCodeName";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.errormessage = "Enter Code & Name";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorCodeName.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorMobileNo = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorMobileNo"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMobileNo");
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.controltovalidate = "ContentPlaceHolder1_txtMobileNo";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.errormessage = "Enter Mobile No";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorMobileNo.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName");
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.controltovalidate = "ContentPlaceHolder1_txtLoanPlanName";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.errormessage = "Enter Loan Plan Name";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorPlanTerm = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorPlanTerm"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorPlanTerm");
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.controltovalidate = "ContentPlaceHolder1_txtPlanTerm";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.errormessage = "Enter Plan Term";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorPlanTerm.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorLoanMode = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanMode"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanMode");
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.controltovalidate = "ContentPlaceHolder1_txtLoanMode";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.errormessage = "Enter Loan Mode";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanMode.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator2 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator2"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator2");
+			ContentPlaceHolder1_RequiredFieldValidator2.controltovalidate = "ContentPlaceHolder1_txtLoanAmount";
+			ContentPlaceHolder1_RequiredFieldValidator2.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator2.errormessage = "Enter Loan Amount";
+			ContentPlaceHolder1_RequiredFieldValidator2.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator2.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator2.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorLoanROI = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorLoanROI"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLoanROI");
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.controltovalidate = "ContentPlaceHolder1_txtLoanROI";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.errormessage = "Enter Loan ROI";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorLoanROI.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorEmiAmount = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorEmiAmount"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorEmiAmount");
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.controltovalidate = "ContentPlaceHolder1_txtEmiAmount";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.errormessage = "Enter Emi Amount";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorEmiAmount.initialvalue = "";
+			//]]>
+		</script>
 
-function ValidatorOnSubmit() {
-    if (Page_ValidationActive) {
-        return ValidatorCommonOnSubmit();
-    }
-    else {
-        return true;
-    }
-}
-        
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoneDate').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoneDate'));
-}
+		<script type="text/javascript">
+			//<![CDATA[
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorCodeName').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorCodeName'));
-}
+			var Page_ValidationActive = false;
+			if (typeof (ValidatorOnLoad) == "function") {
+				ValidatorOnLoad();
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorMobileNo').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorMobileNo'));
-}
+			function ValidatorOnSubmit() {
+				if (Page_ValidationActive) {
+					return ValidatorCommonOnSubmit();
+				} else {
+					return true;
+				}
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoneDate').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoneDate'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorPlanTerm').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorPlanTerm'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorCodeName').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorCodeName'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanMode').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanMode'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorMobileNo').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorMobileNo'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanPlanName'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanROI').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanROI'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorPlanTerm').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorPlanTerm'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorEmiAmount').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorEmiAmount'));
-}
-//]]>
-</script>
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanMode').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanMode'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator2').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator2'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanROI').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorLoanROI'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorEmiAmount').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorEmiAmount'));
+			}
+			//]]>
+		</script>
 	</form>
 </body>
 

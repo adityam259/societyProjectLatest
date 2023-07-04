@@ -16,10 +16,8 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/RegularLoanStatement.aspx?Type=Gold"
 		id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -62,7 +60,6 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
 														<option selected="selected" value="">Select Loan ID</option>
-														
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {

@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Loan"%>
 <%@page import="com.society.application.model.Member"%>
@@ -16,10 +17,8 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/ClosedLoanReport.aspx?Type=Gold"
 		id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -28,15 +27,16 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 											%>
-											<%
+			<%
 											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
 											%>
-											<%
+			<%
 											List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster");
 											%>
-</script>
+			</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -60,33 +60,35 @@
 								<div class="box-body">
 									<div class="col-md-2">
 										<div class="form-group">
-											<label>Loan Id</label> <select name="searchLoanId" onchange="getByLoanIdIrRegularEmiRepayment()"
-														id="searchLoanId1" class="form-control select2"
-														style="width: 100%;">
-														<option selected="selected" value="">Select Loan Id
-														</option>
-														<%
+										<!-- onchange="getByLoanIdIrRegularEmiRepayment()" -->
+											<label>Loan Id</label> <select name="searchLoanId"
+												onchange="javascript:getByGoldLoanIdRegularEmiRepayment()"
+												id="searchLoanId1" class="form-control select2"
+												style="width: 100%;">
+												<option selected="selected" value="">Select Loan Id
+												</option>
+												<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
 														%>
-														<option value="<%=loan.getId()%>"><%=loan.getId()%>
-														</option>
-														<%
+												<option value="<%=loan.getId()%>"><%=loan.getId()%>
+												</option>
+												<%
 														}
 														}
 														%>
-													</select>
+											</select>
 										</div>
 									</div>
-									<div class="col-md-2">
+									<!-- <div class="col-md-2">
 										<div class="form-group">
 											<label>From Date :</label>
 											<div class="input-group date">
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtFDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtFDate"
+												<input name="fDate" type="date"
+													value="01/08/2022" id="fDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -100,14 +102,14 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="tDate" type="date"
+													value="01/08/2022" id="tDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<div class="col-md-2">
 										<div class="form-group">
 											<label></label> <a id="ContentPlaceHolder1_btnSearch"
@@ -126,6 +128,15 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table id="loanTable" cellspacing="0" cellpadding="3"
+										rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<tr>
+											<th>Field</th>
+											<th>Value</th>
+										</tr>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -139,7 +150,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>

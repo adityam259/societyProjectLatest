@@ -456,7 +456,6 @@
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
 													<option value="">Select Branch</option>

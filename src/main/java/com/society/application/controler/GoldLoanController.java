@@ -319,7 +319,8 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		// List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -329,13 +330,16 @@ public class GoldLoanController {
 	// IrregularEMIPaymentEntry9d5e
 	@GetMapping("/irregularEMIPaymentEntry9d5e")
 	public String irregularEMIPaymentEntry9d5e(Model model) {
+		List<BranchMaster> branchData = branchMasterRepo.findAll();
+		model.addAttribute("branchList", branchData);
 		return "Gold_Loan/IrregularEMIPaymentEntry9d5e";
 	}
 
 	// RegularLoanStatement9d5e
 	@GetMapping("/regularLoanStatement9d5e")
 	public String regularLoanStatement9d5e(Model model) {
-		List<Loan> loanList = loanRepo.searchGoldLoan();
+		//List<Loan> loanList = loanRepo.searchGoldLoan();
+		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		return "Gold_Loan/RegularLoanStatement9d5e";
 	}
@@ -353,7 +357,8 @@ public class GoldLoanController {
 	// IrregularLoanStatement9d5e
 	@GetMapping("/irregularLoanStatement9d5e")
 	public String irregularLoanStatement9d5e(Model model) {
-		List<Loan> loanList = loanRepo.searchGoldLoan();
+		//List<Loan> loanList = loanRepo.searchGoldLoan();
+		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		return "Gold_Loan/IrregularLoanStatement9d5e";
 	}
@@ -367,13 +372,16 @@ public class GoldLoanController {
 	// LoanPreSettlement9d5e.html
 	@GetMapping("/loanPreSettlement9d5e")
 	public String loanPreSettlement9d5e(Model model) {
+		List<BranchMaster> branchData = branchMasterRepo.findAll();
+		model.addAttribute("branchList", branchData);
 		return "Gold_Loan/LoanPreSettlement9d5e";
 	}
 
 	// ClosedLoanReport9d5e.html
 	@GetMapping("/closedLoanReport9d5e")
 	public String closedLoanReport9d5e(Model model) {
-		List<Loan> loanList = loanRepo.searchGoldLoan();
+		//List<Loan> loanList = loanRepo.searchGoldLoan();
+		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
@@ -387,11 +395,13 @@ public class GoldLoanController {
 	// LoanNoc9d5e
 	@GetMapping("/loanNoc9d5e")
 	public String loanNoc9d5e(Model model) {
-		List<Loan> loanList = loanRepo.searchGoldLoan();
+		//List<Loan> loanList = loanRepo.searchGoldLoan();
+		List<Loan> loanList = loanRepo.findAll();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -419,7 +429,7 @@ public class GoldLoanController {
 	 * id) { Optional<Member> memberData =
 	 * membRepo.findById(Integer.parseInt(id.getId())); return memberData.get(); }
 	 */
-
+	 
 	@PostMapping("/getMemberDeailsById")
 	@ResponseBody
 	public ClientMaster getMemberDeailsById(@RequestBody GenericGetById id) {
@@ -438,39 +448,46 @@ public class GoldLoanController {
 	@ResponseBody
 	public Loan displayLoanDetailsSelectedId(@RequestBody GenericGetById id) {
 		Optional<Loan> loan = loanRepo.findById(Integer.parseInt(id.getId()));
-		System.err.println(loan.get());
+		// System.err.println(loan.get());
 		return loan.get();
 	}
 
 	@PostMapping("/updateLoanRegularEMIRepayment")
 	public String regularEMIRepayment(@ModelAttribute("updateLoan") Loan loan, Model model) {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
+		// loanRepo.save(loan);
 		if (getLoan.get() != null) {
 			// as of now no action as complete field is not visible in view
+			loanRepo.save(loan);
 		}
 		List<Loan> loanList = loanRepo.searchGoldLoan();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		// List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
 		model.addAttribute("status", "success");
 		return "Gold_Loan/LoanRepayment9d5e";
+		// return "Gold_Loan/IrregularEMIPaymentEntry9d5e";
 	}
 
 	@PostMapping("/updateLoanirRegularEMIRepayment")
 	public String updateLoanirRegularEMIRepayment(@ModelAttribute("updateLoan") Loan loan, Model model) {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
+		// loanRepo.save(loan);
 		if (getLoan.get() != null) {
 			// as of now no action as complete field is not visible in view
+			loanRepo.save(loan);
 		}
 		List<Loan> loanList = loanRepo.searchGoldLoan();
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		// List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -483,6 +500,7 @@ public class GoldLoanController {
 		Optional<Loan> getLoan = loanRepo.findById(loan.getId());
 		if (getLoan.get() != null) {
 			// few fields are no tthere so not saving close status
+			loanRepo.save(loan);
 		}
 		model.addAttribute("status", "success");
 		return "Gold_Loan/LoanPreSettlement9d5e";

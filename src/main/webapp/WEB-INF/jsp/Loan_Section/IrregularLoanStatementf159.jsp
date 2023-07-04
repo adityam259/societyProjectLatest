@@ -16,10 +16,8 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/IrregularLoanStatement.aspx?Type=Gold"
 		id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -57,7 +55,6 @@
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
 														<option selected="selected" value="">Select Loan ID</option>
-														
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -110,7 +107,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -185,6 +181,5 @@
         </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/IrregularLoanStatement.aspx?Type=Gold EDB D 09:27:11 GMT -->
 </html>

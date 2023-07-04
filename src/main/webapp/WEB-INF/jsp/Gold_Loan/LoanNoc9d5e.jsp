@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Loan"%>
 <%@page import="com.society.application.model.Member"%>
@@ -10,10 +11,8 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/LoanNoc.aspx?Type=Gold"
 		id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -22,12 +21,13 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+											  List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
 											%>
-											<%
+			<%
 											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
 											%>
-											<%
+			<%
 											List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster");
 											%>
 			<!-- Content Wrapper. Contains page content -->
@@ -50,22 +50,22 @@
 								<div class="box-body">
 									<div class="col-md-3">
 										<div class="form-group">
-										<%
+											<%
 													List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 													%>
 											<label>Select by Loan ID <strong style="color: Red">*</strong></label>
 											<select name="searchLoanId" id="searchLoanId1"
-												onchange="javascript:getByNoc()"
+												onchange="javascript:getByGoldLoanIdRegularEmiRepayment()"
 												class="form-control select2" style="width: 100%;">
 												<option selected="selected" value="">Select Loan Id
-														</option>
-														<%
+												</option>
+												<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
 														%>
-														<option value="<%=loan.getId()%>"><%=loan.getId()%>
-														</option>
-														<%
+												<option value="<%=loan.getId()%>"><%=loan.getId()%>
+												</option>
+												<%
 														}
 														}
 														%>
@@ -81,12 +81,9 @@
 												class="btn btn-success margin-20">Search</button>
 										</div>
 									</div>
+									<div class="clearfix margin-bottom-10"></div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
 							<div class="box box-success"
 								style="box-shadow: none; overflow: auto !important;">
 								<div class="box-header with-border">
@@ -95,6 +92,15 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table id="loanTable" cellspacing="0" cellpadding="3"
+										rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<tr>
+											<th>Field</th>
+											<th>Value</th>
+										</tr>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -108,7 +114,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -183,6 +188,5 @@
         </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/LoanNoc.aspx?Type=Gold EDB D 09:27:12 GMT -->
 </html>

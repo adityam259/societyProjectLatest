@@ -584,45 +584,45 @@ function displayLoanDetailsOfRegularEMIRepaymentSelectedId() {
 	});
 }
 
-function searchNormalLoanDocument(){
-	let id = document.getElementById("searchLoanId1").value;
-	let printType = document.getElementById("printType").value;
-	var input = {
-		"id":id,
-		"printType":printType,
-	};
-	const myJson = JSON.stringify(input);
-	//alert(id)
-	$.ajax({
-		type:"POST",
-		contentType: "application/json",
-		data: myJson,
-		url: 'searchNormalLoanDocument',
-		async: false,
-		success: function(data){
-			if(data.length){
-				var advisor = data[0];
-				
-				document.getElementById("loanDate").value = advisor.loanDate;
-				document.getElementById("loanName").value = advisor.searchMemberCode;
-				document.getElementById("memberRelativesName").value = advisor.relativeDetails;
-				document.getElementById("phoneno").value = advisor.phoneno;
-				document.getElementById("loanName").value = advisor.loanPlanName;
-				document.getElementById("planTerm").value = advisor.planTerm;
-				document.getElementById("loanMode").value = advisor.mode;
-				document.getElementById("loanAmount").value = advisor.loanAmount;
-				document.getElementById("ROI").value = advisor.loanROI;
-				document.getElementById("roiType").value = advisor.roiType;
-				document.getElementById("emiAmount").value = advisor.emiAmount;
-			}else{
-				alert("No data found");
-			}
-		}, 
-		error: function(){
-			alert("Device control failed");
-		}
-	});
+function searchNormalLoanDocument() {
+  let id = document.getElementById("searchLoanId1").value;
+  let printType = document.getElementById("printType").value;
+  
+  var input = {
+    "id": id,
+    "printType": printType
+  };
+  
+  const myJson = JSON.stringify(input);
+  
+  $.ajax({
+    type: "POST",
+    contentType: "application/json",
+    data: myJson,
+    url: '/searchNormalLoanDocument',
+    success: function(data) {
+      if (data) {
+        document.getElementById("loanDate").value = data.loanDate;
+        document.getElementById("loanName").value = data.searchMemberCode;
+        document.getElementById("memberRelativesName").value = data.relativeDetails;
+        document.getElementById("phoneno").value = data.phoneno;
+        document.getElementById("loanPlanName").value = data.loanPlanName;
+        document.getElementById("planTerm").value = data.planTerm;
+        document.getElementById("loanMode").value = data.mode;
+        document.getElementById("loanAmount").value = data.loanAmount;
+        document.getElementById("ROI").value = data.loanROI;
+        document.getElementById("roiType").value = data.roiType;
+        document.getElementById("emiAmount").value = data.emiAmount;
+      } else {
+        alert("No data found");
+      }
+    },
+    error: function() {
+      alert("Failed to retrieve loan data");
+    }
+  });
 }
+
 
 function LoanNOCTable() {
     var searchLoanId = document.getElementById("searchLoanId1").value;

@@ -1,3 +1,5 @@
+<%@page import="com.society.application.model.BranchMaster"%>
+<%@page import="java.util.List"%>
 <jsp:include page="../header.jsp" />
 <body
 	onload="getAllLoans();getAllLoanId();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
@@ -7,17 +9,17 @@
 	<form method="post" action="closeLoanRegularEMIRepayment?Type=Gold"
 		id="form1" modelAttribute="updateLoan">
 		<%
-         String status = (String)request.getAttribute("status");
-         if(status!=null && "success".equals(status)){
-          %>
+		String status = (String) request.getAttribute("status");
+		if (status != null && "success".equals(status)) {
+		%>
 		<script>
          alert("Saved Successfully");
       </script>
 		<%
-         }else{
-          
-         }
-         %>
+		} else {
+
+		}
+		%>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -27,6 +29,9 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
+			<%
+											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
+			%>
 			<script type="text/javascript">
 //<![CDATA[
 Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['tctl00$ContentPlaceHolder1$uppnlcal','ContentPlaceHolder1_uppnlcal','tctl00$ContentPlaceHolder1$uppaymode','ContentPlaceHolder1_uppaymode','tctl00$ContentPlaceHolder1$upbank','ContentPlaceHolder1_upbank','tctl00$ContentPlaceHolder1$upchq','ContentPlaceHolder1_upchq','tctl00$ContentPlaceHolder1$uppnkad','ContentPlaceHolder1_uppnkad'], [], [], 90, 'ctl00');
@@ -336,10 +341,17 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<select name="ctl00$ContentPlaceHolder1$ddlCSPName"
-													id="ContentPlaceHolder1_ddlCSPName" class="form-control"
+												<select name="cspName" id="branchname" class="form-control"
 													style="width: 100%;">
-													<option value="001">Main Office - 001</option>
+													<option value="">Select Branch</option>
+													<% if(branchList!=null && !branchList.isEmpty()){
+														for(BranchMaster branch :branchList ){
+															%>
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
+														}
+													}
+													%>
 												</select>
 											</div>
 										</div>
@@ -438,9 +450,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="ctl00$ContentPlaceHolder1$txtPaymentDate"
-														type="text" value="01/08/2022"
-														id="ContentPlaceHolder1_txtPaymentDate"
+													<input name="payDate"
+														type="date" value="01/08/2022"
+														id="payDate"
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -453,9 +465,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													By <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-7">
-													<select name="ctl00$ContentPlaceHolder1$ddlPaymode"
+													<select name="paymode"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlPaymode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														id="ContentPlaceHolder1_ddlPaymode" class="form-control"
+														id="paymode" class="form-control"
 														style="width: 100%;">
 														<option selected="selected" value="Cash">Cash</option>
 														<option value="Cheque">Cheque</option>
@@ -475,11 +487,11 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Code <strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorCode"
+													<input name="advisorCode"
 														type="text"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtAdvisorCode\&#39;,\&#39;\&#39;)&#39;, 0)"
 														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtAdvisorCode"
+														id="advisorCode"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Code" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator6"
@@ -491,9 +503,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Name <strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorName"
+													<input name="advisorName"
 														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtAdvisorName"
+														id="advisorName"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Name" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator7"
@@ -505,8 +517,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 										<div class="form-group row">
 											<label class="col-sm-5 control-label">Remarks</label>
 											<div class="col-sm-7">
-												<textarea name="ctl00$ContentPlaceHolder1$txtRemarks"
-													rows="2" cols="20" id="ContentPlaceHolder1_txtRemarks"
+												<textarea name="remarks"
+													rows="2" cols="20" id="remarks"
 													class="form-control" Placeholder="Enter Remarks if any">
 </textarea>
 											</div>
