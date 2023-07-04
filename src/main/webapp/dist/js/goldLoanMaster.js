@@ -1201,6 +1201,7 @@ var loanData = response.data.loan;
         document.getElementById("advisorCode").value = loanMasterData.advisorCode;
         document.getElementById("advisorName").value = loanMasterData.advisorName;
         document.getElementById("remarks").value = loanData.remarks;
+        document.getElementById("id").value = loanData.id;
 //        document.getElementById("emiAmount").value = loanData.emiAmount;
 //        document.getElementById("emiAmount").value = loanData.emiAmount;
 //        document.getElementById("emiAmount").value = loanData.emiAmount;

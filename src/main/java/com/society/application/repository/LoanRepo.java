@@ -41,5 +41,7 @@ public interface LoanRepo extends JpaRepository<Loan, Integer> {
             "WHERE ln.id = :id")
 	Optional<LoanWithLoanMasterDTO> findLoanWithLoanMasterById(@Param("id") Integer id);
 
+	Loan findByid(int id);
+
 	
 }

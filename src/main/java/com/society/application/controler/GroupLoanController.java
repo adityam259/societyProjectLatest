@@ -99,9 +99,13 @@ public class GroupLoanController {
 	
 	@PostMapping("/closeLoanRegularEMIRepaymentGroup")
 	public String closeLoanRegularEMIRepaymentGroup(@ModelAttribute("updateLoan") Loan loan, Model model) {
-		
-				//few fields are no tthere so not saving close status
-		
+
+		Loan loan1 = loanRepo.findByid(loan.getId());
+
+		loan1.setCloseLoan("close");
+
+		loanRepo.save(loan1);
+
 		model.addAttribute("status", "success");
 		return "group_loan/LoanPreSettlement5c22";
 	}
