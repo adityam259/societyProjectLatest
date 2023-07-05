@@ -57,6 +57,8 @@ public interface LoanRepo extends JpaRepository<Loan, Integer> {
 
 	List<Loan> findBycspName(String cspName);
 
+	List<Loan> findByadvisorName(String advisorName);
+
 	//List<Loan> findByid(int id);
 
 }

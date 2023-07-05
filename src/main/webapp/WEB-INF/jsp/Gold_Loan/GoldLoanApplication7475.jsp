@@ -1,13 +1,13 @@
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.LoanMaster"%>
 <%@page import="com.society.application.model.BranchMaster"%>
-<%@page import="com.society.application.model.Member"%>
+<%@page import="com.society.application.model.ClientMaster"%>
 
 <jsp:include page="../header.jsp" />
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true"
-	onload="getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()">
+	onload="getAllItemMasterName();getAllILockerName();getAllPurityMasterName();">
 	<form method="post" name="myFormGoldLoanApplication"
 		modelAttribute="loanGoldApplication" action="saveLoanGoldApplication"
 		id="myFormGoldLoanApplication" enctype="multipart/form-data">
@@ -37,11 +37,9 @@
           
          }
          %>
-			<% List<Member> memberList = (List<Member>) request.getAttribute("memberList"); %>
+			<% List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList"); %>
 			<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
 			<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
-
-
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -70,7 +68,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="loanDate" type="text" value="01/08/2022"
+													<input name="loanDate" type="date" value="01/08/2022"
 														id="loanDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -89,7 +87,7 @@
 													class="form-control select2" style="width: 100%;">
 														<option selected="selected" value="">Select Member</option>
 													<%if(memberList!=null && !memberList.isEmpty()){ 
-														for(Member member: memberList){
+														for(ClientMaster member: memberList){
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName() %></option>
 													<%} 
@@ -222,7 +220,6 @@
 														class="form-control" style="width: 100%;"
 														onchange="javascript:displayLoanMasterDetails()">
 														<option value="">Select loan Plan Master	</option>
-														
 													<%if(loanMasterList!=null && !loanMasterList.isEmpty()){ 
 													for(LoanMaster loanPlan: loanMasterList){
 													%>
@@ -530,8 +527,6 @@
 											</div>
 										</div>
 									</div>
-									
-								
 								</div>
 							</div>
 						</div>
@@ -1079,7 +1074,6 @@
       </script>
 		<script type="text/javascript">
          //<![CDATA[
-         
          var Page_ValidationActive = false;
          if (typeof(ValidatorOnLoad) == "function") {
              ValidatorOnLoad();

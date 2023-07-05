@@ -162,11 +162,19 @@ public class GoldLoanController {
 	}
 
 	// lockerMasterRepo
+	/*
+	 * @PostMapping("/saveLockerMaster") public String
+	 * saveLockerMaster(@ModelAttribute("savelockerMaster") LockerMaster
+	 * lockerMaster, Model model) { LockerMaster getAllRates =
+	 * lockerMasterRepo.save(lockerMaster); return "Gold_Loan/goldLoanMaster"; }
+	 */
+	
+	// lockerMasterRepo
 	@PostMapping("/saveLockerMaster")
-	public String saveLockerMaster(@ModelAttribute("savelockerMaster") LockerMaster lockerMaster, Model model) {
-		LockerMaster getAllRates = lockerMasterRepo.save(lockerMaster);
-		return "Gold_Loan/goldLoanMaster";
-	}
+    public String saveLockerMaster(@ModelAttribute("savelockerMaster") LockerMaster lockerMaster, Model model) {
+        LockerMaster savedLockerMaster = lockerMasterRepo.save(lockerMaster);
+        return "Gold_Loan/goldLoanMaster"; 
+    }
 
 	@GetMapping("/getAllLockerMaster")
 	@ResponseBody
@@ -196,13 +204,14 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
 		return "Gold_Loan/GoldLoanApplication7475";
 	}
-
+	
 	@PostMapping("/saveLoanGoldApplication")
 	public String saveLoanGoldApplication(@ModelAttribute("loanGoldApplication") Loan loan, Model model) {
 		loan.setType("Gold");
@@ -215,7 +224,8 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -236,15 +246,18 @@ public class GoldLoanController {
 		loan.setUpdatedBy("");
 		loan.setUpdatedDate(new Date().toString());
 		Loan loanSaved = loanRepo.save(loan);
-		List<Loan> loanList = loanRepo.searchGoldLoan();
-		model.addAttribute("loanList", loanList);
+		//List<Loan> loanList = loanRepo.searchGoldLoan();
+		//model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
 		if (loanSaved != null) {
+			List<Loan> loanPlanMasterAllData = loanRepo.findAll();
+			model.addAttribute("loanList", loanPlanMasterAllData);
 			model.addAttribute("status", "success");
 			return "Gold_Loan/GoldLoanApplicationf780";
 		} else {
@@ -266,7 +279,8 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -293,7 +307,8 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -306,7 +321,8 @@ public class GoldLoanController {
 		model.addAttribute("loanList", loanList);
 		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
 		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -436,7 +452,7 @@ public class GoldLoanController {
 		Optional<ClientMaster> memberData = clientMasterRepo.findById(Integer.parseInt(id.getId()));
 		return memberData.get();
 	}
-
+	
 	@PostMapping("/getLoanMasterDeailsById")
 	@ResponseBody
 	public LoanMaster getLoanMasterDeailsById(@RequestBody GenericGetById id) {

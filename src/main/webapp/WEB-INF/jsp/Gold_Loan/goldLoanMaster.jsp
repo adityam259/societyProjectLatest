@@ -14,7 +14,6 @@
 		<!-- Aside Menu Start-->
 		<jsp:include page="../asideMenu.jsp" />
 		<!-- Aside Menu end -->
-		
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="min-height: 1105.75px;">
 			<section class="content-header">
@@ -201,8 +200,9 @@
 						<!-- /.box-tools -->
 					</div>
 					<!-- /.box-header -->
-					<form action="saveLockerMaster" method="post"
-						name="myFormLockerMaster" modelAttribute="savelockerMaster">
+					<!-- <form action="saveLockerMaster" method="post"
+						name="myFormLockerMaster" modelAttribute="savelockerMaster"> -->
+						<form action="/saveLockerMaster" method="post" name="myFormLockerMaster" modelAttribute="savelockerMaster">
 						<div class="box-body">
 							<div class="col-md-6">
 								<div class="form-group row">
@@ -228,7 +228,7 @@
 											id="lockerAddressMsg"
 											style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
 									</div>
-									<button type="button"
+									<button type="submit"
 										name="ctl00$ContentPlaceHolder1$btnLocker" value="Save"
 										onclick="return validateLockerMaster()"
 										id="ContentPlaceHolder1_btnLocker"
@@ -279,7 +279,6 @@
 											class="form-control" autocomplete="off" /> <span
 											id="purityNameMsg"
 											style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
-
 									</div>
 								</div>
 								<div class="form-group row">

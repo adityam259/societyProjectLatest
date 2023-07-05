@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="com.society.application.model.LoanMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Member"%>
@@ -11,7 +12,7 @@
 <script src="dist/js/groupMasterUtilsJs.js"></script>
 <script src="dist/js/LoanModuleJs.js"></script>
 <body
-	onload="getAllLoanId();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
+	onload="getAllLoanId();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();"
 	class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
@@ -27,11 +28,12 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			<% List<Member> memberList = (List<Member>) request.getAttribute("memberList"); %>
+			<% //List<Member> memberList = (List<Member>) request.getAttribute("memberList"); 
+			   List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList"); 
+			%>
 			<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
 			<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
-											
-											
+
 			<%
          String status = (String)request.getAttribute("status");
          if(status!=null && "success".equals(status)){
@@ -65,23 +67,20 @@
 									<div class="box-body">
 										<div class="col-md-6">
 											<div class="form-group row">
-											
-											<%
+												<%
 												List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 												%>
-												<input name="id" type="hidden" 
-														id="id" class="form-control"
-														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
-														data-mask="" />
-												<label class="col-sm-4 control-label">Select by
-													LoanID <strong style="color: Red">*</strong>
+												<input name="id" type="hidden" id="id" class="form-control"
+													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+													data-mask="" /> <label class="col-sm-4 control-label">Select
+													by LoanID <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
 													<select name="searchLoanID" id="searchLoanId1"
-													onchange="getByGoldLoanId('approve')"
+														onchange="getByGoldLoanId('approve')"
 														class="form-control select2" style="width: 100%;">
-														<option selected="selected" value="">Select Loan ID</option>
-														
+														<option selected="selected" value="">Select Loan
+															ID</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -100,7 +99,7 @@
 							</div>
 						</div>
 					</div>
-				<div class="row">
+					<div class="row">
 						<div class="col-md-12">
 							<div class="box box-info">
 								<div class="box-header with-border">
@@ -116,7 +115,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="loanDate" type="text" value="01/08/2022"
+													<input name="loanDate" type="date" value="01/08/2022"
 														id="loanDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -135,7 +134,8 @@
 													class="form-control select2" style="width: 100%;">
 													<%
 													if (memberList != null && !memberList.isEmpty()) {
-														for (Member member : memberList) {
+														for (/* Member member : memberList */
+																ClientMaster member : memberList) {
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName()%></option>
 													<%
@@ -279,7 +279,7 @@
 													</select>
 												</div>
 											</div>
-											
+
 											<div class="form-group row">
 												<label for="ddlPlanTerm" class="col-sm-4 control-label">Plan
 													Term <strong style="color: Red">*</strong>
@@ -300,7 +300,6 @@
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Mode</span>
 												</div>
-												
 											</div>
 											<div class="form-group row">
 												<label class="col-sm-4 control-label">Loan Amount <strong
@@ -357,7 +356,6 @@
 								</div>
 							</div>
 						</div>
-					
 					</div>
 					<div class="row">
 						<div id="ContentPlaceHolder1_uppnlGold">
@@ -526,12 +524,9 @@
 											</div>
 										</div>
 									</div>
-									
-								
 								</div>
 							</div>
 						</div>
-						
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -828,7 +823,7 @@
 																	<i class="fa fa-calendar"></i>
 																</div>
 																<input name="ctl00$ContentPlaceHolder1$txtApprovalDate"
-																	type="text" value="01/08/2022"
+																	type="date" value="01/08/2022"
 																	id="ContentPlaceHolder1_txtApprovalDate"
 																	class="form-control"
 																	data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
@@ -842,29 +837,24 @@
 														<label for="txtProcessingFee"
 															class="col-sm-4 control-label">Approval Status</label>
 														<div class="col-sm-8">
-															<select name="approvalStatus" 
-														id="approvalStatus" class="form-control select2"
-														style="width: 100%;">
-														
-													<option selected="selected" value="reject">Reject</option>
-													<option selected="selected" value="approved">Approved</option>
-													
-														
-													</select>
-												
+															<select name="approvalStatus" id="approvalStatus"
+																class="form-control select2" style="width: 100%;">
+																<option selected="selected" value="reject">Reject</option>
+																<option selected="selected" value="approved">Approved</option>
+															</select>
+
 														</div>
 													</div>
 												</div>
 											</div>
 											<div class="box-footer">
-									<div class="row col-md-12">
-
-									<input type="submit"
-											name="ctl00$ContentPlaceHolder1$btnSave" value="Approve"
-											id="ContentPlaceHolder1_btnSave"
-											class="btn btn-success pull-right margin-r-5" />
-									</div>
-								</div>
+												<div class="row col-md-12">
+													<input type="submit"
+														name="ctl00$ContentPlaceHolder1$btnSave" value="Approve"
+														id="ContentPlaceHolder1_btnSave"
+														class="btn btn-success pull-right margin-r-5" />
+												</div>
+											</div>
 											<div class="box-footer">
 												<div class="row col-md-12">
 													<div class="box-footer">

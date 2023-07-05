@@ -8,10 +8,10 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/GoldLoanSearch.aspx"
 		id="form1">
-<%
+		<%
 				List<GroupMaster> allGroupMaster = (List<GroupMaster>) request.getAttribute("allGroupMaster");
 				%>
-				<%
+		<%
 				List<BranchMaster> branchListList = (List<BranchMaster>) request.getAttribute("branchList");
 				%>
 		<div
@@ -53,12 +53,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												id="ContentPlaceHolder1_ddlBranch"
 												class="form-control select2" style="width: 100%;">
 												<option selected="selected" value=""></option>
-														<%
+												<%
 													if (branchListList != null && !branchListList.isEmpty()) {
 														for (BranchMaster group : branchListList) {
 													%>
-													<option value="<%=group.getId()%>"><%=group.getName()%></option>
-													<%
+												<option value="<%=group.getId()%>"><%=group.getName()%></option>
+												<%
 													}
 													}
 													%>
@@ -107,22 +107,21 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									<div class="clearfix"></div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label>Loan ID :</label> <select name="ctl00$ContentPlaceHolder1$ddlSearchLoanID"
-													id="searchGroupID1"
-													
-													
-													class="form-control select2" style="width: 100%;">
-													<option selected="selected" value=""></option>
-														<%
+											<label>Loan ID :</label> <select
+												name="ctl00$ContentPlaceHolder1$ddlSearchLoanID"
+												id="searchGroupID1" class="form-control select2"
+												style="width: 100%;">
+												<option selected="selected" value=""></option>
+												<%
 													if (allGroupMaster != null && !allGroupMaster.isEmpty()) {
 														for (GroupMaster group : allGroupMaster) {
 													%>
-													<option value="<%=group.getId()%>"><%=group.getId()%></option>
-													<%
+												<option value="<%=group.getId()%>"><%=group.getId()%></option>
+												<%
 													}
 													}
 													%>
-												</select>
+											</select>
 										</div>
 									</div>
 									<div class="col-md-3">
@@ -153,9 +152,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									<div class="clearfix margin-bottom-10"></div>
 									<div class="text-center">
 										<a id="ContentPlaceHolder1_btnSearch" class="btn btn-success"
-										href="javascript:displayGroupLoanApplicationDetailsShowTable()"><span
-											class="fa fa-search"
-											></span> SEARCH</a> 
+											href="javascript:displayGroupLoanApplicationDetailsShowTable()"><span
+											class="fa fa-search"></span> SEARCH</a>
 									</div>
 								</div>
 							</div>
@@ -167,17 +165,17 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
-									<table id="tableId" style="width:100%">
-        <tr>
-            <th>Group Name</th>
-            <th>Leader Name</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Employee</th>
-            <th>Day</th>
-            <th>Time</th>
-        </tr>
-    </table>
+									<table id="tableId" style="width: 100%">
+										<tr>
+											<th>Group Name</th>
+											<th>Leader Name</th>
+											<th>Mobile</th>
+											<th>Address</th>
+											<th>Employee</th>
+											<th>Day</th>
+											<th>Time</th>
+										</tr>
+									</table>
 									<div></div>
 								</div>
 							</div>
@@ -192,7 +190,6 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
