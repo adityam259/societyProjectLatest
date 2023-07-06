@@ -262,34 +262,26 @@ public class GroupLoanController {
 
 	@GetMapping("/getAllGroupLoanID")
 	@ResponseBody
-	public List<Loan> getAllGroupLoanID() {
-		return loanRepo.findAll();
+	public List<GroupMaster> getAllGroupLoanID() {
+		return groupMasterRepo.findAll();
 	}
 
 	@GetMapping("/getAllGroupLoanplan")
 	@ResponseBody
-	public List<LoanPlanMaster> getAllGroupLoanplan() {
+	public List<LoanPlanMaster> getAllGroupLoanplan(){
 		return loanPlanRepo.findAll();
 	}
 
 	@PostMapping("/searchInTheGroupLoan")
 	@ResponseBody
-	public List<Loan> searchInTheGroupLoan(@RequestBody Loan loan) {
-
-		List<Loan> data1 = loanRepo.findBycspName(loan.getCspName());
-		List<Loan> data2 = loanRepo.findByloanDateBetween(loan.getfDate(), loan.gettDate());
-		List<Loan> data3 = loanRepo.findByadvisorName(loan.getAdvisorName());
-		
-		//List<Loan> data4 = loanRepo.findByid(loan.getId());
-		List<Loan> data4 = new ArrayList<>();
-	    Loan loanData4 = loanRepo.findByid(loan.getId());
-	    if (loanData4 != null) {
-	        data4.add(loanData4);
-	    }
-	    
-		List<Loan> data5 = loanRepo.findBysearchMemberCode(loan.getSearchMemberCode());
-		List<Loan> data6 = loanRepo.findByloanPlanName(loan.getLoanPlanName());
-		List<Loan> data7 = loanRepo.findByadvisorCode(loan.getAdvisorCode());
+	public List<GroupMaster> searchInTheGroupLoan(@RequestBody GroupMaster groupMaster){
+		List<GroupMaster> data1 = groupMasterRepo.findBybranchName(groupMaster.getBranchName());
+		List<GroupMaster> data2 = groupMasterRepo.findByloanDateBetween(groupMaster.getfDate(),groupMaster.gettDate());
+		List<GroupMaster> data3 = groupMasterRepo.findBymemberName(groupMaster.getMemberName());
+		List<GroupMaster> data4 = groupMasterRepo.findByid(groupMaster.getId());
+		List<GroupMaster> data5 = groupMasterRepo.findBysearchMemberCode(groupMaster.getSearchMemberCode());
+		List<GroupMaster> data6 = groupMasterRepo.findByloanPlanName(groupMaster.getLoanPlanName());
+		List<GroupMaster> data7 = groupMasterRepo.findByadvisorCode(groupMaster.getAdvisorCode());
 
 		if (!data1.isEmpty()) {
 			return data1;
@@ -303,8 +295,10 @@ public class GroupLoanController {
 			return data5;
 		} else if (!data6.isEmpty()) {
 			return data6;
-		} else {
+		} else if(!data7.isEmpty()){
 			return data7;
 		}
+		else return null;
 	}
+
 }

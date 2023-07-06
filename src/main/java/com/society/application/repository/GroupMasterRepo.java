@@ -27,4 +27,18 @@ public interface GroupMasterRepo extends JpaRepository<GroupMaster, Integer> {
 
 	List<GroupMaster> findByid(Integer id);
 	
+	List<GroupMaster> findBybranchName(String branchName);
+
+	List<GroupMaster> findByloanDateBetween(String getfDate, String gettDate);
+
+	List<GroupMaster> findBymemberName(String memberName);
+
+	List<GroupMaster> findByid(int id);
+
+	List<GroupMaster> findBysearchMemberCode(String searchMemberCode);
+
+	List<GroupMaster> findByloanPlanName(String loanPlanName);
+
+	List<GroupMaster> findByadvisorCode(String advisorCode);
+	
 }

@@ -41,7 +41,10 @@ public interface ShareTransferDtoRepo extends JpaRepository<ShareTransferDto, In
 
 	List<ShareTransferDto> findBymemberData(String string);
 
-	
+	List<ShareTransferDto> findBybranchName(String branchName);
 
+	List<ShareTransferDto> findBytransferDateBetween(String getfDate, String gettDate);
+
+	List<ShareTransferDto> findBydojBetween(String getfDate, String gettDate);
 	
 }

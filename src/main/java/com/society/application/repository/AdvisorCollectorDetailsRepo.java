@@ -54,5 +54,12 @@ public interface AdvisorCollectorDetailsRepo extends JpaRepository<AdvisorCollec
 	@Query("UPDATE AdvisorCollectorDetails SET branchName=:branchName, selectPosition=:selectPosition, newSenior=:newSenior WHERE id=:id")
 	int updateThroughid(@Param("branchName") String branchName, @Param("selectPosition") String selectPosition, @Param("newSenior") String newSenior, @Param("id") int id);
 
-	
+	List<AdvisorCollectorDetails> findBybranchName(String branchName);
+
+	List<AdvisorCollectorDetails> findByjoiningDateBetween(String getfDate, String gettDate);
+
+	List<AdvisorCollectorDetails> findByBranchName(String branchName);
+
+	List<AdvisorCollectorDetails> findByJoiningDateBetween(String getfDate, String gettDate);
+
 }
