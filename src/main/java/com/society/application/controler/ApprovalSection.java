@@ -1,11 +1,25 @@
 package com.society.application.controler;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.society.application.dto.Response;
+import com.society.application.model.AddInvestment;
+import com.society.application.repository.AddInvestmentRepo;
 
 @Controller
 public class ApprovalSection {
+	
+	@Autowired
+	AddInvestmentRepo addInvestmentRepo;
 	
 	/* MEMBER APPROVAL */
 
@@ -73,5 +87,48 @@ public class ApprovalSection {
 	public String CSPCashTransferApproval(Model model) {
 		return "approvalSection/CSPCashTransferApproval";
 	}
+	
+	
+	
+	@PostMapping("/searchByBranchName")
+	@ResponseBody
+	public Response searchByBranchName(@RequestBody AddInvestment ai) {
+
+		Response response = new Response<>();
+		response.setStatus("Not Success");
+		response.setMessage("Data Not Found ..!!");
+		List<AddInvestment> addinvest = addInvestmentRepo.findBybranchName(ai.getBranchName());
+
+		if (addinvest != null) {
+			response.setStatus("Success");
+			response.setMessage("Data Found !!!");
+			response.setData(addinvest);
+			return response;
+		}
+
+		return response;
+	}
+	
+	
+	@PostMapping("/searchByDate")
+	@ResponseBody
+	public Response searchByDate(@RequestBody AddInvestment ai) {
+
+		Response response = new Response<>();
+		response.setStatus("Not Success");
+		response.setMessage("Data Not Found ..!!");
+
+		List<AddInvestment> addinvest2 = addInvestmentRepo.findBymDateBetween(ai.getfDate(), ai.gettDate());
+
+		if (addinvest2 != null) {
+			response.setStatus("Success");
+			response.setMessage("Data Found !!!");
+			response.setData(addinvest2);
+			return response;
+		}
+		return response;
+
+	}
+	
 
 }

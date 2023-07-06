@@ -69,7 +69,45 @@ public class AddInvestment {
 	private String flag;
 	private String applicationDate;
 	private String paymentDate;
+    private String roi;
+    private String penalty;
+    private String reqUser;
+    private String approvalDate;
+    private String appBranch;
+    
 
+
+	
+	public String getAppBranch() {
+		return appBranch;
+	}
+	public void setAppBranch(String appBranch) {
+		this.appBranch = appBranch;
+	}
+	public String getReqUser() {
+		return reqUser;
+	}
+	public void setReqUser(String reqUser) {
+		this.reqUser = reqUser;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	public String getRoi() {
+		return roi;
+	}
+	public void setRoi(String roi) {
+		this.roi = roi;
+	}
+	public String getPenalty() {
+		return penalty;
+	}
+	public void setPenalty(String penalty) {
+		this.penalty = penalty;
+	}
 	@Transient
 	private String frontEndPhoto;
 	@Transient
