@@ -60,7 +60,6 @@ public class Employee {
 	private String rcl;
 	private String rsl;
 	private String rel;
-
 	private String leaveDate;
 	private String LeavePurpose;
 

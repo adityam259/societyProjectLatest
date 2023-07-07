@@ -14,7 +14,6 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -75,7 +74,7 @@
 														<div class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</div>
-														<input name="DOJ" type="text" value="01/08/2022"
+														<input name="DOJ" type="date" value="01/08/2022"
 															readonly="readonly" id="DOJ" class="form-control"
 															data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 															data-mask="" />
@@ -194,13 +193,11 @@
 																	for="ContentPlaceHolder1_rdbLeaveApply_0">CL</label></td>
 															</tr>
 															<tr>
-																<td><input id="SL" type="radio" name="sl"
-																	 /><label
+																<td><input id="SL" type="radio" name="sl" /><label
 																	for="ContentPlaceHolder1_rdbLeaveApply_1">SL</label></td>
 															</tr>
 															<tr>
-																<td><input id="EL" type="radio" name="el"
-																	/><label
+																<td><input id="EL" type="radio" name="el" /><label
 																	for="ContentPlaceHolder1_rdbLeaveApply_2">EL/PL</label></td>
 															</tr>
 														</table>
@@ -267,7 +264,7 @@
 														<div class="input-group-addon">
 															<i class="fa fa-calendar"></i>
 														</div>
-														<input name="leaveDate" type="text" value="01/08/2022"
+														<input name="leaveDate" type="date" value="01/08/2022"
 															id="leaveDate" class="form-control"
 															data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 															data-mask="" />
@@ -296,10 +293,9 @@
 										<div class="row col-md-12">
 											<button type="submit"
 												name="ctl00$ContentPlaceHolder1$btnSubmit" value="Submit"
-												id="ContentPlaceHolder1_btnSubmit" 
-												class="aspNetDisabled"
+												id="ContentPlaceHolder1_btnSubmit" class="aspNetDisabled"
 												class="btn btn-success pull-right margin-r-5">Submit</button>
-											<button type="button"
+											<button type="reset"
 												name="ctl00$ContentPlaceHolder1$btnClear" value="Clear"
 												id="ContentPlaceHolder1_btnClear"
 												class="btn btn-success pull-right margin-r-5">Clear</button>
@@ -323,7 +319,6 @@
 												<table cellspacing="0" cellpadding="3" rules="all"
 													class="display nowrap table table-hover table-striped table-bordered"
 													border="1" style="width: 100%; border-collapse: collapse;">
-
 													<tr style="color: White; background-color: #008385;">
 														<th scope="col">Slno</th>
 														<th scope="col">Code</th>

@@ -212,7 +212,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 	<script src="dist/js/GoldLoan.js"></script>
-	<script src="dist/js/GroupLoan.js"></script>
+	<!-- <script src="dist/js/GroupLoan.js"></script> -->
 	<!-- Select2 -->
 	<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 	<script>

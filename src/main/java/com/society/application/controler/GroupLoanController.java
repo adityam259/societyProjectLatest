@@ -272,33 +272,29 @@ public class GroupLoanController {
 		return loanPlanRepo.findAll();
 	}
 
-	@PostMapping("/searchInTheGroupLoan")
-	@ResponseBody
-	public List<GroupMaster> searchInTheGroupLoan(@RequestBody GroupMaster groupMaster){
-		List<GroupMaster> data1 = groupMasterRepo.findBybranchName(groupMaster.getBranchName());
-		List<GroupMaster> data2 = groupMasterRepo.findByloanDateBetween(groupMaster.getfDate(),groupMaster.gettDate());
-		List<GroupMaster> data3 = groupMasterRepo.findBymemberName(groupMaster.getMemberName());
-		List<GroupMaster> data4 = groupMasterRepo.findByid(groupMaster.getId());
-		List<GroupMaster> data5 = groupMasterRepo.findBysearchMemberCode(groupMaster.getSearchMemberCode());
-		List<GroupMaster> data6 = groupMasterRepo.findByloanPlanName(groupMaster.getLoanPlanName());
-		List<GroupMaster> data7 = groupMasterRepo.findByadvisorCode(groupMaster.getAdvisorCode());
-
-		if (!data1.isEmpty()) {
-			return data1;
-		} else if (!data2.isEmpty()) {
-			return data2;
-		} else if (!data3.isEmpty()) {
-			return data3;
-		} else if (!data4.isEmpty()) {
-			return data4;
-		} else if (!data5.isEmpty()) {
-			return data5;
-		} else if (!data6.isEmpty()) {
-			return data6;
-		} else if(!data7.isEmpty()){
-			return data7;
-		}
-		else return null;
-	}
+	/*
+	 * @PostMapping("/searchInTheGroupLoan")
+	 * 
+	 * @ResponseBody public List<GroupMaster> searchInTheGroupLoan(@RequestBody
+	 * GroupMaster groupMaster){ List<GroupMaster> data1 =
+	 * groupMasterRepo.findBybranchName(groupMaster.getBranchName());
+	 * List<GroupMaster> data2 =
+	 * groupMasterRepo.findByloanDateBetween(groupMaster.getfDate(),groupMaster.
+	 * gettDate()); List<GroupMaster> data3 =
+	 * groupMasterRepo.findBymemberName(groupMaster.getMemberName());
+	 * List<GroupMaster> data4 = groupMasterRepo.findByid(groupMaster.getId());
+	 * List<GroupMaster> data5 =
+	 * groupMasterRepo.findBysearchMemberCode(groupMaster.getSearchMemberCode());
+	 * List<GroupMaster> data6 =
+	 * groupMasterRepo.findByloanPlanName(groupMaster.getLoanPlanName());
+	 * List<GroupMaster> data7 =
+	 * groupMasterRepo.findByadvisorCode(groupMaster.getAdvisorCode());
+	 * 
+	 * if (!data1.isEmpty()) { return data1; } else if (!data2.isEmpty()) { return
+	 * data2; } else if (!data3.isEmpty()) { return data3; } else if
+	 * (!data4.isEmpty()) { return data4; } else if (!data5.isEmpty()) { return
+	 * data5; } else if (!data6.isEmpty()) { return data6; } else
+	 * if(!data7.isEmpty()){ return data7; } else return null; }
+	 */
 
 }

@@ -11,24 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.society.application.model.SavingsDepositWith;
 
-
 @Repository
 
-public interface SavingsDepositWithdrawalRepo extends JpaRepository<SavingsDepositWith, Integer>{
+public interface SavingsDepositWithdrawalRepo extends JpaRepository<SavingsDepositWith, Integer> {
 
-	 List<SavingsDepositWith> findByaccountNo(String accountNo);
-	 
-	 @Modifying
-	 @Transactional
-	 @Query("UPDATE SavingsDepositWith SET flag=:flag WHERE accountNo=:accountNo")
-	 int updateThroughIDInDeleteSavingsTransaction(@Param("flag") String flag,@Param("accountNo") String accountNo); 
-	//int updateThroughIDInDeleteSavingsTransaction(@Param("flag") String flag,@Param("id") int id);
+	List<SavingsDepositWith> findByaccountNo(String accountNo);
+
+	@Modifying
+	@Transactional
+	@Query("UPDATE SavingsDepositWith SET flag=:flag WHERE accountNo=:accountNo")
+	int updateThroughIDInDeleteSavingsTransaction(@Param("flag") String flag, @Param("accountNo") String accountNo);
+	// int updateThroughIDInDeleteSavingsTransaction(@Param("flag") String
+	// flag,@Param("id") int id);
 
 	List<SavingsDepositWith> findByflag(String flag);
 
-	
+	List<SavingsDepositWith> findBybranchName(String branchName);
 
-	}
-	
+	List<SavingsDepositWith> findBytxnDateBetween(String getfDate, String gettDate);
 
- 
+}

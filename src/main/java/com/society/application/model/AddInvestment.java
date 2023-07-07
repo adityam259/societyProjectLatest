@@ -74,10 +74,14 @@ public class AddInvestment {
     private String reqUser;
     private String approvalDate;
     private String appBranch;
-    
+    private String deduction;
+    private String adjustment;
+    private String aprovalStatus;
+    @Transient
+	private String frontEndPhoto;
+	@Transient
+	private String frontEndSignature;
 
-
-	
 	public String getAppBranch() {
 		return appBranch;
 	}
@@ -108,11 +112,6 @@ public class AddInvestment {
 	public void setPenalty(String penalty) {
 		this.penalty = penalty;
 	}
-	@Transient
-	private String frontEndPhoto;
-	@Transient
-	private String frontEndSignature;
-	
 	public String getAmtDue() {
 		return amtDue;
 	}
@@ -472,6 +471,24 @@ public class AddInvestment {
 	}
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+	public String getDeduction() {
+		return deduction;
+	}
+	public void setDeduction(String deduction) {
+		this.deduction = deduction;
+	}
+	public String getAdjustment() {
+		return adjustment;
+	}
+	public void setAdjustment(String adjustment) {
+		this.adjustment = adjustment;
+	}
+	public String getAprovalStatus() {
+		return aprovalStatus;
+	}
+	public void setAprovalStatus(String aprovalStatus) {
+		this.aprovalStatus = aprovalStatus;
 	}
 	
 }

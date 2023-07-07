@@ -49,6 +49,10 @@ public class SavingsDepositWith {
 	private String imageSignature;
 	
 	private String imgJointPhoto;
+	
+	private String fDate;
+	
+	private String tDate;
 
 	public String getFlag() {
 		return flag;
@@ -200,6 +204,22 @@ public class SavingsDepositWith {
 
 	public void setImgJointPhoto(String imgJointPhoto) {
 		this.imgJointPhoto = imgJointPhoto;
+	}
+
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
 	}
 	
 }
