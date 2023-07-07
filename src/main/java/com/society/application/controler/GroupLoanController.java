@@ -198,9 +198,17 @@ public class GroupLoanController {
 
 	@PostMapping("/getGroupMasterById")
 	@ResponseBody
-	public GroupMaster getGroupMasterById(@RequestBody GenericGetById id) {
-		Optional<GroupMaster> groupMaster = groupMasterRepo.findById(Integer.parseInt(id.getId()));
-		return groupMaster.get();
+	public List<GroupMaster> getGroupMasterById(@RequestBody GroupMaster id) {
+		List<GroupMaster> groupMaster = groupMasterRepo.findByid(id.getId());
+		return groupMaster;
+	}
+	
+	
+	@PostMapping("/getGroupMasterByBranch")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterByBranch(@RequestBody GroupMaster ob) {
+		List<GroupMaster> groupMaster = groupMasterRepo.findBycsp(ob.getCsp());
+		return groupMaster;
 	}
 
 	@PostMapping("/saveGroupMasterApplication")

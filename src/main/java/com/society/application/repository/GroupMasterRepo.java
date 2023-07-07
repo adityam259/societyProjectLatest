@@ -26,5 +26,7 @@ public interface GroupMasterRepo extends JpaRepository<GroupMaster, Integer> {
 	int updateThroughIDInDeleteGoldtRectification(@Param("flag") String flag,@Param("id") int id);
 
 	List<GroupMaster> findByid(Integer id);
+
+	List<GroupMaster> findBycsp(String csp);
 	
 }

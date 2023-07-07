@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 
@@ -49,6 +50,27 @@ public class SavingsDepositWith {
 	private String imageSignature;
 	
 	private String imgJointPhoto;
+	
+	@Transient
+	private String fDate;
+	private String tDate;
+	
+
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
+	}
 
 	public String getFlag() {
 		return flag;
