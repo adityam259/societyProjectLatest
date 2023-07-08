@@ -13,7 +13,6 @@ function validateGoldLoanMaster() {
 	} else {
 		return false;
 	}
-
 }
 
 function validateDepartmentMaster() {
@@ -31,9 +30,7 @@ function validateDepartmentMaster() {
 	} else {
 		return false;
 	}
-
 }
-
 
 function validateEmployeeMaster() {
 	var status = true;
@@ -113,9 +110,7 @@ function validateEmployeeMaster() {
 	} else {
 		return false;
 	}
-
 }
-
 
 function clearFields(){
 	document.getElementById('designationName').value = "";
@@ -124,7 +119,6 @@ function clearFields(){
 function clearFieldsDepartment(){
 	document.getElementById('department').value = "";
 }
-
 
 function getAllDestignation() {
 	$.ajax({
@@ -142,7 +136,6 @@ function getAllDestignation() {
                            		<td scope="col">`+ j++ +`</td>
                                 <td scope="col">${value.id}</td>
                                 <td scope="col">${value.designation}</td>
-                            
                             </tr>`
 					);
 				}).join('');
@@ -155,7 +148,6 @@ function getAllDestignation() {
 		}
 	});
 }
-
 
 function getAllDepartment() {
 	$.ajax({
@@ -173,7 +165,6 @@ function getAllDepartment() {
                            		<td scope="col">`+ j++ +`</td>
                                 <td scope="col">${value.id}</td>
                                 <td scope="col">${value.department}</td>
-                            
                             </tr>`
 					);
 				}).join('');
@@ -202,8 +193,7 @@ function getAllEmployeeData(){
      			option.setAttribute('value', value.id);
      			option.innerHTML = value.id
      			select.appendChild(option)
-   			})
-                
+   			})    
             } ,
     	    error: function(){
     	    	alert("Device control failed");
@@ -226,7 +216,6 @@ function getAllEmployeeData(){
 	} else {
 		return false;
 	}
-
 }
 
 function validateEmployeeLeaveDetails2() {
@@ -258,7 +247,6 @@ function validateEmployeeLeaveDetails2() {
 	} else {
 		return false;
 	}
-
 }
 
 function getEmpById(ids){
@@ -274,7 +262,6 @@ function getEmpById(ids){
                  url: 'getEmpById',
                  asynch: false,
                  success: function(data) {
-					 
                  for (let i = 0; i < 1; i++) {
 					//document.getElementById("id").value= data.id;
 					let j =1;
@@ -287,24 +274,20 @@ function getEmpById(ids){
 	                                <td style="width="10px;">${value.sl}</td>
 	                                <td style="width="10px;">${value.cl}</td>
 	                                <td style="width="10px;">${value.el}</td>
-	                            
 	                            </tr>`
 						);
 					}).join('');
 					const tableBody1 = document.querySelector("#ContentPlaceHolder1_gvSalary");
 					tableBody1.innerHTML = '<tr><th>#</th><th>ID</th><th>Member Name</th><th>SL</th><th>CL</th><th>EL</th></tr>' + tableData1;
-
 					//tableBody1.innerHTML = tableData1;
-				}
-                     
+				}   
                  } ,
          	    error: function(){
          	    	alert("Device control failed");
          	    }
              });
-	}
-	
-	
+}
+		
 function validateEmployeeSalaryDetails() {
 	var status = true;
 	const basic = document.getElementById("basic");
@@ -376,9 +359,7 @@ function validateEmployeeSalaryDetails() {
 	} else {
 		return false;
 	}
-
 }
-
 
 function getEmpByIdSalary(ids){
 		//alert(ids)
@@ -411,18 +392,16 @@ function getEmpByIdSalary(ids){
 					}).join('');
 					const tableBody1 = document.querySelector("#ContentPlaceHolder1_gvSalaryMod");
 					tableBody1.innerHTML = tableData1;
-				}
-                     
+				}  
                  } ,
          	    error: function(){
          	    	alert("Device control failed");
          	    }
              });
-	}
+}
 	
-
 function getEmpByIdForEmpLeave(ids){
-		//alert(ids)
+		alert(ids)
 		document.getElementById("id").value=ids;
 		var input = {
                      "id": ids
@@ -485,28 +464,24 @@ function getEmpByIdForEmpLeave(ids){
 	                                <td scope="col">${value.sl}</td>
 	                                <td scope="col">${value.cl}</td>
 	                                <td scope="col">${value.el}</td>
-	                            
 	                            </tr>`
 						);
 					}).join('');
 					const tableBody1 = document.querySelector("#ContentPlaceHolder1_gvSalary");
 					tableBody1.innerHTML = tableData1;
-				}
-                     
+				}  
                  } ,
          	    error: function(){
          	    	alert("Device control failed");
          	    }
              });
-	}
-	
+}	
 	
 function readAnchorValue(obj){
 	     var myVal = obj.getAttribute("href");
 		 document.getElementById("leaveType").value= myVal;
 		 document.lavesubmit.submit();
 }
-
 
 function getAllAttendence() {
 	$.ajax({
@@ -538,7 +513,6 @@ function getAllAttendence() {
 	});
 }
 
-
 function getEmpByIdForSalaryPayment(ids){
 		//alert(ids)
 		document.getElementById("id").value=ids;
@@ -561,9 +535,7 @@ function getEmpByIdForSalaryPayment(ids){
 					document.getElementById("others").value= data[0].others;
 					document.getElementById("PF").value= data[0].PF;
 					document.getElementById("ESI").value= data[0].ESI;
-					
-				}
-                     
+				}  
                  } ,
          	    error: function(){
          	    	alert("Device control failed");

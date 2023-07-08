@@ -1,10 +1,10 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.society.application.model.Member"%>
 <jsp:include page="../header.jsp" />
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-
 	<% String status  = (String)request.getAttribute("status");%>
 	<% if(status!=null && status.equals("success")){ %>
 	<script type="text/javascript">
@@ -99,7 +99,8 @@
 												<label class="col-sm-4 control-label">Select by Code<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<%List<Member> allMember = (List<Member>)request.getAttribute("allMember"); 
+													<%//List<Member> allMember = (List<Member>)request.getAttribute("allMember"); 
+													List<ClientMaster> allMember = (List<ClientMaster>)request.getAttribute("allMember");
                                           if(allMember!=null && !allMember.isEmpty()){ %>
 													<select
 														name="ctl00$ContentPlaceHolder1$ddlSearchMemberCode"
@@ -108,7 +109,8 @@
 														class="form-control select2" style="width: 100%;">
 														<option selected="selected" value="">Select
 															Criteria</option>
-														<%for(Member member: allMember){ %>
+														<%for(/* Member member: allMember */
+																ClientMaster member: allMember){ %>
 														<option value="<%=member.getId()%>"><%=member.getMemberName() %>
 															-
 															<%=member.getBranchName() %></option>
@@ -334,7 +336,6 @@
 	<script src="dist/js/demo.js"></script>
 	<!-- Select2 -->
 	<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-	
 	</form>
 </body>
 </html>

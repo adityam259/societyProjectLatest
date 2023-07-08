@@ -139,6 +139,8 @@ public interface AddInvestmentRepo extends JpaRepository<AddInvestment, Integer>
 
 	public List<AddInvestment> findAllByid(int id);
 
+	public List<AddInvestment> findBypolicyDateBetween(String getfDate, String gettDate);
+
 	//public List<AddInvestment> findByPolicyno(String policyNo);
 
 }

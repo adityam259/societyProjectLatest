@@ -6,15 +6,15 @@
 		name="saveDesignametionMaster"
 		modelAttribute="saveDesignationMasterData" id="form1">
 		<%
-   String status = (String)request.getAttribute("status");
-   if(status!=null &&  status.equals("success")){
-   	%>
+		String status = (String) request.getAttribute("status");
+		if (status != null && status.equals("success")) {
+		%>
 		<script>
-   alert("Saved Successfully");
-</script>
+			alert("Saved Successfully");
+		</script>
 		<%
-   } 
-   %>
+		}
+		%>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -25,10 +25,12 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<script type="text/javascript">
-            //<![CDATA[
-            Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
-            //]]>
-         </script>
+				//<![CDATA[
+				Sys.WebForms.PageRequestManager._initialize(
+						'ctl00$ScriptManager1', 'form1', [], [], [], 90,
+						'ctl00');
+				//]]>
+			</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -63,8 +65,9 @@
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-										<button type="button" name="clear" value="Clear" id="clear"
-											class="btn btn-info pull-right" onclick="clearFields()">Clear</button>
+									<!-- onclick="clearFields()" -->
+										<button type="reset" name="clear" value="Clear" id="clear"
+											class="btn btn-info pull-right">Clear</button>
 										<button type="button" name="save" value="Save"
 											onclick="return validateGoldLoanMaster()" id="save"
 											class="btn btn-success pull-right margin-r-5">Save</button>
@@ -134,87 +137,119 @@
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
-         $(function () {
-             //Initialize Select2 Elements
-             $('.select2').select2();
-             //Datemask dd/mm/yyyy
-             $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-             //Datemask2 mm/dd/yyyy
-             $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-             //Date range picker
-             $('#reservation').daterangepicker()
-             //Date range picker with time picker
-             $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
-             $('#daterange-btn').daterangepicker(
-              {
-                  ranges: {
-                      'Today': [moment(), moment()],
-                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                      'This Month': [moment().startOf('month'), moment().endOf('month')],
-                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                  },
-                  startDate: moment().subtract(29, 'days'),
-                  endDate: moment()
-              },
-              function (start, end) {
-                  $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
-              }
-            )
-             //Date picker
-             $('#datepicker').datepicker({
-                 autoclose: true
-             })
-             //Money Euro
-             $('[data-mask]').inputmask()
-         
-             //iCheck for checkbox and radio inputs
-             $('span[type="checkbox"].minimal').iCheck({
-                 checkboxClass: 'icheckbox_minimal-blue',
-                 radioClass: 'iradio_minimal-blue'
-             })
-         })
-      </script>
+			$(function() {
+				//Initialize Select2 Elements
+				$('.select2').select2();
+				//Datemask dd/mm/yyyy
+				$('#datemask').inputmask('dd/mm/yyyy', {
+					'placeholder' : 'dd/mm/yyyy'
+				})
+				//Datemask2 mm/dd/yyyy
+				$('#datemask2').inputmask('mm/dd/yyyy', {
+					'placeholder' : 'mm/dd/yyyy'
+				})
+				//Date range picker
+				$('#reservation').daterangepicker()
+				//Date range picker with time picker
+				$('#reservationtime').daterangepicker({
+					timePicker : true,
+					timePickerIncrement : 30,
+					locale : {
+						format : 'MM/DD/YYYY hh:mm A'
+					}
+				})
+				$('#daterange-btn')
+						.daterangepicker(
+								{
+									ranges : {
+										'Today' : [ moment(), moment() ],
+										'Yesterday' : [
+												moment().subtract(1, 'days'),
+												moment().subtract(1, 'days') ],
+										'Last 7 Days' : [
+												moment().subtract(6, 'days'),
+												moment() ],
+										'Last 30 Days' : [
+												moment().subtract(29, 'days'),
+												moment() ],
+										'This Month' : [
+												moment().startOf('month'),
+												moment().endOf('month') ],
+										'Last Month' : [
+												moment().subtract(1, 'month')
+														.startOf('month'),
+												moment().subtract(1, 'month')
+														.endOf('month') ]
+									},
+									startDate : moment().subtract(29, 'days'),
+									endDate : moment()
+								},
+								function(start, end) {
+									$('#daterange-btn span').html(
+											start.format('DD/MM/YYYY') + ' - '
+													+ end.format('DD/MM/YYYY'))
+								})
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose : true
+				})
+				//Money Euro
+				$('[data-mask]').inputmask()
+
+				//iCheck for checkbox and radio inputs
+				$('span[type="checkbox"].minimal').iCheck({
+					checkboxClass : 'icheckbox_minimal-blue',
+					radioClass : 'iradio_minimal-blue'
+				})
+			})
+		</script>
 		<script type="text/javascript">
-         //<![CDATA[
-         var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredtxtDesignationName"));
-         //]]>
-      </script>
+			//<![CDATA[
+			var Page_Validators = new Array(
+					document
+							.getElementById("ContentPlaceHolder1_RequiredtxtDesignationName"));
+			//]]>
+		</script>
 		<script type="text/javascript">
-         //<![CDATA[
-         var ContentPlaceHolder1_RequiredtxtDesignationName = document.all ? document.all["ContentPlaceHolder1_RequiredtxtDesignationName"] : document.getElementById("ContentPlaceHolder1_RequiredtxtDesignationName");
-         ContentPlaceHolder1_RequiredtxtDesignationName.controltovalidate = "ContentPlaceHolder1_txtDesignationName";
-         ContentPlaceHolder1_RequiredtxtDesignationName.focusOnError = "t";
-         ContentPlaceHolder1_RequiredtxtDesignationName.errormessage = "Enter Designation Name";
-         ContentPlaceHolder1_RequiredtxtDesignationName.display = "Dynamic";
-         ContentPlaceHolder1_RequiredtxtDesignationName.validationGroup = "A";
-         ContentPlaceHolder1_RequiredtxtDesignationName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-         ContentPlaceHolder1_RequiredtxtDesignationName.initialvalue = "";
-         //]]>
-      </script>
+			//<![CDATA[
+			var ContentPlaceHolder1_RequiredtxtDesignationName = document.all ? document.all["ContentPlaceHolder1_RequiredtxtDesignationName"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredtxtDesignationName");
+			ContentPlaceHolder1_RequiredtxtDesignationName.controltovalidate = "ContentPlaceHolder1_txtDesignationName";
+			ContentPlaceHolder1_RequiredtxtDesignationName.focusOnError = "t";
+			ContentPlaceHolder1_RequiredtxtDesignationName.errormessage = "Enter Designation Name";
+			ContentPlaceHolder1_RequiredtxtDesignationName.display = "Dynamic";
+			ContentPlaceHolder1_RequiredtxtDesignationName.validationGroup = "A";
+			ContentPlaceHolder1_RequiredtxtDesignationName.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredtxtDesignationName.initialvalue = "";
+			//]]>
+		</script>
 		<script type="text/javascript">
-         //<![CDATA[
-         
-         var Page_ValidationActive = false;
-         if (typeof(ValidatorOnLoad) == "function") {
-             ValidatorOnLoad();
-         }
-         
-         function ValidatorOnSubmit() {
-             if (Page_ValidationActive) {
-                 return ValidatorCommonOnSubmit();
-             }
-             else {
-                 return true;
-             }
-         }
-                 
-         document.getElementById('ContentPlaceHolder1_RequiredtxtDesignationName').dispose = function() {
-             Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredtxtDesignationName'));
-         }
-         //]]>
-      </script>
+			//<![CDATA[
+
+			var Page_ValidationActive = false;
+			if (typeof (ValidatorOnLoad) == "function") {
+				ValidatorOnLoad();
+			}
+
+			function ValidatorOnSubmit() {
+				if (Page_ValidationActive) {
+					return ValidatorCommonOnSubmit();
+				} else {
+					return true;
+				}
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredtxtDesignationName').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredtxtDesignationName'));
+			}
+			//]]>
+		</script>
 	</form>
 </body>
 </html>

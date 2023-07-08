@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="com.society.application.model.LoanMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Member"%>
@@ -11,13 +12,26 @@
 <script src="dist/js/groupMasterUtilsJs.js"></script>
 <script src="dist/js/LoanModuleJs.js"></script>
 <body
-	onload="getAllLoanId();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
+	onload="getAllLoanId();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();"
 	class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post" 
-		 action="saveLoanGoldPayment"
-		modelAttribute="loanGoldApplication"  id="form1"
+	
+	<%
+	String status = (String) request.getAttribute("status");
+	if (status != null && "success".equals(status)) {
+	%>
+	<script>
+        	   alert("Saved Successfully");
+        	</script>
+	<%
+	} else {
+
+	}
+	%>
+	
+	<form method="post" action="saveLoanGoldPayment"
+		modelAttribute="loanGoldApplication" id="form1"
 		enctype="multipart/form-data">
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
@@ -28,10 +42,10 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			<% List<Member> memberList = (List<Member>) request.getAttribute("memberList"); %>
+			<% //List<Member> memberList = (List<Member>) request.getAttribute("memberList"); 
+			     List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");  %>
 			<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
 			<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
-				
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -52,7 +66,7 @@
 								<div class="form-horizontal">
 									<div class="box-body">
 										<div class="col-md-6">
-										<%
+											<%
 												List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
 												%>
 											<div class="form-group row">
@@ -61,10 +75,10 @@
 												</label>
 												<div class="col-sm-8">
 													<select name="searchLoanID" id="searchLoanId1"
-													onchange="getByGoldLoanId('payment')"
+														onchange="getByGoldLoanId('payment')"
 														class="form-control select2" style="width: 100%;">
-														<option selected="selected" value="">Select Loan ID</option>
-														
+														<option selected="selected" value="">Select Loan
+															ID</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -92,12 +106,11 @@
 								<div class="box-body">
 									<div class="col-md-6">
 										<div class="form-group row">
-										<input name="id" type="hidden" 
-														id="id" class="form-control"
-														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
-														data-mask="" />
-											<label class="col-sm-4 control-label">Loan Date <strong
-												style="color: Red">*</strong></label>
+											<input name="id" type="hidden" id="id" class="form-control"
+												data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+												data-mask="" /> <label class="col-sm-4 control-label">Loan
+												Date <strong style="color: Red">*</strong>
+											</label>
 											<div class="col-sm-8">
 												<div class="input-group date">
 													<div class="input-group-addon">
@@ -122,7 +135,8 @@
 													class="form-control select2" style="width: 100%;">
 													<%
 													if (memberList != null && !memberList.isEmpty()) {
-														for (Member member : memberList) {
+														for (/* Member member : memberList */
+																ClientMaster  member : memberList) {
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName()%></option>
 													<%
@@ -291,7 +305,7 @@
 												<div class="col-sm-8">
 													<input name="planTerm" type="text" readonly="readonly"
 														id="planTerm" class="form-control" PlaceHolder="Plan Term" />
-												 <span id="planTermMsg"
+													<span id="planTermMsg"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														PIN</span>
 												</div>
@@ -369,7 +383,6 @@
 								</div>
 							</div>
 						</div>
-				
 					</div>
 					<div class="row">
 						<div id="ContentPlaceHolder1_uppnlGold">
@@ -538,12 +551,9 @@
 											</div>
 										</div>
 									</div>
-									
-								
 								</div>
 							</div>
 						</div>
-					
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -899,14 +909,13 @@
 												</div>
 											</div>
 											<div class="box-footer">
-									<div class="row col-md-12">
-
-									<input type="submit"
-											name="ctl00$ContentPlaceHolder1$btnSave" value="Save"
-											id="ContentPlaceHolder1_btnSave"
-											class="btn btn-success pull-right margin-r-5" />
-									</div>
-								</div>
+												<div class="row col-md-12">
+													<input type="submit"
+														name="ctl00$ContentPlaceHolder1$btnSave" value="Save"
+														id="ContentPlaceHolder1_btnSave"
+														class="btn btn-success pull-right margin-r-5" />
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -919,7 +928,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>

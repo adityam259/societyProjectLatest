@@ -43,10 +43,28 @@ public class PayrollController {
 	@Autowired
 	AttendenceMasterRepo attendenceMasterRepo;
 
+	/* ADD DESIGNATION */
+
 	@GetMapping("/DesignationMasterPayroll")
 	public String designationMaster(Model model) {
 		return "payrollManagement/DesignationMaster";
 	}
+
+	@PostMapping("/saveDesignationMasterData")
+	public String saveDesignationMasterData(
+			@ModelAttribute("saveDesignationMasterData") DesignationMaster designationMaster, Model model) {
+		designationMasterRepo.save(designationMaster);
+		model.addAttribute("status", "success");
+		return "payrollManagement/DesignationMaster";
+	}
+
+	@GetMapping("/getAllDestignation")
+	@ResponseBody
+	public List<DesignationMaster> getAllDestignation() {
+		return designationMasterRepo.findAll();
+	}
+
+	/* */
 
 	@GetMapping("/DepartmentMasterPayroll")
 	public String departmentMaster(Model model) {
@@ -63,12 +81,40 @@ public class PayrollController {
 		return "payrollManagement/EmployeeLeaveDetails";
 	}
 
+	/* SALARY DETAILS */
+
 	@GetMapping("/SalarySetupMaster")
 	public String salarySetupMaster(Model model) {
 		List<SalaryMaster> listSalary = salaryMasterRepo.findAll();
 		model.addAttribute("salaryList", listSalary);
 		return "payrollManagement/SalarySetupMaster";
 	}
+
+	@GetMapping("/getAllEmployeeData")
+	@ResponseBody
+	public List<Employee> getAllEmployeeData() {
+		return employeeRepo.findAll();
+	}
+
+	@PostMapping("/getEmpById")
+	@ResponseBody
+	public List<Employee> getEmpById(@RequestBody GenericGetById id) {
+		Optional<Employee> emp = employeeRepo.findById(Integer.parseInt(id.getId()));
+		//System.err.println(emp.get());
+		return Arrays.asList(emp.get());
+	}
+
+	@PostMapping("/saveSalarySetupMaster")
+	public String saveSalarySetupMaster(@ModelAttribute("saveSalarySetupMaster") SalaryMaster salaryMaster,
+			Model model) {
+		salaryMasterRepo.save(salaryMaster);
+		List<SalaryMaster> listSalary = salaryMasterRepo.findAll();
+		model.addAttribute("salaryList", listSalary);
+		model.addAttribute("status", "success");
+		return "payrollManagement/SalarySetupMaster";
+	}
+
+	/* */
 
 	@GetMapping("/HrmAppointmentLetter")
 	public String hrmAppointmentLetter(Model model) {
@@ -85,10 +131,39 @@ public class PayrollController {
 		return "payrollManagement/OffDaySetting";
 	}
 
+	/* LEAVE ADJUSTMENT */
+	
 	@GetMapping("/LeaveAdjustment")
 	public String leaveAdjustment(Model model) {
 		return "payrollManagement/LeaveAdjustment";
 	}
+	
+	@PostMapping("/saveEmployeeLeaveMaster")
+	public String saveEmployeeLeaveMaster(@ModelAttribute("saveEmployeeLeaveMaster") Employee employee, Model model) {
+		System.err.println(employee);
+		Optional<Employee> emp = employeeRepo.findById(Integer.parseInt(employee.getEmpCode()));
+		if (emp.get().getCl() != null) {
+			Integer cl = Integer.parseInt(emp.get().getCl());// db
+			Integer clUser = Integer.parseInt(employee.getCl());// user
+			if (cl != 0) {
+				if (clUser != null && clUser != 0) {
+					cl = cl - clUser;
+					employee.setCl(String.valueOf(cl));
+					emp.get().setRcl(String.valueOf(cl));
+				}
+			}
+		}
+		emp.get().setCl(employee.getCl());
+		emp.get().setSl(employee.getSl());
+		emp.get().setEl(employee.getEl());
+		emp.get().setLeaveDate(employee.getLeaveDate());
+		emp.get().setLeavePurpose(employee.getLeavePurpose());
+		employeeRepo.save(emp.get());
+		model.addAttribute("status", "success");
+		return "payrollManagement/EmployeeLeaveDetails";
+	}
+	
+	/* */
 
 	@GetMapping("/HrmAttendance")
 	public String hrmAttendance(Model model) {
@@ -130,20 +205,6 @@ public class PayrollController {
 		return "payrollManagement/HrmEmployeeIDCard";
 	}
 
-	@GetMapping("/getAllDestignation")
-	@ResponseBody
-	public List<DesignationMaster> getAllDestignation() {
-		return designationMasterRepo.findAll();
-	}
-
-	@PostMapping("/saveDesignationMasterData")
-	public String saveDesignationMasterData(
-			@ModelAttribute("saveDesignationMasterData") DesignationMaster designationMaster, Model model) {
-		designationMasterRepo.save(designationMaster);
-		model.addAttribute("status", "success");
-		return "payrollManagement/DesignationMaster";
-	}
-
 	@GetMapping("/getAllDepartment")
 	@ResponseBody
 	public List<DepartmentMaster> getAllDepartment() {
@@ -158,61 +219,19 @@ public class PayrollController {
 		return "payrollManagement/DepartmentMaster";
 	}
 
+	@PostMapping("/getSalaryById")
+	@ResponseBody
+	public List<SalaryMaster> getSalaryById(@RequestBody GenericGetById id) {
+		List<SalaryMaster> salaryEmp = salaryMasterRepo.searchByEmpId(id.getId());
+		System.err.println(salaryEmp);
+		return salaryEmp;
+	}
+
 	@PostMapping("/saveEmployeeMasterData")
 	public String saveEmployeeMasterData(@ModelAttribute("saveEmployeeMasterData") Employee employee, Model model) {
 		employeeRepo.save(employee);
 		model.addAttribute("status", "success");
 		return "payrollManagement/EmployeeMaster";
-	}
-
-	@GetMapping("/getAllEmployeeData")
-	@ResponseBody
-	public List<Employee> getAllEmployeeData() {
-		return employeeRepo.findAll();
-	}
-
-	@PostMapping("/getEmpById")
-	@ResponseBody
-	public List<Employee> getEmpById(@RequestBody GenericGetById id) {
-		Optional<Employee> emp = employeeRepo.findById(Integer.parseInt(id.getId()));
-		System.err.println(emp.get());
-		return Arrays.asList(emp.get());
-	}
-
-	@PostMapping("/saveEmployeeLeaveMaster")
-	public String saveEmployeeLeaveMaster(@ModelAttribute("saveEmployeeLeaveMaster") Employee employee, Model model) {
-		System.err.println(employee);
-		Optional<Employee> emp = employeeRepo.findById(Integer.parseInt(employee.getEmpCode()));
-		if (emp.get().getCl() != null) {
-			Integer cl = Integer.parseInt(emp.get().getCl());// db
-			Integer clUser = Integer.parseInt(employee.getCl());// user
-			if (cl != 0) {
-				if (clUser != null && clUser != 0) {
-					cl = cl - clUser;
-					employee.setCl(String.valueOf(cl));
-					emp.get().setRcl(String.valueOf(cl));
-				}
-			}
-		}
-		emp.get().setCl(employee.getCl());
-		emp.get().setSl(employee.getSl());
-		emp.get().setEl(employee.getEl());
-		emp.get().setLeaveDate(employee.getLeaveDate());
-		emp.get().setLeavePurpose(employee.getLeavePurpose());
-		employeeRepo.save(emp.get());
-		model.addAttribute("status", "success");
-		return "payrollManagement/EmployeeLeaveDetails";
-	}
-
-	@PostMapping("/saveSalarySetupMaster")
-	public String saveSalarySetupMaster(@ModelAttribute("saveSalarySetupMaster") SalaryMaster salaryMaster,
-			Model model) {
-		salaryMasterRepo.save(salaryMaster);
-		List<SalaryMaster> listSalary = salaryMasterRepo.findAll();
-		model.addAttribute("salaryList", listSalary);
-		model.addAttribute("status", "success");
-
-		return "payrollManagement/SalarySetupMaster";
 	}
 
 	@PostMapping("/getEmpByIdSalary")
@@ -234,14 +253,6 @@ public class PayrollController {
 	@ResponseBody
 	public List<AttendenceMaster> getAllAttendence() {
 		return attendenceMasterRepo.findAll();
-	}
-
-	@PostMapping("/getSalaryById")
-	@ResponseBody
-	public List<SalaryMaster> getSalaryById(@RequestBody GenericGetById id) {
-		List<SalaryMaster> salaryEmp = salaryMasterRepo.searchByEmpId(id.getId());
-		System.err.println(salaryEmp);
-		return salaryEmp;
 	}
 
 	@PostMapping("/updateSalaryPayment")

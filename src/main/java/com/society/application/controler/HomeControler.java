@@ -504,7 +504,8 @@ public class HomeControler {
 
 	@GetMapping("/addMemberKyc")
 	public String addMemberKyc(Model model) {
-		List<Member> allMember = memberRepo.findAll();
+		//List<Member> allMember = memberRepo.findAll();
+		List<ClientMaster> allMember = clientMasterRepo.findAll();
 		model.addAttribute("allMember", allMember);
 		return "member/AddMemberKYC";
 	}
@@ -636,10 +637,25 @@ public class HomeControler {
 		return "member/AddMember";
 	}
 
+	/*
+	 * @PostMapping("getMember")
+	 * 
+	 * @ResponseBody public Optional<Member> getAllMember(@RequestBody
+	 * GenericGetById id) { Optional<Member> member =
+	 * memberRepo.findById(Integer.parseInt(id.getId())); // Optional<BranchMaster>
+	 * branchMaster =
+	 * branchMasterRepo.findById(Integer.parseInt(member.get().getBranchName())); //
+	 * member.get().setBranchName(branchMaster.get().getName()); //
+	 * Optional<StateMaster> stateData =
+	 * stateMasterRepo.findById(Integer.parseInt(member.get().getState())); //
+	 * member.get().setState(stateData.get().getName()); // return member.get();
+	 * return member; }
+	 */
+	
 	@PostMapping("getMember")
 	@ResponseBody
-	public Optional<Member> getAllMember(@RequestBody GenericGetById id) {
-		Optional<Member> member = memberRepo.findById(Integer.parseInt(id.getId()));
+	public Optional<ClientMaster> getAllMember(@RequestBody GenericGetById id) {
+		Optional<ClientMaster> member = clientMasterRepo.findById(Integer.parseInt(id.getId()));
 //		Optional<BranchMaster> branchMaster = branchMasterRepo.findById(Integer.parseInt(member.get().getBranchName()));
 //		member.get().setBranchName(branchMaster.get().getName());
 //		Optional<StateMaster> stateData = stateMasterRepo.findById(Integer.parseInt(member.get().getState()));
@@ -727,8 +743,9 @@ public class HomeControler {
 	}
 
 	@GetMapping("updateMember")
-	public String updateMember(@ModelAttribute("user") Member member, Model model) {
-		Optional<Member> memberObj = memberRepo.findById(member.getId());
+	public String updateMember(@ModelAttribute("user") ClientMaster member, Model model) {
+		//Optional<Member> memberObj = memberRepo.findById(member.getId());
+		Optional<ClientMaster> memberObj = clientMasterRepo.findById(member.getId());
 		memberObj.get().setVoterNo(member.getVoterNo());
 		memberObj.get().setRationNo(member.getRationNo());
 		memberObj.get().setdLNo(member.getdLNo());
@@ -736,9 +753,10 @@ public class HomeControler {
 		memberObj.get().setBankBranch(member.getBankBranch());
 		memberObj.get().setAccountNo(member.getAccountNo());
 		memberObj.get().setiFSC(member.getiFSC());
-		memberRepo.save(memberObj.get());
+		clientMasterRepo.save(memberObj.get());
 		model.addAttribute("status", "success");
-		List<Member> allMember = memberRepo.findAll();
+		//List<Member> allMember = memberRepo.findAll();
+		List<ClientMaster> allMember = clientMasterRepo.findAll();
 		model.addAttribute("allMember", allMember);
 		return "member/AddMemberKYC";
 	}
@@ -996,8 +1014,6 @@ public class HomeControler {
 		return date;
 	}
 
-	
-
 	@GetMapping("/goldLoanPlan")
 	public String goldLoanPlan() {
 		return "Gold_Loan/Gold_LoanPlan";
@@ -1015,8 +1031,6 @@ public class HomeControler {
 		return "Gold_Loan/Gold_LoanPlan";
 	}
 
-	
-
 	@PostMapping("getLoanDetails")
 	@ResponseBody
 	public LoanPlanMaster getLoanDetails(@RequestBody GenericGetById id) {
@@ -1029,7 +1043,6 @@ public class HomeControler {
 		return null;
 	}
 
-	
 	@GetMapping("/rDRenewal")
 	public String rDRenewal() {
 		return "investmentSection/RDRenewal";

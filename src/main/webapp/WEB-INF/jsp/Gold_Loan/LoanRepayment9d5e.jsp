@@ -1,3 +1,4 @@
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="com.society.application.model.LoanMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Member"%>
@@ -19,7 +20,7 @@
 		<%
          String status = (String)request.getAttribute("status");
          if(status!=null && "success".equals(status)){
-          %>
+         %>
 		<script>
          alert("Saved Successfully");
       </script>
@@ -30,7 +31,6 @@
          %>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -38,10 +38,11 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			<% List<Member> memberList = (List<Member>) request.getAttribute("memberList"); %>
+			<% //List<Member> memberList = (List<Member>) request.getAttribute("memberList"); 
+			     List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList"); 
+			%>
 			<% List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList"); %>
 			<% List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster"); %>
-				
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -70,9 +71,9 @@
 													<select name="searchLoanIDLoan"
 														onchange="javascript:displayLoanDetailsSelectedId()"
 														id="searchLoanIDLoan" class="form-control select2"
-														style="width: 100%;">
-														<<option selected="selected" value="">Select Loan ID</option>
-														
+														style="width: 100%;"> <
+														<option selected="selected" value="">Select Loan
+															ID</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
@@ -378,10 +379,17 @@
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<select name="ctl00$ContentPlaceHolder1$ddlCSPName"
-													id="ContentPlaceHolder1_ddlCSPName" class="form-control"
+												<select name="cspName" id="branchname" class="form-control"
 													style="width: 100%;">
-													<option value="001">Main Office - 001</option>
+													<option value="">Select Branch</option>
+													<% if(branchList!=null && !branchList.isEmpty()){
+														for(BranchMaster branch :branchList ){
+															%>
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
+														}
+													}
+													%>
 												</select>
 											</div>
 										</div>
@@ -407,11 +415,11 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="ctl00$ContentPlaceHolder1$txtPaymentDate"
-														type="text" value="01/08/2022"
+													<input name="payDate"
+														type="date" value="01/08/2022"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtPaymentDate\&#39;,\&#39;\&#39;)&#39;, 0)"
 														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtPaymentDate"
+														id="payDate"
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -442,11 +450,11 @@
 												Amount<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtPayableAmount"
+												<input name="payAmount"
 													type="text"
 													onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtPayableAmount\&#39;,\&#39;\&#39;)&#39;, 0)"
 													onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;return isNumberKey(this, event);"
-													id="ContentPlaceHolder1_txtPayableAmount"
+													id="payAmount"
 													class="form-control" PlaceHolder="Enter Payable Amount"
 													onpaste="return false" autocomplete="off" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorPayableAmount"
@@ -459,9 +467,9 @@
 												class="col-sm-4 control-label">Net Amt.<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtTotalPayableAmt"
+												<input name="netAmount"
 													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtTotalPayableAmt"
+													id="netAmount"
 													class="form-control" PlaceHolder="Enter Total Payable Amt." />
 												<span
 													id="ContentPlaceHolder1_RequiredFieldValidatorTotalPayableAmt"
@@ -475,9 +483,9 @@
 													By<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<select name="ctl00$ContentPlaceHolder1$ddlPaymode"
+													<select name="paymode"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlPaymode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														id="ContentPlaceHolder1_ddlPaymode" class="form-control"
+														id="paymode" class="form-control"
 														style="width: 100%;">
 														<option selected="selected" value="Cash">Cash</option>
 														<option value="Cheque">Cheque</option>
@@ -498,11 +506,11 @@
 												<label class="col-sm-5 control-label">Advisor Code<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorCode"
+													<input name="advisorCode"
 														type="text"
 														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtAdvisorCode\&#39;,\&#39;\&#39;)&#39;, 0)"
 														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtAdvisorCode"
+														id="advisorCode"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Code" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator6"
@@ -514,9 +522,9 @@
 												<label class="col-sm-5 control-label">Advisor Name<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorName"
+													<input name="advisorName"
 														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtAdvisorName"
+														id="advisorName"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Name" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator7"
@@ -528,8 +536,8 @@
 										<div class="form-group row">
 											<label class="col-sm-5 control-label">Remarks</label>
 											<div class="col-sm-7">
-												<textarea name="ctl00$ContentPlaceHolder1$txtRemarks"
-													rows="2" cols="20" id="ContentPlaceHolder1_txtRemarks"
+												<textarea name="remarks"
+													rows="2" cols="20" id="remarks"
 													class="form-control" Placeholder="Enter Remarks if any">
 </textarea>
 											</div>
@@ -538,9 +546,6 @@
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-										
-									
-
 										<input type="submit" name="save" value="Save Data" id="save"
 											class="btn btn-success pull-right margin-r-5" />
 									</div>
@@ -568,7 +573,6 @@
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -805,7 +809,6 @@ ContentPlaceHolder1_RequiredFieldValidator7.initialvalue = "";
 //]]>
 </script>
 
-
 		<script type="text/javascript">
 //<![CDATA[
 
@@ -900,6 +903,7 @@ document.getElementById('ContentPlaceHolder1_RequiredFieldValidator7').dispose =
 }
 //]]>
 </script>
+
 	</form>
 </body>
 

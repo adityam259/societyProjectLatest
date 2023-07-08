@@ -89,6 +89,10 @@ public class AdvisorCollectorDetails {
 	
 	private String age;
 	
+	private String fDate;
+	
+	private String tDate;
+	
 	private byte[] photo;
 	
 	private byte[] signiture;
@@ -451,6 +455,22 @@ public class AdvisorCollectorDetails {
 
 	public void setFrontEndSignature(String frontEndSignature) {
 		this.frontEndSignature = frontEndSignature;
+	}
+
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
 	}
 
 	@Override

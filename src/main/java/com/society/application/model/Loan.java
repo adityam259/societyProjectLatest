@@ -84,10 +84,12 @@ public class Loan {
 	private String paymode;
 	private String charges;
 	private String remarks;
+	private String branchname;
+	private String fDate;
+	private String tDate;
 	@Transient
 	private String loanPlanNameView;
 	private String modeRegOrIrr;
-	
 
 	public String getModeRegOrIrr() {
 		return modeRegOrIrr;
@@ -695,6 +697,30 @@ public class Loan {
 
 	public void setTotItemWt(String totItemWt) {
 		this.totItemWt = totItemWt;
+	}
+
+	public String getBranchname() {
+		return branchname;
+	}
+
+	public void setBranchname(String branchname) {
+		this.branchname = branchname;
+	}
+
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
 	}
 
 	@Override

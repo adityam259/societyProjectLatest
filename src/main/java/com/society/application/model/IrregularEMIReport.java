@@ -25,6 +25,8 @@ public class IrregularEMIReport
 	private String chequeno;
 	private String sbaccount;
 	private String collectorcode;
+	private String fDate;
+	private String tDate;
 	
 	public int getId() {
 		return id;
@@ -109,5 +111,17 @@ public class IrregularEMIReport
 	}
 	public void setCollectorcode(String collectorcode) {
 		this.collectorcode = collectorcode;
+	}
+	public String getfDate() {
+		return fDate;
+	}
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+	public String gettDate() {
+		return tDate;
+	}
+	public void settDate(String tDate) {
+		this.tDate = tDate;
 	}
 }

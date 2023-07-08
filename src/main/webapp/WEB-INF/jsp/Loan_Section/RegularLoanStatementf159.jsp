@@ -1,13 +1,21 @@
+<%@page import="com.society.application.model.LoanMaster"%>
 <%@page import="java.util.List"%>
-<%@page import="com.society.application.model.Loan"%>
 <%@page import="com.society.application.model.Member"%>
 <%@page import="com.society.application.model.BranchMaster"%>
-<%@page import="com.society.application.model.LoanMaster"%>
+<%@page import="com.society.application.model.Loan"%>
 <jsp:include page="../header.jsp" />
-<body onload="getListOfLoanId()" class="skin-blue sidebar-mini"
+<script src="dist/js/customJs.js"></script>
+<script src="dist/js/investmentSection.js"></script>
+<script src="dist/js/loanModule.js"></script>
+<script src="dist/js/goldLoanMaster.js"></script>
+<script src="dist/js/groupMasterUtilsJs.js"></script>
+<script src="dist/js/LoanModuleJs.js"></script>
+<body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post" action="" id="form1">
+	<form method="post"
+		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/RegularLoanStatement.aspx?Type=Gold"
+		id="form1">
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -18,10 +26,10 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<script type="text/javascript">
-            //<![CDATA[
-            Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
-            //]]>
-         </script>
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
+//]]>
+</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -32,15 +40,6 @@
 						<li class="active">Statement</li>
 					</ol>
 				</section>
-				<%
-											List<Member> memberList = (List<Member>) request.getAttribute("memberList");
-											%>
-											<%
-											List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
-											%>
-											<%
-											List<LoanMaster> loanMasterList = (List<LoanMaster>) request.getAttribute("loanPlanMaster");
-											%>
 				<section class="content">
 					<div class="row">
 						<div class="col-md-12">
@@ -48,25 +47,24 @@
 								<div class="box-header with-border">
 									<h3 class="box-title">Search Details for Print</h3>
 								</div>
+								<%
+												List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
+												%>
 								<div class="form-horizontal">
 									<div class="box-body">
 										<div class="col-md-3">
 											<div class="form-group">
-											<%
-													List<Loan> loanList = (List<Loan>) request.getAttribute("loanList");
-													%>
 												<label>Select by Loan ID <strong style="color: Red">*</strong></label>
-												<select name="searchLoanId" onchange="getByLoanIdRegularEmiRepayment()"
+												<select name="searchLoanId1"
+														onchange="getByGoldLoanIdRegularEmiRepayment()"
 														id="searchLoanId1" class="form-control select2"
 														style="width: 100%;">
-														<option selected="selected" value="">Select Loan Id
-														</option>
+														<option selected="selected" value="">Select Loan ID</option>
 														<%
 														if (loanList != null && !loanList.isEmpty()) {
 															for (Loan loan : loanList) {
 														%>
-														<option value="<%=loan.getId()%>"><%=loan.getId()%>
-														</option>
+														<option value="<%=loan.getId()%>"><%=loan.getId()%></option>
 														<%
 														}
 														}
@@ -76,10 +74,9 @@
 										</div>
 										<div class="col-md-3">
 											<div class="form-group">
-												<label></label> <input type="submit"
-													onclick="this.disabled = true" name="btnSave"
-													value="Search" id="btnSave"
-													class="btn btn-success margin-20" />
+												<label></label>
+												<button type="button" name="btnSave" value="Search"
+													id="save" class="btn btn-success margin-20">Save</button>
 											</div>
 										</div>
 									</div>
@@ -95,8 +92,8 @@
 									<div class="clearfix margin-bottom-10"></div>
 									<table id="loanTable"
 									cellspacing="0" cellpadding="3" rules="all" class="display nowrap table table-hover table-striped table-bordered" border="1"  style="width:100%;border-collapse:collapse;">
-									<tr>
-										<th>Field</th>
+									<tr style="color: White; background-color: #008385;">
+										<th >Field</th>
 										<th>Value</th>
 									</tr>
 								</table>
@@ -109,9 +106,11 @@
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
+
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -142,49 +141,50 @@
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
-         $(function () {
-             //Initialize Select2 Elements
-             $('.select2').select2();
-             //Datemask dd/mm/yyyy
-             $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-             //Datemask2 mm/dd/yyyy
-             $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-             //Date range picker
-             $('#reservation').daterangepicker()
-             //Date range picker with time picker
-             $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
-             $('#daterange-btn').daterangepicker(
-              {
-                  ranges: {
-                      'Today': [moment(), moment()],
-                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                      'This Month': [moment().startOf('month'), moment().endOf('month')],
-                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                  },
-                  startDate: moment().subtract(29, 'days'),
-                  endDate: moment()
-              },
-              function (start, end) {
-                  $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
-              }
-            )
-             //Date picker
-             $('#datepicker').datepicker({
-                 autoclose: true
-             })
-             //Money Euro
-             $('[data-mask]').inputmask()
-         
-             //iCheck for checkbox and radio inputs
-             $('span[type="checkbox"].minimal').iCheck({
-                 checkboxClass: 'icheckbox_minimal-blue',
-                 radioClass: 'iradio_minimal-blue'
-             })
-         })
-      </script>
+            $(function () {
+                //Initialize Select2 Elements
+                $('.select2').select2();
+                //Datemask dd/mm/yyyy
+                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+                //Datemask2 mm/dd/yyyy
+                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+                //Date range picker
+                $('#reservation').daterangepicker()
+                //Date range picker with time picker
+                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
+                $('#daterange-btn').daterangepicker(
+                 {
+                     ranges: {
+                         'Today': [moment(), moment()],
+                         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                         'This Month': [moment().startOf('month'), moment().endOf('month')],
+                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                     },
+                     startDate: moment().subtract(29, 'days'),
+                     endDate: moment()
+                 },
+                 function (start, end) {
+                     $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
+                 }
+               )
+                //Date picker
+                $('#datepicker').datepicker({
+                    autoclose: true
+                })
+                //Money Euro
+                $('[data-mask]').inputmask()
+
+                //iCheck for checkbox and radio inputs
+                $('span[type="checkbox"].minimal').iCheck({
+                    checkboxClass: 'icheckbox_minimal-blue',
+                    radioClass: 'iradio_minimal-blue'
+                })
+            })
+        </script>
 	</form>
 </body>
-<!-- Dk/Admin/RegularLoanStatement.aspx?Type=Normal EDB D 09:27:10 GMT -->
+
+<!-- Dk/Admin/RegularLoanStatement.aspx?Type=Gold EDB D 09:27:11 GMT -->
 </html>

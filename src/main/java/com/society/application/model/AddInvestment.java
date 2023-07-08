@@ -69,12 +69,49 @@ public class AddInvestment {
 	private String flag;
 	private String applicationDate;
 	private String paymentDate;
-
-	@Transient
+    private String roi;
+    private String penalty;
+    private String reqUser;
+    private String approvalDate;
+    private String appBranch;
+    private String deduction;
+    private String adjustment;
+    private String aprovalStatus;
+    @Transient
 	private String frontEndPhoto;
 	@Transient
 	private String frontEndSignature;
-	
+
+	public String getAppBranch() {
+		return appBranch;
+	}
+	public void setAppBranch(String appBranch) {
+		this.appBranch = appBranch;
+	}
+	public String getReqUser() {
+		return reqUser;
+	}
+	public void setReqUser(String reqUser) {
+		this.reqUser = reqUser;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	public String getRoi() {
+		return roi;
+	}
+	public void setRoi(String roi) {
+		this.roi = roi;
+	}
+	public String getPenalty() {
+		return penalty;
+	}
+	public void setPenalty(String penalty) {
+		this.penalty = penalty;
+	}
 	public String getAmtDue() {
 		return amtDue;
 	}
@@ -434,6 +471,24 @@ public class AddInvestment {
 	}
 	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
+	}
+	public String getDeduction() {
+		return deduction;
+	}
+	public void setDeduction(String deduction) {
+		this.deduction = deduction;
+	}
+	public String getAdjustment() {
+		return adjustment;
+	}
+	public void setAdjustment(String adjustment) {
+		this.adjustment = adjustment;
+	}
+	public String getAprovalStatus() {
+		return aprovalStatus;
+	}
+	public void setAprovalStatus(String aprovalStatus) {
+		this.aprovalStatus = aprovalStatus;
 	}
 	
 }

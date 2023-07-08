@@ -12,6 +12,5 @@ public interface CashStatementrepo extends JpaRepository<CashStatement, Integer>
 
 	public List<CashStatement> findBytxnDateBetween(String fromDate, String toDate);
 
-
-	
+	public List<CashStatement> findBybranchName(String branchName);
 }
