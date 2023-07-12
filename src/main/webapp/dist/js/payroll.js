@@ -570,3 +570,170 @@ function getEmpByIdForSalaryPayment(ids){
          	    }
              });
 	}
+	
+	
+	
+	function getTableInOfferLetter(){
+		//alert(ids)
+		var ids = document.getElementById("searchEmpCode").value;
+		var input = {
+                     "id": ids
+             }
+         	$.ajax({
+                 type:"post",
+                 contentType: "application/json",
+                 data: JSON.stringify(input),
+                 url: 'getEmpById',
+                 asynch: false,
+                 success: function(data) {
+                 for (let i = 0; i <data.length ; i++) {
+					//document.getElementById("id").value= data.id;
+					let j =1;
+					const tableData1 = data.map(function(value) {
+						return (
+							`<tr>
+	                           		<td scope="col">`+ j++ +`</td>
+	                                <td scope="col">${value.id}</td>
+	                                <td scope="col">${value.dob}</td>
+	                                <td scope="col">${value.address}</td>
+	                                <td scope="col">${value.bankAc}</td>
+	                                
+	                            </tr>`
+						);
+					}).join('');
+					const tableBody1 = document.querySelector("#table");
+					tableBody1.innerHTML = tableData1;
+				}
+                     
+                 } ,
+         	    error: function(){
+         	    	alert("Device control failed");
+         	    }
+             });
+	}
+	
+	
+	function getTableInSalaryPaymentReport(){
+		//alert(ids)
+		var empCode = document.getElementById("ECode").value;
+		var fDate = document.getElementById("FDate").value;
+		var tDate = document.getElementById("TDate").value;
+		var input = {
+                     "empCode": empCode
+             }
+             
+             var input2 = {
+                     "fDate": fDate,
+                     "tDate":tDate
+             }
+             
+         	$.ajax({
+                 type:"post",
+                 contentType: "application/json",
+                 data: JSON.stringify(input),
+                 url: 'getEmpByCode',
+                 asynch: false,
+                 success: function(data) {
+                 for (let i = 0; i <data.length ; i++) {
+					//document.getElementById("id").value= data.id;
+					let j =1;
+					const tableData1 = data.map(function(value) {
+						return (
+							`<tr>
+	                           		<td scope="col">`+ j++ +`</td>
+	                                <td scope="col">${value.id}</td>
+	                                <td scope="col">${value.dob}</td>
+	                                <td scope="col">${value.address}</td>
+	                                <td scope="col">${value.bankAc}</td>
+	                                
+	                            </tr>`
+						);
+					}).join('');
+					const tableBody1 = document.querySelector("#table");
+					tableBody1.innerHTML = tableData1;
+				}
+                     
+                 } ,
+         	    error: function(){
+         	    	alert("Device control failed");
+         	    }
+             });
+             
+             
+             $.ajax({
+                 type:"post",
+                 contentType: "application/json",
+                 data: JSON.stringify(input2),
+                 url: 'getEmpByleaveDate',
+                 asynch: false,
+                 success: function(data) {
+                 for (let i = 0; i <data.length ; i++) {
+					//document.getElementById("id").value= data.id;
+					let j =1;
+					const tableData1 = data.map(function(value) {
+						return (
+							`<tr>
+	                           		<td scope="col">`+ j++ +`</td>
+	                                <td scope="col">${value.id}</td>
+	                                <td scope="col">${value.dob}</td>
+	                                <td scope="col">${value.address}</td>
+	                                <td scope="col">${value.bankAc}</td>
+	                                
+	                            </tr>`
+						);
+					}).join('');
+					const tableBody1 = document.querySelector("#table");
+					tableBody1.innerHTML = tableData1;
+				}
+                     
+                 } ,
+         	    error: function(){
+         	    	alert("Device control failed");
+         	    }
+             });
+	}
+	
+	
+	
+		
+	function getTableInHrmSalaryGenrate(){
+		//alert(ids)
+		var fDate = document.getElementById("FDate").value;
+		var tDate = document.getElementById("TDate").value;
+		var input = {
+                     "fDate":fDate,
+                     "tDate":tDate
+             }
+         	$.ajax({
+                 type:"post",
+                 contentType: "application/json",
+                 data: JSON.stringify(input),
+                 url: 'getSalaryMasterByDate',
+                 asynch: false,
+                 success: function(data) {
+                 for (let i = 0; i <data.length ; i++) {
+					//document.getElementById("id").value= data.id;
+					let j =1;
+					const tableData1 = data.map(function(value) {
+						return (
+							`<tr>
+	                           		<td scope="col">`+ j++ +`</td>
+	                                <td scope="col">${value.id}</td>
+	                                <td scope="col">${value.payDate}</td>
+	                                <td scope="col">${value.paymode}</td>
+	                                <td scope="col">${value.empCode}</td>
+	                                
+	                            </tr>`
+						);
+					}).join('');
+					const tableBody1 = document.querySelector("#table");
+					tableBody1.innerHTML = tableData1;
+				}
+                     
+                 } ,
+         	    error: function(){
+         	    	alert("Device control failed");
+         	    }
+             });
+	}
+	

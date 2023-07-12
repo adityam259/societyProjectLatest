@@ -28,6 +28,28 @@ public class SalaryMaster {
 	private String payBranch;
 	private String payDate;
 	private String paymode;
+	
+	@Transient
+	private String fDate;
+	@Transient
+	private String tDate;
+
+	
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
+	}
 
 	public String getPayBranch() {
 		return payBranch;

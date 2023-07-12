@@ -51,7 +51,7 @@
 										<div class="form-group row">
 											<label class="col-sm-4 control-label"></label>
 											<div class="col-sm-8">
-												<button type="button" name="search" value="Print"
+												<button type="button" name="search" value="Print" onclick="getTableInOfferLetter()"
 													id="search" class="btn btn-success pull-right">
 													Search</button>
 											</div>
@@ -66,7 +66,22 @@
 									<div class="box-tools pull-right"></div>
 								</div>
 								<div class="box-body">
-									<div class="clearfix margin-bottom-10"></div>
+									<div class="clearfix margin-bottom-10">
+									<table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+											<th scope="col">Sr.No</th>
+												<th scope="col">Id</th>
+												<th scope="col">BOB</th>
+												<th scope="col">Address</th>
+												<th scope="col">Bank Account</th>
+											</tr>
+											<tbody id="table">
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

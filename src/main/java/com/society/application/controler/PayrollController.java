@@ -255,4 +255,26 @@ public class PayrollController {
 		return "payrollManagement/HrmSalaryPayment";
 
 	}
+	
+	
+	@PostMapping("/getEmpByCode")
+	@ResponseBody
+	public List<Employee> getEmpByCode(@RequestBody Employee id) {
+		List<Employee> emp = employeeRepo.findByempCode(id.getEmpCode());
+		return emp;
+	}
+	
+	@PostMapping("/getEmpByleaveDate")
+	@ResponseBody
+	public List<Employee> getEmpByleaveDate(@RequestBody Employee id) {
+		List<Employee> emp = employeeRepo.findByleaveDateBetween(id.getfDate(),id.gettDate());
+		return emp;
+	}
+	
+	@PostMapping("/getSalaryMasterByDate")
+	@ResponseBody
+	public List<SalaryMaster> getSalaryMasterByDate(@RequestBody SalaryMaster obj) {
+		List<SalaryMaster> obj2 = salaryMasterRepo.findBypayDateBetween(obj.getfDate(),obj.gettDate());
+		return obj2;
+	}
 }
