@@ -193,8 +193,13 @@ function displayGroupLoanApplicationDetails() {
 
 function displayGroupLoanApplicationDetailsShowTable() {
 	var id = document.getElementById("searchGroupID1");
+	var branch = document.getElementById("ContentPlaceHolder1_ddlBranch");
 	var input = {
 		"id": id.value
+	}
+	
+	var input2 = {
+		"csp": branch.value
 	}
 	$.ajax({
 		type: "post",
@@ -203,61 +208,73 @@ function displayGroupLoanApplicationDetailsShowTable() {
 		url: 'getGroupMasterById',
 		asynch: false,
 		success: function(data) {
-			    var table = document.getElementById("tableId");
 
-    // Clear previous table data
-    table.innerHTML = "";
 
-    // Create table headers
-    var headers = ["Group Name", "Leader Name", "Mobile", "Address", "Employee", "Day", "Time"];
-    var headerRow = document.createElement("tr");
-    for (var i = 0; i < headers.length; i++) {
-        var headerCell = document.createElement("th");
-        headerCell.textContent = headers[i];
-        headerRow.appendChild(headerCell);
-    }
-    table.appendChild(headerRow);
+ for (var i = 0; i < data.length; i++){
+				
+				//var j=1;
+				const tableData1 = data.map(function (value) {
+					return (
+						`<tr>
+                         <td>${value.id}</td> 
+                         <td>${value.groupName}</td>
+                         <td>${value.opDate}</td>
+                          <td>${value.csp}</td>
+                          
+                          <td>${value.grLeaderName}</td> 
+                         <td>${value.mobile}</td>
+                         <td>${value.grAddr}</td>
+                          <td>${value.employee}</td>
+                          <td>${value.cTime}</td>
+                          <td>${value.createdDate}</td>
+						 
+                         </tr>`
+					);
+				}).join('');
+				const tableBody1 = document.querySelector("#tableBody");
+				tableBody1.innerHTML = tableData1;
+			}
 
-    // Create table row with data
-    var dataRow = document.createElement("tr");
+		},
+		error: function() {
+			alert("Device control failed");
+		}
+	});
+	
+	
+	$.ajax({
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(input2),
+		url: 'getGroupMasterByBranch',
+		asynch: false,
+		success: function(data) {
 
-    // Group Name
-    var groupNameCell = document.createElement("td");
-    groupNameCell.textContent = data.groupName;
-    dataRow.appendChild(groupNameCell);
 
-    // Leader Name
-    var leaderNameCell = document.createElement("td");
-    leaderNameCell.textContent = data.grLeaderName;
-    dataRow.appendChild(leaderNameCell);
-
-    // Mobile
-    var mobileCell = document.createElement("td");
-    mobileCell.textContent = data.mobile;
-    dataRow.appendChild(mobileCell);
-
-    // Address
-    var addressCell = document.createElement("td");
-    addressCell.textContent = data.grAddr;
-    dataRow.appendChild(addressCell);
-
-    // Employee
-    var employeeCell = document.createElement("td");
-    employeeCell.textContent = data.employee;
-    dataRow.appendChild(employeeCell);
-
-    // Day
-    var dayCell = document.createElement("td");
-    dayCell.textContent = data.cDay;
-    dataRow.appendChild(dayCell);
-
-    // Time
-    var timeCell = document.createElement("td");
-    timeCell.textContent = data.cTime;
-    dataRow.appendChild(timeCell);
-
-    table.appendChild(dataRow);
-
+ for (var i = 0; i < data.length; i++){
+				
+				//var j=1;
+				const tableData1 = data.map(function (value) {
+					return (
+						`<tr>
+                         <td>${value.id}</td> 
+                         <td>${value.groupName}</td>
+                         <td>${value.opDate}</td>
+                          <td>${value.csp}</td>
+                          
+                          <td>${value.grLeaderName}</td> 
+                         <td>${value.mobile}</td>
+                         <td>${value.grAddr}</td>
+                          <td>${value.employee}</td>
+                          <td>${value.cTime}</td>
+                          <td>${value.createdDate}</td>
+						 
+                         </tr>`
+					);
+				}).join('');
+				const tableBody1 = document.querySelector("#tableBody");
+				tableBody1.innerHTML = tableData1;
+			}
 
 		},
 		error: function() {

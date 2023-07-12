@@ -1,9 +1,12 @@
 package com.society.application.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
@@ -84,10 +87,22 @@ public class Loan {
 	private String paymode;
 	private String charges;
 	private String remarks;
+	private String closeLoan;
 	@Transient
 	private String loanPlanNameView;
 	private String modeRegOrIrr;
 	
+
+	
+	
+
+	public String getCloseLoan() {
+		return closeLoan;
+	}
+
+	public void setCloseLoan(String closeLoan) {
+		this.closeLoan = closeLoan;
+	}
 
 	public String getModeRegOrIrr() {
 		return modeRegOrIrr;

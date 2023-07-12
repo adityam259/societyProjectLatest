@@ -37,24 +37,57 @@
 								<div class="box-body">
 									<div class="col-md-3">
 										<div class="form-group">
-											<label> </label> <input name="dtDate" type="text"
-												value="AUG - 2022" readonly="readonly" id="dtDate"
-												class="form-control" />
-										</div>
+<!-- 											<label> </label> <input name="dtDate" type="text" -->
+<!-- 												value="AUG - 2022" readonly="readonly" id="dtDate" -->
+<!-- 												class="form-control" /> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="col-md-4"> -->
+<!-- 										<label> </label> -->
+<!-- 										<button type="button" name="ctl00$ContentPlaceHolder1$btnPrev" -->
+<!-- 											value="Previous Month" id="ContentPlaceHolder1_btnPrev" -->
+<!-- 											class="btn btn-warning margin-20 margin-r-5">Previous -->
+<!-- 											Month</button> -->
+<!-- 										<button type="button" name="ctl00$ContentPlaceHolder1$btnNext" -->
+<!-- 											value="Next Month" id="ContentPlaceHolder1_btnNext" -->
+<!-- 											class="btn btn-warning margin-20">Next Month</button> -->
+
+                                     
 									</div>
-									<div class="col-md-4">
-										<label> </label>
-										<button type="button" name="ctl00$ContentPlaceHolder1$btnPrev"
-											value="Previous Month" id="ContentPlaceHolder1_btnPrev"
-											class="btn btn-warning margin-20 margin-r-5">Previous
-											Month</button>
-										<button type="button" name="ctl00$ContentPlaceHolder1$btnNext"
-											value="Next Month" id="ContentPlaceHolder1_btnNext"
-											class="btn btn-warning margin-20">Next Month</button>
+									
+							
+									<div class="col-md-2">
+										<div class="form-group">
+										
+												 <div class="col-md-2">
+										<div class="form-group">
+											<label>From Date :</label>
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input name="FDate" type="date" 
+													id="FDate" class="form-control"
+													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+													data-mask="" />
+											</div>
+										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="form-group">
-											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+											<label>To Date :</label>
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input name="TDate" type="date" 
+													id="TDate" class="form-control"
+													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+													data-mask="" />
+											</div>
+										</div>
+									</div>
+											<label></label> <a id="ContentPlaceHolder1_btnSearch" onclick="getTableInHrmSalaryGenrate()"
 												class="btn btn-success margin-20">GENERATE</a>
 										</div>
 									</div>
@@ -64,7 +97,23 @@
 							<div class="box box-success"
 								style="box-shadow: none; overflow: auto !important;">
 								<div class="box-body">
-									<div class="clearfix margin-bottom-10"></div>
+									<div class="clearfix margin-bottom-10">
+									
+									<table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+											<th scope="col">Sr.No</th>
+												<th scope="col">Id</th>
+												<th scope="col">payDate</th>
+												<th scope="col">paymode</th>
+												<th scope="col">empCode</th>
+											</tr>
+											<tbody id="table">
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

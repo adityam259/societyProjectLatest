@@ -6,14 +6,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.society.application.dto.LoanWithLoanMasterDTO;
+import com.society.application.dto.Response;
 import com.society.application.model.BranchMaster;
 import com.society.application.model.Employee;
 import com.society.application.model.GenericGetById;
@@ -27,6 +33,7 @@ import com.society.application.repository.EmployeeRepo;
 import com.society.application.repository.GroupMasterApplicationRepo;
 import com.society.application.repository.GroupMasterRepo;
 import com.society.application.repository.LoanMasterRepo;
+import com.society.application.repository.LoanRepo;
 import com.society.application.repository.MemberRepo;
 
 @Controller
@@ -49,6 +56,9 @@ public class GroupLoanController {
 
 	@Autowired
 	GroupMasterApplicationRepo groupMasterApplicationRepo;
+	
+	@Autowired
+	LoanRepo loanRepo;
 
 	@GetMapping("/LoanPlan5c22")
 	public String LoanPlan5c22(Model model) {
@@ -89,9 +99,13 @@ public class GroupLoanController {
 	
 	@PostMapping("/closeLoanRegularEMIRepaymentGroup")
 	public String closeLoanRegularEMIRepaymentGroup(@ModelAttribute("updateLoan") Loan loan, Model model) {
-		
-				//few fields are no tthere so not saving close status
-		
+
+		Loan loan1 = loanRepo.findByid(loan.getId());
+
+		loan1.setCloseLoan("close");
+
+		loanRepo.save(loan1);
+
 		model.addAttribute("status", "success");
 		return "group_loan/LoanPreSettlement5c22";
 	}
@@ -184,9 +198,17 @@ public class GroupLoanController {
 
 	@PostMapping("/getGroupMasterById")
 	@ResponseBody
-	public GroupMaster getGroupMasterById(@RequestBody GenericGetById id) {
-		Optional<GroupMaster> groupMaster = groupMasterRepo.findById(Integer.parseInt(id.getId()));
-		return groupMaster.get();
+	public List<GroupMaster> getGroupMasterById(@RequestBody GroupMaster id) {
+		List<GroupMaster> groupMaster = groupMasterRepo.findByid(id.getId());
+		return groupMaster;
+	}
+	
+	
+	@PostMapping("/getGroupMasterByBranch")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterByBranch(@RequestBody GroupMaster ob) {
+		List<GroupMaster> groupMaster = groupMasterRepo.findBycsp(ob.getCsp());
+		return groupMaster;
 	}
 
 	@PostMapping("/saveGroupMasterApplication")
@@ -228,19 +250,64 @@ public class GroupLoanController {
 		return "group_loan/GroupLoanApproval9c5a";
 	}
 	@PostMapping("/updateLoanRegularEMIRepaymentGroup")
-	public String updateLoanRegularEMIRepaymentGroup(@ModelAttribute("updateLoan") Loan loan, Model model) {
+	public ResponseEntity<String> updateLoanRegularEMIRepaymentGroup(@ModelAttribute("updateLoan") Loan loan, Model model,
+			@RequestParam(name = "loanmasterID", required = false) Integer id,
+			@RequestParam(name = "branchName", required = false) String branchName, 
+			@RequestParam(name = "emiAmount1", required = false) String emiAmount1, 
+			@RequestParam(name = "loanAmount1", required = false) String loanAmount1, 
+			@RequestParam(name = "advisorCode", required = false) String advisorCode, 
+			@RequestParam(name = "advisorName", required = false) String advisorName ) {
 		
-			//as of now no action as complete field is not visible in view 
+		try {
 		
-		List<GroupMaster> allGroupMaster = groupMasterRepo.findAll();
-		model.addAttribute("allGroupMaster", allGroupMaster);
-		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
-		model.addAttribute("loanPlanMaster", loanPlanMaster);
-		List<Member> memberList = memberRepo.findAll();
-		model.addAttribute("memberList", memberList);
-		List<BranchMaster> branchData = branchMasterRepo.findAll();
-		model.addAttribute("branchList", branchData);
-		model.addAttribute("status", "success");
-		return "group_loan/LoanRepayment5c22";
+		
+			List<LoanMaster> lm = loanMasterRepo.findByid(id);
+			
+			lm.forEach(s -> {
+				s.setBranchName(branchName);
+				s.setEmiAmount(emiAmount1);
+				s.setLoanAmount(loanAmount1);
+				s.setAdvisorCode(advisorCode);
+				s.setAdvisorName(advisorName);
+				
+				loanMasterRepo.save(s);
+			
+			});
+			return new ResponseEntity<>("Data Saved Sucessfully!!!!", HttpStatus.OK);
+		} catch (Exception ex) {
+			return new ResponseEntity<>("Failed Data Saved Sucessfully!!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+//		List<GroupMaster> allGroupMaster = groupMasterRepo.findAll();
+//		model.addAttribute("allGroupMaster", allGroupMaster);
+//		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
+//		model.addAttribute("loanPlanMaster", loanPlanMaster);
+//		List<Member> memberList = memberRepo.findAll();
+//		model.addAttribute("memberList", memberList);
+//		List<BranchMaster> branchData = branchMasterRepo.findAll();
+//		model.addAttribute("branchList", branchData);
+//		model.addAttribute("status", "success");
+//		return "group_loan/LoanRepayment5c22";
+	}
+	
+	
+	@PostMapping("/fetchEmiRepayment")
+	@ResponseBody
+	public Response fetchEmiRepayment (@RequestBody Loan loan) {
+		Response response = new Response<>();
+		response.setStatus("Not Success");
+		response.setMessage("Data Not Saved..!!");
+
+		Optional<LoanWithLoanMasterDTO> optionalLoan = loanRepo.findLoanWithLoanMasterById(loan.getId());
+		
+		if(optionalLoan != null) {
+		response.setStatus("Success");
+			response.setMessage("Data Found !!!");
+			response.setData(optionalLoan); 
+		}
+		return response;
+		
+		
 	}
 }

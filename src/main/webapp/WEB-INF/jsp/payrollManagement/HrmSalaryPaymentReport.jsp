@@ -48,7 +48,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="FDate" type="text" value="01/08/2022"
+												<input name="FDate" type="date" 
 													id="FDate" class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -62,7 +62,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="TDate" type="text" value="01/08/2022"
+												<input name="TDate" type="date" 
 													id="TDate" class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -71,7 +71,7 @@
 									</div>
 									<div class="col-md-2">
 										<div class="form-group">
-											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+											<label></label> <a id="ContentPlaceHolder1_btnSearch" onclick="getTableInSalaryPaymentReport()"
 												class="btn btn-success margin-20"><span
 												class="fa fa-search"></span> SEARCH</a>
 										</div>
@@ -86,7 +86,24 @@
 									<div class="box-tools pull-right"></div>
 								</div>
 								<div class="box-body">
-									<div class="clearfix margin-bottom-10"></div>
+									<div class="clearfix margin-bottom-10">
+									
+										<table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+											<th scope="col">Sr.No</th>
+												<th scope="col">Id</th>
+												<th scope="col">BOB</th>
+												<th scope="col">Address</th>
+												<th scope="col">Bank Account</th>
+											</tr>
+											<tbody id="table">
+											</tbody>
+										</table>
+									
+									</div>
 								</div>
 							</div>
 						</div>

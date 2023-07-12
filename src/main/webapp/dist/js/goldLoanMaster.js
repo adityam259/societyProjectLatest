@@ -1170,26 +1170,50 @@ function displayLoanDetailsSelectedId() {
 		type: "post",
 		contentType: "application/json",
 		data: JSON.stringify(input),
-		url: 'displayLoanDetailsSelectedId',
+		url: 'fetchEmiRepayment',
 		asynch: false,
-		success: function(data) {
-			document.getElementById("loanDate").value = data.loanDate;
-			document.getElementById("searchMemberCode").value = data.searchMemberCode;
-			document.getElementById("relativeDetails").value = data.relativeDetails;
-			document.getElementById("phoneno").value = data.phoneno;
-			document.getElementById("loanPlanName").value = data.loanPlanName;
-			document.getElementById("planTerm").value = data.planTerm;
-			document.getElementById("mode").value = data.mode;
-			document.getElementById("loanAmount").value = data.loanAmount;
-			document.getElementById("loanROI").value = data.loanROI;
-			document.getElementById("ROIType").value = data.ROIType;
-			document.getElementById("emiAmount").value = data.emiAmount;
-			document.getElementById("id").value = data.id;
-			document.getElementById("cspName").value = data.cspName;
+		success: function(response) {
+			
+var loanData = response.data.loan;
+ var loanMasterData = response.data.loanMaster;
+
+		document.getElementById("loanDate").value = loanData.loanDate;
+		document.getElementById("searchMemberCode").value = loanData.searchMemberCode;
+		document.getElementById("relativeDetails").value = loanData.relativeDetails;
+		document.getElementById("phoneno").value = loanData.phoneno;
+		document.getElementById("cspName").value = loanData.cspName;
+		document.getElementById("loanPlanName").value = loanData.loanPlanName;
+		document.getElementById("planTerm").value = loanData.planTerm;
+		document.getElementById("mode").value = loanData.mode;
+		document.getElementById("loanAmount").value = loanData.loanAmount;
+		document.getElementById("loanROI").value = loanData.loanROI;
+		document.getElementById("ROIType").value = loanData.roiType;
+		document.getElementById("emiAmount").value = loanData.emiAmount;
+//		document.getElementById("ContentPlaceHolder1_txtTotalInterest").value = loanData.loanDate;
+//		document.getElementById("ContentPlaceHolder1_txtTotalPrinciple").value = loanData.loanDate;
+//		document.getElementById("ContentPlaceHolder1_txtTotalPayble").value = loanData.loanDate;
+
+        document.getElementById("branchName").value = loanMasterData.branchName;
+        document.getElementById("payDate").value = loanData.payDate;
+        document.getElementById("emiAmount1").value = loanMasterData.emiAmount;
+        document.getElementById("loanAmount1").value = loanMasterData.loanAmount;
+        document.getElementById("paymode").value = loanData.paymode;
+        document.getElementById("advisorCode").value = loanMasterData.advisorCode;
+        document.getElementById("advisorName").value = loanMasterData.advisorName;
+        document.getElementById("remarks").value = loanData.remarks;
+        document.getElementById("id").value = loanData.id;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
 
 
 
-
+       document.getElementById("loanmasterID").value = loanMasterData.id;
 
 		},
 		error: function() {

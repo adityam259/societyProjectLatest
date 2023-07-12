@@ -1,5 +1,6 @@
 <jsp:include page="../header.jsp" />
-<body class="skin-blue sidebar-mini"
+<script src="dist/js/ApprovalSection.js"></script>
+<body class="skin-blue sidebar-mini" onload="getBranchName()"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
 	<form method="post"
@@ -40,11 +41,11 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Branch :</label> <select
-												name="ctl00$ContentPlaceHolder1$ddlBranch"
-												id="ContentPlaceHolder1_ddlBranch" class="form-control"
+												name="branchName"
+												id="branchName" class="form-control"
 												style="width: 100%;">
-												<option value="All">All Branch</option>
-												<option value="001">Main Office - 001</option>
+												<option value="">All Branch</option>
+												
 											</select>
 										</div>
 									</div>
@@ -55,8 +56,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtFDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtFDate"
+												<input name="fDate" type="date"
+													 id="fDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -70,8 +71,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="tDate" type="date"
+													 id="tDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -80,7 +81,7 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+											<label></label> <a id="ContentPlaceHolder1_btnSearch" onclick="getTableBranchName()"
 												class="btn btn-success margin-20"><span
 												class="fa fa-search"></span> SEARCH</a>
 										</div>
@@ -91,8 +92,23 @@
 							<div class="box box-success"
 								style="box-shadow: none; overflow: auto !important;">
 								<div class="box-body">
-									<div class="clearfix margin-bottom-10"></div>
-									<div></div>
+									<div class="clearfix margin-bottom-10">
+									<table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+												<th scope="col">Id</th>
+												<th scope="col">Adress</th>
+												<th scope="col">Branch Name</th>
+												
+											</tr>
+											<tbody id="tableBody">
+											</tbody>
+										</table>
+									
+									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -134,6 +150,7 @@
 		<script src="dist/js/demo.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
+		
 		<script>
          $(function () {
              //Initialize Select2 Elements
