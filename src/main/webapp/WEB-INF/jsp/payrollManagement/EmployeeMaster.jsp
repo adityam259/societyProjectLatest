@@ -1,3 +1,5 @@
+<%@page import="com.society.application.model.BranchMaster"%>
+<%@page import="java.util.List"%>
 <jsp:include page="../header.jsp" />
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
@@ -24,7 +26,6 @@
 			<!-- Aside Menu Start-->
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
-			
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -35,6 +36,9 @@
 						<li class="active">Employee Master</li>
 					</ol>
 				</section>
+				<%
+				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
+				%>
 				<section class="content">
 					<div class="row">
 						<div class="col-md-10">
@@ -66,7 +70,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="DOJ" type="text" value="01/08/2022" id=DOJ
+													<input name="DOJ" type="date" value="01/08/2022" id=DOJ
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -81,9 +85,16 @@
 											<div class="col-sm-8">
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
-													<option value="" selected="selected">Select Branch
-														Name</option>
-													<option value="001">Main Office - 001</option>
+													<option value="">Select Branch</option>
+													<%
+													if (branchList != null && !branchList.isEmpty()) {
+														for (BranchMaster branch : branchList) {
+													%>
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
+													}
+													}
+													%>
 												</select> <span id="cspNameMsg"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
 											</div>
@@ -108,7 +119,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="DOB" type="text" value="01/08/2022" id="DOB"
+													<input name="DOB" type="date" value="01/08/2022" id="DOB"
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" /> <span id="DOBMsg"

@@ -85,11 +85,20 @@ public class Loan {
 	private String charges;
 	private String remarks;
 	private String branchname;
+	private String closeLoan;
 	private String fDate;
 	private String tDate;
 	@Transient
 	private String loanPlanNameView;
 	private String modeRegOrIrr;
+
+	public String getCloseLoan() {
+		return closeLoan;
+	}
+
+	public void setCloseLoan(String closeLoan) {
+		this.closeLoan = closeLoan;
+	}
 
 	public String getModeRegOrIrr() {
 		return modeRegOrIrr;

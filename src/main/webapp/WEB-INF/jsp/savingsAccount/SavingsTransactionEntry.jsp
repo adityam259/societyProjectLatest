@@ -46,6 +46,21 @@
 								<div class="box-body">
 									<div class="col-md-6">
 										<div class="form-group row">
+											<label class="col-sm-4 control-label">Select Saving Id<strong
+												style="color: Red">*</strong></label>
+											<div class="col-sm-8">
+												<select name=""
+													id=""
+													class="form-control select2" style="width: 100%;">
+													<option value="">Select Saving Id</option>
+													<option value="">1</option>
+												</select> <span
+													id="ContentPlaceHolder1_RequiredFieldValidatorddlBranchName"
+													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Select
+													Saving Id</span>
+											</div>
+										</div>
+										<div class="form-group row">
 											<label class="col-sm-4 control-label">Txn Date<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">

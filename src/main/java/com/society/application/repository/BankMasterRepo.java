@@ -12,4 +12,6 @@ import com.society.application.model.BankMaster;
 public interface BankMasterRepo extends JpaRepository<BankMaster, Integer>{
 	@Query(value="select * from bank_master order by id limit 5",nativeQuery = true)
 	List<BankMaster> getlastFiveRecords();
+
+	List<BankMaster> findByaccountNo(String accountNo);
 }

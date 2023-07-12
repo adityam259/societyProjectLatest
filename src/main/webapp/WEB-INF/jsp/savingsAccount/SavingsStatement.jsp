@@ -1,13 +1,11 @@
 <jsp:include page="../header.jsp" />
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.BankMaster"%>
-<body class="skin-blue sidebar-mini"
+<body class="skin-blue sidebar-mini" onload="getAllAccountNo();"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post"
-		action=""
-		id="form1">
-<%
+	<form method="post" action="" id="form1">
+		<%
 				List<BankMaster> bankList = (List<BankMaster>) request.getAttribute("bankMaster");
 				%>
 		<div
@@ -40,18 +38,10 @@
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Select A/C No. :</label> <select
-												name="ctl00$ContentPlaceHolder1$ddlSearchAccountNo"
-												id="ContentPlaceHolder1_ddlSearchAccountNo"
+												name="accountNo"
+												id="accountNo"
 												class="form-control select2" style="width: 100%;">
-												<%
-													if (bankList != null && !bankList.isEmpty()) {
-														for (BankMaster bank : bankList) {
-													%>
-													<option value="<%=bank.getId()%>"><%=bank.getAccountNo()%></option>
-													<%
-													}
-													}
-													%>
+												<option value="" selected="selected"></option>
 											</select>
 										</div>
 									</div>
@@ -62,8 +52,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtFDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtFDate"
+												<input name="fDate" type="date"
+													value="01/08/2022" id="fDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -77,8 +67,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="tDate" type="date"
+													value="01/08/2022" id="tDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -89,7 +79,7 @@
 										<div class="form-group">
 											<label></label> <a id="ContentPlaceHolder1_btnSearch"
 												class="btn btn-success margin-20"
-												href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$btnSearch&#39;,&#39;&#39;)"><span
+												href="javascript:showSavingsStatementSearch();"><span
 												class="fa fa-search"></span> SEARCH</a>
 										</div>
 									</div>
@@ -104,6 +94,25 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Search</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">Account No.</th>
+											<th scope="col">Account Holder Name</th>
+											<th scope="col">Txn Date</th>
+											<!-- <th scope="col">Inst No.</th> -->
+											<th scope="col">Phone No.</th>
+											<th scope="col">Transaction For</th>
+											<th scope="col">Balance</th>
+											<th scope="col">Pay Mode</th>
+											<th scope="col">Branch</th>
+											<th scope="col">Remarks</th>
+										</tr>
+										<tbody id="tableBody">
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -113,11 +122,9 @@
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -145,6 +152,7 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/SavingsAccount.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
@@ -192,6 +200,5 @@
         </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/SavingsStatement.aspx EDB D 09:27:06 GMT -->
 </html>

@@ -1,5 +1,6 @@
 <jsp:include page="../header.jsp" />
-<body onload="getAllEmployeeData();" class="skin-blue sidebar-mini"
+<body onload="getAllEmployeeData(); getAllBranchSalaryPayment();"
+	class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
 	<form method="post" action="updateSalaryPayment"
@@ -152,7 +153,7 @@
 											<label class="col-sm-4 control-label">PF <strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="PF" type="text" readonly="readonly" id="PF"
+												<input name="pf" type="text" readonly="readonly" id="pf"
 													class="form-control" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator8"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -165,7 +166,7 @@
 											<label class="col-sm-4 control-label">ESI <strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ESI" type="text" readonly="readonly" id="ESI"
+												<input name="esi" type="text" readonly="readonly" id="esi"
 													class="form-control" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator11"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -190,8 +191,9 @@
 											<div class="col-sm-8">
 												<select name="payBranch" id="payBranch" class="form-control"
 													style="width: 100%;">
-													<option value="001">Main Office - 001</option>
-												</select>
+													<option value="">Select</option>
+												</select> <span id="payBranchMsg"
+													style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
 											</div>
 										</div>
 										<div class="form-group row">
@@ -203,12 +205,16 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="payDate" type="text" value="01/08/2022"
+													<!-- <input name="payDate" type="text" value="01/08/2022"
 														id="payDate" class="form-control"
+														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+														data-mask="" /> -->
+													<input name="payDate" type="date" id="payDate"
+														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
-												<span id="ContentPlaceHolder1_RequiredFieldValidatorPayDate"
+												<span id="payDateMsg"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Pay Date</span>
 											</div>
@@ -220,12 +226,14 @@
 											<div class="col-sm-8">
 												<select name="paymode" id="paymode" class="form-control"
 													style="width: 100%;">
-													<option selected="selected" value="Cash">Cash</option>
+													<option value="">Select</option>
+													<option value="Cash">Cash</option>
 													<option value="Cheque">Cheque</option>
 													<option value="Online">Online</option>
 													<option value="NEFT">NEFT</option>
 													<option value="SBAccount">SBAccount</option>
-												</select>
+												</select> <span id="paymodeMsg"
+													style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
 											</div>
 										</div>
 									</div>
@@ -233,8 +241,7 @@
 								<div class="box-footer">
 									<div class="row col-md-12">
 										<input type="submit" name="ctl00$ContentPlaceHolder1$BtnPay"
-											value="Pay"
-											onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$BtnPay&quot;, &quot;&quot;, true, &quot;A&quot;, &quot;&quot;, false, false))"
+											value="Pay" onclick="return validateSalaryPayment();"
 											id="ContentPlaceHolder1_BtnPay"
 											class="btn btn-success pull-right" />
 									</div>

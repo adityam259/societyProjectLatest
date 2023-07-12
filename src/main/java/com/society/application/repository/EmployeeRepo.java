@@ -28,5 +28,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findBybranch(String branch);
 
-	
+	List<Employee> findByleaveDateBetween(String getfDate, String gettDate);
+
 }

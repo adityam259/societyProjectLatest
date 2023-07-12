@@ -18,7 +18,7 @@
             //<![CDATA[
             Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
             //]]>
-         </script>
+            </script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -66,23 +66,19 @@
 						<div class="col-md-7">
 							<div class="box box-success">
 								<div class="box-body">
-									<div>
-										<table cellspacing="0" cellpadding="3" rules="all"
-											class="display nowrap table table-hover table-striped table-bordered"
-											border="1" style="width: 100%; border-collapse: collapse;">
-											<caption>Department List</caption>
-											<tr style="color: White; background-color: #008385;">
-												<th scope="col">Slno</th>
-												<th scope="col">Department Code</th>
-												<th scope="col">Department Name</th>
-											</tr>
-										</table>
-										<table cellspacing="0" cellpadding="3" rules="all"
-											class="display nowrap table table-hover table-striped table-bordered"
-											border="1" id="ContentPlaceHolder1_gvDepartment"
-											style="width: 100%; border-collapse: collapse;">
-										</table>
-									</div>
+									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Department List</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">Slno</th>
+											<th scope="col">Department Code</th>
+											<th scope="col">Department Name</th>
+										</tr>
+										<tbody id="ContentPlaceHolder1_gvDepartment">
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>

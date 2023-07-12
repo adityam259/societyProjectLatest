@@ -20,14 +20,37 @@ public class SalaryMaster {
 	private String ta;
 	private String allowance;
 	private String others;
-	private String PF;
-	private String ESI;
+	private String pf;
+	private String esi;
 	private String empCode;
 	@Transient
 	private String empName;
 	private String payBranch;
 	private String payDate;
 	private String paymode;
+	private String netPay;
+	@Transient
+	private String fDate;
+	@Transient
+	private String tDate;
+	private String smsCharges;
+	private String serviceCharges;
+	
+	public String getfDate() {
+		return fDate;
+	}
+
+	public void setfDate(String fDate) {
+		this.fDate = fDate;
+	}
+
+	public String gettDate() {
+		return tDate;
+	}
+
+	public void settDate(String tDate) {
+		this.tDate = tDate;
+	}
 
 	public String getPayBranch() {
 		return payBranch;
@@ -93,22 +116,6 @@ public class SalaryMaster {
 		this.others = others;
 	}
 
-	public String getPF() {
-		return PF;
-	}
-
-	public void setPF(String pF) {
-		PF = pF;
-	}
-
-	public String getESI() {
-		return ESI;
-	}
-
-	public void setESI(String eSI) {
-		ESI = eSI;
-	}
-
 	public String getEmpCode() {
 		return empCode;
 	}
@@ -139,6 +146,46 @@ public class SalaryMaster {
 
 	public void setTa(String ta) {
 		this.ta = ta;
+	}
+
+	public String getPf() {
+		return pf;
+	}
+
+	public void setPf(String pf) {
+		this.pf = pf;
+	}
+
+	public String getEsi() {
+		return esi;
+	}
+
+	public void setEsi(String esi) {
+		this.esi = esi;
+	}
+
+	public String getNetPay() {
+		return netPay;
+	}
+
+	public void setNetPay(String netPay) {
+		this.netPay = netPay;
+	}
+
+	public String getSmsCharges() {
+		return smsCharges;
+	}
+
+	public void setSmsCharges(String smsCharges) {
+		this.smsCharges = smsCharges;
+	}
+
+	public String getServiceCharges() {
+		return serviceCharges;
+	}
+
+	public void setServiceCharges(String serviceCharges) {
+		this.serviceCharges = serviceCharges;
 	}
 
 }

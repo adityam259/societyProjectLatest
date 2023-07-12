@@ -30,4 +30,12 @@ public interface SavingsDepositWithdrawalRepo extends JpaRepository<SavingsDepos
 
 	List<SavingsDepositWith> findBytxnDateBetween(String getfDate, String gettDate);
 
+	List<SavingsDepositWith> findByaccHolderName(String accHolderName);
+
+	List<SavingsDepositWith> findBymemberCode(String memberCode);
+
+	List<SavingsDepositWith> findByschemeName(String schemeName);
+
+	List<SavingsDepositWith> findByadvisorCode(String advisorCode);
+
 }

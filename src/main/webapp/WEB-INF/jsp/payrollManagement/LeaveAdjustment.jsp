@@ -188,8 +188,8 @@
 													<div class="col-sm-6">
 														<table id="ContentPlaceHolder1_rdbLeaveApply" class="rbl">
 															<tr>
-																<td><input id="CL" type="radio" name="cl"
-																	=checked="checked" /><label
+																<td><input id="cl" type="radio" name="cl"
+																	 /><label
 																	for="ContentPlaceHolder1_rdbLeaveApply_0">CL</label></td>
 															</tr>
 															<tr>
@@ -208,7 +208,6 @@
 																<input name="cl" type="text" maxlength="2" id="CL"
 																	title="Enter Apply CL" class="form-control mb12 "
 																	PlaceHolder="Enter CL" min="0" autocomplete="off" /> <span
-																	id="clMsg"
 																	style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Please
 																	Enter CL Leave Value</span> <span id="clMsg" class="col-md-12"
 																	style="color: Red; display: none;">CL field

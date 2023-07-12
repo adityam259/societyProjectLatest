@@ -35,14 +35,31 @@
 									<h3 class="box-title">Select Month Year</h3>
 								</div>
 								<div class="box-body">
-									<div class="col-md-3">
+									<!-- <div class="col-md-3">
 										<div class="form-group">
 											<label> </label> <input name="date" type="text"
 												value="AUG - 2022" readonly="readonly" id="date"
 												class="form-control" />
 										</div>
+									</div> -->
+
+									<div class="col-md-3">
+										<div class="form-group">
+											<label> Date :</label>
+											<div class="input-group date">
+												<div class="input-group-addon">
+													<i class="fa fa-calendar"></i>
+												</div>
+												<input name="date" type="date" id="date"
+													class="form-control"
+													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
+													data-mask="" />
+											</div>
+										</div>
 									</div>
-									<div class="col-md-4">
+
+
+									<!-- 	<div class="col-md-4">
 										<label> </label>
 										<button type="button" name="ctl00$ContentPlaceHolder1$btnPrev"
 											value="Previous Month" id="ContentPlaceHolder1_btnPrev"
@@ -51,21 +68,48 @@
 										<button type="button" name="ctl00$ContentPlaceHolder1$btnNext"
 											value="Next Month" id="ContentPlaceHolder1_btnNext"
 											class="btn btn-warning margin-20">Next Month</button>
-									</div>
-									<div class="col-md-2">
+									</div> -->
+
+									<!-- <div class="col-md-2">
 										<div class="form-group">
-											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+											<label></label> <a id="ContentPlaceHolder1_btnSearch"  onclick="getHolidayMasterData();"
 												class="btn btn-success margin-20" href="#"><span
 												class="fa fa-search"></span> SEARCH</a>
 										</div>
+									</div> -->
+
+									<div class="col-md-3">
+										<div class="form-group">
+											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+												class="btn btn-success margin-20"
+												onclick="getHolidayMasterData();"><span
+												class="fa fa-search"></span> SEARCH</a>
+										</div>
 									</div>
+
 									<div class="clearfix margin-bottom-10"></div>
+
 								</div>
 							</div>
 							<div class="box box-success"
 								style="box-shadow: none; overflow: auto !important;">
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Search</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">ID</th>
+											<th scope="col">DATE</th>
+											<th scope="col">HOLIDAY DESCRIPTION</th>
+
+										</tr>
+										<tbody id="tableBody">
+
+										</tbody>
+									</table>
+
 									<div></div>
 								</div>
 							</div>
@@ -106,9 +150,11 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+
+		<script src="dist/js/payroll.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-		<script>
+		<!-- <script>
          $(function () {
              //Initialize Select2 Elements
              $('.select2').select2();
@@ -150,7 +196,7 @@
                  radioClass: 'iradio_minimal-blue'
              })
          })
-      </script>
+      </script> -->
 	</form>
 </body>
 <!-- Dk/Admin/OffDaySetting.aspx EDB D 09:27:23 GMT -->

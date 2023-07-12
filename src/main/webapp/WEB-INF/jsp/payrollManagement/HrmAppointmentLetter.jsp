@@ -13,10 +13,12 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<script type="text/javascript">
-            //<![CDATA[
-            Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [], [], [], 90, 'ctl00');
-            //]]>
-         </script>
+				//<![CDATA[
+				Sys.WebForms.PageRequestManager._initialize(
+						'ctl00$ScriptManager1', 'form1', [], [], [], 90,
+						'ctl00');
+				//]]>
+			</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -52,8 +54,8 @@
 											<label class="col-sm-4 control-label"></label>
 											<div class="col-sm-8">
 												<button type="button" name="search" value="Print"
-													id="search" class="btn btn-success pull-right">
-													Search</button>
+													onclick="showEmployeeDetailsPayroll();" id="search"
+													class="btn btn-success pull-right">Search</button>
 											</div>
 										</div>
 									</div>
@@ -67,6 +69,18 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">Slno</th>
+											<th scope="col">Employe Name</th>
+											<th scope="col">Date of Joining</th>
+											<th scope="col">Employe id</th>
+										</tr>
+										<tbody id="appointmentletter">
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
@@ -106,51 +120,76 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/payroll.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
-         $(function () {
-             //Initialize Select2 Elements
-             $('.select2').select2();
-             //Datemask dd/mm/yyyy
-             $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-             //Datemask2 mm/dd/yyyy
-             $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-             //Date range picker
-             $('#reservation').daterangepicker()
-             //Date range picker with time picker
-             $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
-             $('#daterange-btn').daterangepicker(
-              {
-                  ranges: {
-                      'Today': [moment(), moment()],
-                      'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                      'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                      'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                      'This Month': [moment().startOf('month'), moment().endOf('month')],
-                      'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                  },
-                  startDate: moment().subtract(29, 'days'),
-                  endDate: moment()
-              },
-              function (start, end) {
-                  $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
-              }
-            )
-             //Date picker
-             $('#datepicker').datepicker({
-                 autoclose: true
-             })
-             //Money Euro
-             $('[data-mask]').inputmask()
-         
-             //iCheck for checkbox and radio inputs
-             $('span[type="checkbox"].minimal').iCheck({
-                 checkboxClass: 'icheckbox_minimal-blue',
-                 radioClass: 'iradio_minimal-blue'
-             })
-         })
-      </script>
+			$(function() {
+				//Initialize Select2 Elements
+				$('.select2').select2();
+				//Datemask dd/mm/yyyy
+				$('#datemask').inputmask('dd/mm/yyyy', {
+					'placeholder' : 'dd/mm/yyyy'
+				})
+				//Datemask2 mm/dd/yyyy
+				$('#datemask2').inputmask('mm/dd/yyyy', {
+					'placeholder' : 'mm/dd/yyyy'
+				})
+				//Date range picker
+				$('#reservation').daterangepicker()
+				//Date range picker with time picker
+				$('#reservationtime').daterangepicker({
+					timePicker : true,
+					timePickerIncrement : 30,
+					locale : {
+						format : 'MM/DD/YYYY hh:mm A'
+					}
+				})
+				$('#daterange-btn')
+						.daterangepicker(
+								{
+									ranges : {
+										'Today' : [ moment(), moment() ],
+										'Yesterday' : [
+												moment().subtract(1, 'days'),
+												moment().subtract(1, 'days') ],
+										'Last 7 Days' : [
+												moment().subtract(6, 'days'),
+												moment() ],
+										'Last 30 Days' : [
+												moment().subtract(29, 'days'),
+												moment() ],
+										'This Month' : [
+												moment().startOf('month'),
+												moment().endOf('month') ],
+										'Last Month' : [
+												moment().subtract(1, 'month')
+														.startOf('month'),
+												moment().subtract(1, 'month')
+														.endOf('month') ]
+									},
+									startDate : moment().subtract(29, 'days'),
+									endDate : moment()
+								},
+								function(start, end) {
+									$('#daterange-btn span').html(
+											start.format('DD/MM/YYYY') + ' - '
+													+ end.format('DD/MM/YYYY'))
+								})
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose : true
+				})
+				//Money Euro
+				$('[data-mask]').inputmask()
+
+				//iCheck for checkbox and radio inputs
+				$('span[type="checkbox"].minimal').iCheck({
+					checkboxClass : 'icheckbox_minimal-blue',
+					radioClass : 'iradio_minimal-blue'
+				})
+			})
+		</script>
 	</form>
 </body>
 <!-- Dk/Admin/HrmAppointmentLetter.aspx EDB D 09:27:23 GMT -->

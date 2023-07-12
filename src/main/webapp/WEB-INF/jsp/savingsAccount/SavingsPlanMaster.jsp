@@ -1,9 +1,8 @@
 <jsp:include page="../header.jsp" />
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
-	cz-shortcut-listen="true"
-	onload="getData()">
-	<script>
+	cz-shortcut-listen="true" onload="savingAccounttable();">
+	<!--  <script>
     // Fetch the data from the URL
     function getData(){
     	const xhr = new XMLHttpRequest();
@@ -56,11 +55,9 @@
 
     	xhr.send();
     }
-  </script>
-	<form method="post"
-		action="saveSavingsAccount"
+  </script>  -->
+	<form method="post" action="saveSavingsAccount"
 		model="saveSavingsAccount" id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -95,8 +92,7 @@
 													Name<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="schemeName"
-														type="text" id="schemeName"
+													<input name="schemeName" type="text" id="schemeName"
 														class="form-control" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatorSchemeName"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -108,9 +104,7 @@
 													class="col-sm-4 control-label">Annual R.O.I (%)<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input
-														name="annualROI"
-														type="text" id="annualROI"
+													<input name="annualROI" type="text" id="annualROI"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatorAnnualInterestRate"
@@ -123,9 +117,8 @@
 													class="col-sm-4 control-label">Min. Opening Amount<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input name="minOpeningAmount"
-														type="text" id="minOpeningAmount"
-														class="form-control"
+													<input name="minOpeningAmount" type="text"
+														id="minOpeningAmount" class="form-control"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatorMinOpeningAmount"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -137,10 +130,7 @@
 													class="col-sm-4 control-label">Monthly Avg. Bal.<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input
-														name="monthlyAvgBal"
-														type="text"
-														id="monthlyAvgBal"
+													<input name="monthlyAvgBal" type="text" id="monthlyAvgBal"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatorMinMonthlyAvgBalance"
@@ -153,8 +143,7 @@
 													In balance<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="lockInbalance"
-														type="text" id="lockInbalance"
+													<input name="lockInbalance" type="text" id="lockInbalance"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatorLockInBalance"
@@ -167,9 +156,7 @@
 													class="col-sm-4 control-label">SMS Charges <strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input
-														name="smsCharges"
-														type="text" id="smsCharges"
+													<input name="smsCharges" type="text" id="smsCharges"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatortxtSmsChargesQarterly"
@@ -182,9 +169,7 @@
 													class="col-sm-4 control-label">SMS Interval<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<select
-														name="smsInterval"
-														id="smsInterval"
+													<select name="smsInterval" id="smsInterval"
 														class="form-control" style="width: 100%;">
 														<option value="Monthly">Monthly</option>
 														<option value="Quarterly">Quarterly</option>
@@ -198,10 +183,9 @@
 													Collection(p.m)<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input
-														name="freeIfscCollectionpm"
-														type="text" id="freeIfscCollectionpm"
-														class="form-control" onpaste="return false"
+													<input name="freeIfscCollectionpm" type="text"
+														id="freeIfscCollectionpm" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator1"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Free
@@ -213,9 +197,9 @@
 													Transfers(p.m)<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="freeTransferspm"
-														type="text" id="freeTransferspm"
-														class="form-control" onpaste="return false"
+													<input name="freeTransferspm" type="text"
+														id="freeTransferspm" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator2"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Free
@@ -229,9 +213,9 @@
 													Limit<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="singleTxnLimit"
-														type="text" id="singleTxnLimit"
-														class="form-control" onpaste="return false"
+													<input name="singleTxnLimit" type="text"
+														id="singleTxnLimit" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator3"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Single
@@ -243,8 +227,7 @@
 													Limit<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="dailyMAXLimit"
-														type="text" id="dailyMAXLimit"
+													<input name="dailyMAXLimit" type="text" id="dailyMAXLimit"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator4"
@@ -257,9 +240,9 @@
 													Limit<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="weeklyMAXLimit"
-														type="text" id="weeklyMAXLimit"
-														class="form-control" onpaste="return false"
+													<input name="weeklyMAXLimit" type="text"
+														id="weeklyMAXLimit" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator5"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Weekly
@@ -271,9 +254,9 @@
 													Limit<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="monthlyMAXLimit"
-														type="text" id="monthlyMAXLimit"
-														class="form-control" onpaste="return false"
+													<input name="monthlyMAXLimit" type="text"
+														id="monthlyMAXLimit" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator6"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Monthly
@@ -285,9 +268,9 @@
 													Charges <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="serviceCharges"
-														type="text" id="serviceCharges"
-														class="form-control" onpaste="return false"
+													<input name="serviceCharges" type="text"
+														id="serviceCharges" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator7"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -299,9 +282,8 @@
 													Interval<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<select name="serviceInterval"
-														id="serviceInterval" class="form-control"
-														style="width: 100%;">
+													<select name="serviceInterval" id="serviceInterval"
+														class="form-control" style="width: 100%;">
 														<option value="Monthly">Monthly</option>
 														<option value="Quarterly">Quarterly</option>
 														<option value="Half Yearly">Half Yearly</option>
@@ -314,8 +296,7 @@
 													Charge<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input name="cardCharge"
-														type="text" id="cardCharge"
+													<input name="cardCharge" type="text" id="cardCharge"
 														class="form-control" onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatortxtCardCharge"
@@ -328,9 +309,9 @@
 													class="col-sm-4 control-label">Card Limit Monthly<strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-8">
-													<input name="cardLimitMonthly"
-														type="text" id="cardLimitMonthly"
-														class="form-control" onpaste="return false"
+													<input name="cardLimitMonthly" type="text"
+														id="cardLimitMonthly" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatortxtCardLimitMonthly"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -343,11 +324,9 @@
 													Yearly<strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<input
-														name="cardTotalLimitYearly"
-														type="text"
-														id="cardTotalLimitYearly"
-														class="form-control" onpaste="return false"
+													<input name="cardTotalLimitYearly" type="text"
+														id="cardTotalLimitYearly" class="form-control"
+														onpaste="return false"
 														onkeypress="return isNumberOnlyKey(this, event);" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidatortxtCardTotalLimitYearly"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -359,8 +338,7 @@
 									<div class="box-footer">
 										<div class="row col-md-12">
 											<input type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
-												value="Save"
-												id="ContentPlaceHolder1_btnSave"
+												value="Save" id="ContentPlaceHolder1_btnSave"
 												class="btn btn-success pull-right margin-r-5" />
 										</div>
 									</div>
@@ -375,8 +353,35 @@
 								<div class="box-header with-border">
 									<h3 class="box-title">Scheme List</h3>
 								</div>
-								<div id="table-container"></div>
-
+								<table cellspacing="0" cellpadding="3" rules="all"
+									class="display nowrap table table-hover table-striped table-bordered"
+									border="1" style="width: 100%; border-collapse: collapse;">
+									<tr style="color: White; background-color: #008385;">
+										<th scope="col">S/N</th>
+										<th scope="col">Scheme Name</th>
+										<th scope="col">Annual ROI</th>
+										<th scope="col">Min Opening Amount</th>
+										<th scope="col">Monthly Avg Bal</th>
+										<th scope="col">Lock In Balance</th>
+										<th scope="col">SMS Charges</th>
+										<th scope="col">SMS Interval</th>
+										<th scope="col">Free IFSC</th>
+										<th scope="col">Free Transfers</th>
+										<th scope="col">Single Txn Limit</th>
+										<th scope="col">Daily MAX Limit</th>
+										<th scope="col">Weekly MAX Limit</th>
+										<th scope="col">Monthly MAX Limit</th>
+										<th scope="col">Service Charges</th>
+										<th scope="col">Service Interval</th>
+										<th scope="col">Card Charge</th>
+										<th scope="col">Card Limit Monthly</th>
+										<th scope="col">Card Total Limit Yearly</th>
+									</tr>
+									<tbody id="savingAccounttable">
+									</tbody>
+								</table>
+								<!-- <div id="table-container"></div>
+ -->
 							</div>
 						</div>
 					</div>
@@ -385,11 +390,9 @@
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -417,6 +420,7 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/SavingsAccount.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
@@ -462,13 +466,11 @@
                 })
             })
         </script>
-
 		<script type="text/javascript">
 //<![CDATA[
 var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorSchemeName"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorAnnualInterestRate"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMinOpeningAmount"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorMinMonthlyAvgBalance"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorLockInBalance"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtSmsChargesQarterly"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator1"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator3"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator4"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator5"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator6"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator7"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtCardCharge"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtCardLimitMonthly"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtCardTotalLimitYearly"));
 //]]>
 </script>
-
 		<script type="text/javascript">
 //<![CDATA[
 var ContentPlaceHolder1_RequiredFieldValidatorSchemeName = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorSchemeName"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorSchemeName");
@@ -601,8 +603,6 @@ ContentPlaceHolder1_RequiredFieldValidatortxtCardTotalLimitYearly.evaluationfunc
 ContentPlaceHolder1_RequiredFieldValidatortxtCardTotalLimitYearly.initialvalue = "";
 //]]>
 </script>
-
-
 		<script type="text/javascript">
 //<![CDATA[
 
@@ -687,6 +687,4 @@ document.getElementById('ContentPlaceHolder1_RequiredFieldValidatortxtCardTotalL
 </script>
 	</form>
 </body>
-
-
 </html>

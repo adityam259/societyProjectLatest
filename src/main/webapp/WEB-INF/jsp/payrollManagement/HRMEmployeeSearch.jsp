@@ -1,7 +1,8 @@
 <jsp:include page="../header.jsp" />
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
-	cz-shortcut-listen="true">
+	cz-shortcut-listen="true"
+	onload="getAllBranchEmployeeSearch(); getAllDepartments(); getAllDesignation();">
 	<form method="post" action="" id="form1">
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
@@ -41,7 +42,7 @@
 											<label>Branch :</label> <select name="branch" id="branch"
 												class="form-control select2" style="width: 100%;">
 												<option value="All">All Branch</option>
-												<option value="001">Main Office - 001</option>
+
 											</select>
 										</div>
 									</div>
@@ -52,8 +53,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="FDate" type="text" value="01/08/2022"
-													id="FDate" class="form-control"
+												<input name="fDate" type="date" id="fDate"
+													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
 											</div>
@@ -66,8 +67,8 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="TDate" type="text" value="01/08/2022"
-													id="TDate" class="form-control"
+												<input name="tDate" type="date" id="tDate"
+													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
 											</div>
@@ -75,23 +76,23 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label>Employee Name :</label> <input name="memberName"
-												type="text" id="memberName" class="form-control"
+											<label>Employee Name :</label> <input name="empName"
+												type="text" id="empName" class="form-control"
 												Placeholder="Enter Employee Name" autocomplete="off" />
 										</div>
 									</div>
 									<div class="clearfix"></div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label>Employee Code :</label> <input name="searchbyCode"
-												type="text" id="searchbyCode" class="form-control"
+											<label>Employee Code :</label> <input name="empCode"
+												type="text" id="empCode" class="form-control"
 												Placeholder="Enter Employee Code" autocomplete="off" />
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<label>Mobile No. :</label> <input name="mobile" type="text"
-												id="mobile" class="form-control"
+											<label>Mobile No. :</label> <input name="phoneNo" type="text"
+												id="phoneNo" class="form-control"
 												Placeholder="Enter Mobile No." autocomplete="off" />
 										</div>
 									</div>
@@ -99,23 +100,7 @@
 										<div class="form-group">
 											<label>Designation :</label> <select name="designation"
 												id="designation" class="form-control" style="width: 100%;">
-												<option value="0"></option>
-												<option value="101">Officer</option>
-												<option value="102">Collector</option>
-												<option value="103">Cashier</option>
-												<option value="104">Test</option>
-												<option value="105">Manager</option>
-												<option value="106">Advisor</option>
-												<option value="107">Supervisor</option>
-												<option value="108">Asst Manager</option>
-												<option value="109">General Manager</option>
-												<option value="110">HR Manager</option>
-												<option value="111">Chairman</option>
-												<option value="112">COLLECTOR</option>
-												<option value="113">COLLECTOR</option>
-												<option value="114">COLLECTOR</option>
-												<option value="115">OFFICE BOY</option>
-												<option value="116">Cashier</option>
+												<option>Select</option>
 											</select>
 										</div>
 									</div>
@@ -123,26 +108,15 @@
 										<div class="form-group">
 											<label>Department :</label> <select name="department"
 												id="department" class="form-control" style="width: 100%;">
-												<option value="0"></option>
-												<option value="1001">Field Officer</option>
-												<option value="1002">Accounts</option>
-												<option value="1003">Sales</option>
-												<option value="1004">Loan</option>
-												<option value="1005">Cash</option>
-												<option value="1006">General</option>
-												<option value="1007">Collection</option>
-												<option value="1008">HR</option>
-												<option value="1009">Marketing</option>
-												<option value="1010">FIELD OFFICER</option>
-												<option value="1011">FIELD OFFICER</option>
-												<option value="1012">Sales PERSON</option>
-												<option value="1013">Accounts</option>
+												<option>Select</option>
 											</select>
+
 										</div>
 									</div>
 									<div class="clearfix margin-bottom-10"></div>
 									<div class="text-center">
-										<a id="ContentPlaceHolder1_btnSearch" class="btn btn-success"><span
+										<a id="ContentPlaceHolder1_btnSearch" class="btn btn-success"
+											onclick="showTableDataOfEmployeeSearch();"><span
 											class="fa fa-search"></span> SEARCH</a> <a
 											id="ContentPlaceHolder1_btnPrint" class="btn btn-warning"><span
 											class="fa fa-print"></span> PRINT</a>
@@ -157,6 +131,28 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Search</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">ID</th>
+											<th scope="col">DOJ</th>
+											<th scope="col">CSP NAME</th>
+											<th scope="col">EMPLOYEE NAME</th>
+											<th scope="col">AGE</th>
+											<th scope="col">PHONE NO</th>
+											<th scope="col">NOMINEE NAME</th>
+											<th scope="col">ADDRESS</th>
+											<th scope="col">BANK ACCOUNT</th>
+											<th scope="col">DESIGNATION</th>
+											<th scope="col">DEPARTMENT</th>
+										</tr>
+										<tbody id="table">
+
+										</tbody>
+									</table>
+
 									<div></div>
 								</div>
 							</div>
@@ -197,6 +193,8 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+
+		<script src="dist/js/payroll.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>

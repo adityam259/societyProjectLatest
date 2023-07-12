@@ -3,17 +3,13 @@
 <%@page import="com.society.application.model.BankMaster"%>
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
-	onload="disable()"
-	cz-shortcut-listen="true">
-	<form method="post"
-		action=""
-		id="form1">
-<%
+	onload="disable(); getAllAccountNo();" cz-shortcut-listen="true">
+	<form method="post" action="" id="form1">
+		<%
 				List<BankMaster> bankList = (List<BankMaster>) request.getAttribute("bankMaster");
 				%>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -49,20 +45,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 											<div class="form-group">
 												<label>Select by Account No.<strong
 													style="color: Red">*</strong></label><select name="accountNo"
-													
-													id="accountNo"
-													class="form-control select2" style="width: 100%;">
+													id="accountNo" class="form-control select2"
+													style="width: 100%;" onchange="showSavingsPassbookData();">
 													<option value="">Select Acc.No</option>
-													<%
-													if (bankList != null && !bankList.isEmpty()) {
-														for (BankMaster bank : bankList) {
-													%>
-													<option value="<%=bank.getId()%>"><%=bank.getAccountNo()%></option>
-													<%
-													}
-													}
-													%>
-
 												</select>
 											</div>
 										</div>
@@ -95,6 +80,23 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Search</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">ID</th>
+											<th scope="col">BANK NAME</th>
+											<th scope="col">ACOOUNT NO</th>
+											<th scope="col">MOBILE NO</th>
+											<th scope="col">ADDRESS</th>
+											<th scope="col">OPENING DATE</th>
+											<th scope="col">OPENING BALANCE</th>
+											<th scope="col">MAPPED BRANCH</th>
+										</tr>
+										<tbody id="tableBody">
+										</tbody>
+									</table>
 									<div></div>
 								</div>
 							</div>
@@ -105,11 +107,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -137,6 +137,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/SavingsAccount.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
@@ -182,7 +183,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
                 })
             })
         </script>
-        <script>
+		<script>
         function disable(){
         document.getElementById("ContentPlaceHolder1_btnHeadline").disabled = true;
         document.getElementById("ContentPlaceHolder1_btnBook").disabled = true;
@@ -192,6 +193,5 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
         </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/SBPassbookPrint.aspx EDB D 09:27:06 GMT -->
 </html>

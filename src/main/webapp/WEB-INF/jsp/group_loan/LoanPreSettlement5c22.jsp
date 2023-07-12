@@ -11,7 +11,7 @@
          if(status!=null && "success".equals(status)){
           %>
 		<script>
-         alert("Saved Successfully");
+         alert("Loan Closed Sucessfully!!!!");
       </script>
 		<%
          }else{
@@ -55,7 +55,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												</label>
 												<div class="col-sm-8">
 													<select name="searchLoanIDLoan"
-														onchange="javascript:displayLoanDetailsSelectedId()"
+														onchange="javascript:displayLoanDetailsSelectedId2()"
 														id="searchLoanIDLoan" class="form-control select2"
 														style="width: 100%;">
 														<option selected="selected" value=""></option>
@@ -337,8 +337,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												Branch<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<select name="ctl00$ContentPlaceHolder1$ddlCSPName"
-													id="ContentPlaceHolder1_ddlCSPName" class="form-control"
+												<select name="branchName"
+													id="branchName" class="form-control"
 													style="width: 100%;">
 													<option value="001">Main Office - 001</option>
 												</select>
@@ -404,12 +404,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
 													<input
-														name="ctl00$ContentPlaceHolder1$txtTotalPrincipleDue"
+														name="loanAmount1"
 														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtTotalPrincipleDue"
+														id="loanAmount1"
 														class="form-control"
 														PlaceHolder="Enter Total Principal Due" /> <span
-														id="ContentPlaceHolder1_RequiredFieldValidatorTotalPrincipleDue"
+														
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Total Principle Due</span>
 												</div>
@@ -419,12 +419,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													Due Amt. <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtTotalDueAmt"
+													<input name="emiAmount1"
 														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtTotalDueAmt"
+														
 														class="form-control" PlaceHolder="Enter Total Due Amt." />
 													<span
-														id="ContentPlaceHolder1_RequiredFieldValidatorTotalDueAmt"
+														id="emiAmount1"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Total Due Amt.</span>
 												</div>
@@ -439,9 +439,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="ctl00$ContentPlaceHolder1$txtPaymentDate"
+													<input name="payDate"
 														type="text" value="01/08/2022"
-														id="ContentPlaceHolder1_txtPaymentDate"
+														id="payDate"
 														class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -454,9 +454,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													By <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-7">
-													<select name="ctl00$ContentPlaceHolder1$ddlPaymode"
-														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlPaymode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														id="ContentPlaceHolder1_ddlPaymode" class="form-control"
+													<select name="paymode"
+														
+														id="paymode" class="form-control"
 														style="width: 100%;">
 														<option selected="selected" value="Cash">Cash</option>
 														<option value="Cheque">Cheque</option>
@@ -476,11 +476,10 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Code <strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorCode"
+													<input name="advisorCode"
 														type="text"
-														onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$txtAdvisorCode\&#39;,\&#39;\&#39;)&#39;, 0)"
-														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtAdvisorCode"
+													
+														id="advisorCode"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Code" /> <span
 														id="ContentPlaceHolder1_RequiredFieldValidator6"
@@ -492,12 +491,12 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 												<label class="col-sm-5 control-label">Advisor Name <strong
 													style="color: Red">*</strong></label>
 												<div class="col-sm-7">
-													<input name="ctl00$ContentPlaceHolder1$txtAdvisorName"
+													<input name="advisorName"
 														type="text" readonly="readonly"
-														id="ContentPlaceHolder1_txtAdvisorName"
+														id="advisorName"
 														class="form-control"
 														placeholder="Enter Advisor/Collector Name" /> <span
-														id="ContentPlaceHolder1_RequiredFieldValidator7"
+														
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														Advisor/Collector Name</span>
 												</div>
@@ -506,8 +505,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 										<div class="form-group row">
 											<label class="col-sm-5 control-label">Remarks</label>
 											<div class="col-sm-7">
-												<textarea name="ctl00$ContentPlaceHolder1$txtRemarks"
-													rows="2" cols="20" id="ContentPlaceHolder1_txtRemarks"
+												<textarea name="remarks"
+													rows="2" cols="20" id="remarks"
 													class="form-control" Placeholder="Enter Remarks if any">
 </textarea>
 											</div>

@@ -1,20 +1,20 @@
 <jsp:include page="../header.jsp" />
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.Member"%>
+<%@page import="com.society.application.model.ClientMaster"%>
 <%@page import="com.society.application.model.BranchMaster"%>
 <body class="skin-blue sidebar-mini"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post"
-		action="saveSavingsAccountApplciation"
-		model="saveSavingsAccountApplciation"
-		 id="form1">
-		 <%
-				List<Member> memberList = (List<Member>) request.getAttribute("memberList");
-				%>
-				<%
-				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
-				%>
+	<form method="post" action="saveSavingsAccountApplciation"
+		model="saveSavingsAccountApplciation" id="form1">
+		<%
+		//List<Member> memberList = (List<Member>) request.getAttribute("memberList");
+		List<ClientMaster> memberList = (List<ClientMaster>) request.getAttribute("memberList");
+		%>
+		<%
+		List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
+		%>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -68,7 +68,7 @@
 													class="form-control select2" style="width: 100%;">
 													<%
 													if (memberList != null && !memberList.isEmpty()) {
-														for (Member member : memberList) {
+														for (ClientMaster member : memberList) {
 													%>
 													<option value="<%=member.getId()%>"><%=member.getMemberName()%></option>
 													<%
@@ -86,9 +86,8 @@
 												Name <strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="memberName" type="text"  
-													id="memberName" class="form-control"
-													Placeholder="Enter Member Name" />
+												<input name="memberName" type="text" id="memberName"
+													class="form-control" Placeholder="Enter Member Name" />
 											</div>
 										</div>
 										<div class="form-group row">
@@ -100,16 +99,14 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="dOB" type="date"   id="dob"
-														class="form-control"
+													<input name="dOB" type="date" id="dob" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
 											</div>
 											<div class="col-sm-3">
 												<input name="age" type="text" value="0" maxlength="2"
-													  id="age" class="form-control"
-													Placeholder="Enter Age"
+													id="age" class="form-control" Placeholder="Enter Age"
 													onkeypress="return isNumberOnlyKey(this, event);"
 													autocomplete="off" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator12"
@@ -121,8 +118,8 @@
 											<label class="col-sm-5 control-label">Relative
 												Details</label>
 											<div class="col-sm-7">
-												<input name="relativeName" type="text"  
-													id="relativeName" class="form-control"
+												<input name="relativeName" type="text" id="relativeName"
+													class="form-control"
 													Placeholder="Enter Relative Name &amp; Relation" />
 											</div>
 										</div>
@@ -132,7 +129,7 @@
 											</label>
 											<div class="col-sm-7">
 												<input name="phoneno" type="text" maxlength="10"
-													  id="phoneno" class="form-control"
+													id="phoneno" class="form-control"
 													Placeholder="Enter Mobile No" autocomplete="off"
 													onkeypress="return isNumberOnlyKey(this, event);" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator8"
@@ -152,8 +149,8 @@
 											<label for="txtNomineeName" class="col-sm-5 control-label">Nominee
 												Age</label>
 											<div class="col-sm-7">
-												<input name="nomName" type="text" maxlength="2" id="nomineeAge"
-													class="form-control" />
+												<input name="nomName" type="text" maxlength="2"
+													id="nomineeAge" class="form-control" />
 											</div>
 										</div>
 										<div class="form-group row">
@@ -184,9 +181,8 @@
 												<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<textarea name="address" rows="2" cols="20"
-													  id="address" class="form-control"
-													Placeholder="Enter Addess">
+												<textarea name="address" rows="2" cols="20" id="address"
+													class="form-control" Placeholder="Enter Addess">
 </textarea>
 												<span id="ContentPlaceHolder1_RequiredFieldValidator3"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -198,9 +194,8 @@
 												<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="district" type="text"  
-													id="district" class="form-control"
-													Placeholder="Enter District" /> <span
+												<input name="district" type="text" id="district"
+													class="form-control" Placeholder="Enter District" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator4"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													District</span>
@@ -232,8 +227,8 @@
 												<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="state" type="text"  
-													id="state" class="form-control" /> <span
+												<input name="state" type="text" id="state"
+													class="form-control" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator11"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Select
 													State</span>
@@ -244,9 +239,8 @@
 												Code <strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-7">
-												<input name="pin" type="text" maxlength="6"
-													  id="pin" class="form-control"
-													Placeholder="Enter Pincode" /> <span
+												<input name="pin" type="text" maxlength="6" id="pin"
+													class="form-control" Placeholder="Enter Pincode" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator5"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													PIN</span>
@@ -277,8 +271,8 @@
 											<label for="txtJointMemberName"
 												class="col-sm-5 control-label">Joint/Survivor Name</label>
 											<div class="col-sm-7">
-												<input name="jointName" type="text"  
-													id="jointName" class="form-control" />
+												<input name="jointName" type="text" id="jointName"
+													class="form-control" />
 											</div>
 										</div>
 										<div class="form-group row">
@@ -350,8 +344,8 @@
 											<label class="col-sm-5 control-label">Name <strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-7">
-												<input name="advisorName" type="text"  
-													id="advisorName" class="form-control"
+												<input name="advisorName" type="text" id="advisorName"
+													class="form-control"
 													placeholder="Enter Advisor/Collector Name" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidator2"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -436,17 +430,14 @@
 								</div>
 								<div class="box-footer">
 									<div class="row col-md-12">
-										<input
-											type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
-											value="Save"
-										
-											id="ContentPlaceHolder1_btnSave"
+										<input type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
+											value="Save" id="ContentPlaceHolder1_btnSave"
 											class="btn btn-success pull-right margin-r-5" />
 									</div>
 								</div>
 							</div>
 						</div>
-					
+
 					</div>
 				</section>
 			</div>
@@ -488,198 +479,311 @@
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
-            $(function () {
-                //Initialize Select2 Elements
-                $('.select2').select2();
-                //Datemask dd/mm/yyyy
-                $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-                //Datemask2 mm/dd/yyyy
-                $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
-                //Date range picker
-                $('#reservation').daterangepicker()
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, locale: { format: 'MM/DD/YYYY hh:mm A' } })
-                $('#daterange-btn').daterangepicker(
-                 {
-                     ranges: {
-                         'Today': [moment(), moment()],
-                         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                         'This Month': [moment().startOf('month'), moment().endOf('month')],
-                         'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                     },
-                     startDate: moment().subtract(29, 'days'),
-                     endDate: moment()
-                 },
-                 function (start, end) {
-                     $('#daterange-btn span').html(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'))
-                 }
-               )
-                //Date picker
-                $('#datepicker').datepicker({
-                    autoclose: true
-                })
-                //Money Euro
-                $('[data-mask]').inputmask()
+			$(function() {
+				//Initialize Select2 Elements
+				$('.select2').select2();
+				//Datemask dd/mm/yyyy
+				$('#datemask').inputmask('dd/mm/yyyy', {
+					'placeholder' : 'dd/mm/yyyy'
+				})
+				//Datemask2 mm/dd/yyyy
+				$('#datemask2').inputmask('mm/dd/yyyy', {
+					'placeholder' : 'mm/dd/yyyy'
+				})
+				//Date range picker
+				$('#reservation').daterangepicker()
+				//Date range picker with time picker
+				$('#reservationtime').daterangepicker({
+					timePicker : true,
+					timePickerIncrement : 30,
+					locale : {
+						format : 'MM/DD/YYYY hh:mm A'
+					}
+				})
+				$('#daterange-btn')
+						.daterangepicker(
+								{
+									ranges : {
+										'Today' : [ moment(), moment() ],
+										'Yesterday' : [
+												moment().subtract(1, 'days'),
+												moment().subtract(1, 'days') ],
+										'Last 7 Days' : [
+												moment().subtract(6, 'days'),
+												moment() ],
+										'Last 30 Days' : [
+												moment().subtract(29, 'days'),
+												moment() ],
+										'This Month' : [
+												moment().startOf('month'),
+												moment().endOf('month') ],
+										'Last Month' : [
+												moment().subtract(1, 'month')
+														.startOf('month'),
+												moment().subtract(1, 'month')
+														.endOf('month') ]
+									},
+									startDate : moment().subtract(29, 'days'),
+									endDate : moment()
+								},
+								function(start, end) {
+									$('#daterange-btn span').html(
+											start.format('DD/MM/YYYY') + ' - '
+													+ end.format('DD/MM/YYYY'))
+								})
+				//Date picker
+				$('#datepicker').datepicker({
+					autoclose : true
+				})
+				//Money Euro
+				$('[data-mask]').inputmask()
 
-                //iCheck for checkbox and radio inputs
-                $('span[type="checkbox"].minimal').iCheck({
-                    checkboxClass: 'icheckbox_minimal-blue',
-                    radioClass: 'iradio_minimal-blue'
-                })
-            })
-        </script>
-
-		<script type="text/javascript">
-//<![CDATA[
-var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator12"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator8"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator3"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator4"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator11"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator5"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator1"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"));
-//]]>
-</script>
-
-		<script type="text/javascript">
-//<![CDATA[
-var ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode");
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.controltovalidate = "ContentPlaceHolder1_ddlSearchMemberCode";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.errormessage = "Select Member Code";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator12 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator12"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator12");
-ContentPlaceHolder1_RequiredFieldValidator12.controltovalidate = "ContentPlaceHolder1_txtAge";
-ContentPlaceHolder1_RequiredFieldValidator12.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator12.errormessage = "Enter Age";
-ContentPlaceHolder1_RequiredFieldValidator12.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator12.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator12.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator12.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator8 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator8"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator8");
-ContentPlaceHolder1_RequiredFieldValidator8.controltovalidate = "ContentPlaceHolder1_txtPhoneno";
-ContentPlaceHolder1_RequiredFieldValidator8.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator8.errormessage = "Enter Phone No";
-ContentPlaceHolder1_RequiredFieldValidator8.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator8.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator8.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator8.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator3 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator3"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator3");
-ContentPlaceHolder1_RequiredFieldValidator3.controltovalidate = "ContentPlaceHolder1_txtAddress";
-ContentPlaceHolder1_RequiredFieldValidator3.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator3.errormessage = "Enter Address";
-ContentPlaceHolder1_RequiredFieldValidator3.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator3.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator3.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator4 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator4"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator4");
-ContentPlaceHolder1_RequiredFieldValidator4.controltovalidate = "ContentPlaceHolder1_txtDistrict";
-ContentPlaceHolder1_RequiredFieldValidator4.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator4.errormessage = "Enter District";
-ContentPlaceHolder1_RequiredFieldValidator4.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator4.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator4.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator11 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator11"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator11");
-ContentPlaceHolder1_RequiredFieldValidator11.controltovalidate = "ContentPlaceHolder1_txtState";
-ContentPlaceHolder1_RequiredFieldValidator11.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator11.errormessage = "Select State";
-ContentPlaceHolder1_RequiredFieldValidator11.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator11.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator11.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator11.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator5 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator5"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator5");
-ContentPlaceHolder1_RequiredFieldValidator5.controltovalidate = "ContentPlaceHolder1_txtPin";
-ContentPlaceHolder1_RequiredFieldValidator5.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator5.errormessage = "Enter PIN";
-ContentPlaceHolder1_RequiredFieldValidator5.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator5.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator5.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator5.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount");
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.controltovalidate = "ContentPlaceHolder1_txtOpeningAmount";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.errormessage = "Enter Opening Amount";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator1 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator1"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator1");
-ContentPlaceHolder1_RequiredFieldValidator1.controltovalidate = "ContentPlaceHolder1_txtAdvisorCode";
-ContentPlaceHolder1_RequiredFieldValidator1.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator1.errormessage = "Enter Advisor/Collector Code";
-ContentPlaceHolder1_RequiredFieldValidator1.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator1.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator1.initialvalue = "";
-var ContentPlaceHolder1_RequiredFieldValidator2 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator2"] : document.getElementById("ContentPlaceHolder1_RequiredFieldValidator2");
-ContentPlaceHolder1_RequiredFieldValidator2.controltovalidate = "ContentPlaceHolder1_txtAdvisorName";
-ContentPlaceHolder1_RequiredFieldValidator2.focusOnError = "t";
-ContentPlaceHolder1_RequiredFieldValidator2.errormessage = "Enter Advisor/Collector Name";
-ContentPlaceHolder1_RequiredFieldValidator2.display = "Dynamic";
-ContentPlaceHolder1_RequiredFieldValidator2.validationGroup = "A";
-ContentPlaceHolder1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
-ContentPlaceHolder1_RequiredFieldValidator2.initialvalue = "";
-//]]>
-</script>
+				//iCheck for checkbox and radio inputs
+				$('span[type="checkbox"].minimal').iCheck({
+					checkboxClass : 'icheckbox_minimal-blue',
+					radioClass : 'iradio_minimal-blue'
+				})
+			})
+		</script>
 
 		<script type="text/javascript">
-//<![CDATA[
+			//<![CDATA[
+			var Page_Validators = new Array(
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator12"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator8"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator3"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator4"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator11"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator5"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator1"),
+					document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator2"));
+			//]]>
+		</script>
 
-var Page_ValidationActive = false;
-if (typeof(ValidatorOnLoad) == "function") {
-    ValidatorOnLoad();
-}
+		<script type="text/javascript">
+			//<![CDATA[
+			var ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode");
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.controltovalidate = "ContentPlaceHolder1_ddlSearchMemberCode";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.errormessage = "Select Member Code";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator12 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator12"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator12");
+			ContentPlaceHolder1_RequiredFieldValidator12.controltovalidate = "ContentPlaceHolder1_txtAge";
+			ContentPlaceHolder1_RequiredFieldValidator12.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator12.errormessage = "Enter Age";
+			ContentPlaceHolder1_RequiredFieldValidator12.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator12.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator12.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator12.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator8 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator8"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator8");
+			ContentPlaceHolder1_RequiredFieldValidator8.controltovalidate = "ContentPlaceHolder1_txtPhoneno";
+			ContentPlaceHolder1_RequiredFieldValidator8.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator8.errormessage = "Enter Phone No";
+			ContentPlaceHolder1_RequiredFieldValidator8.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator8.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator8.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator8.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator3 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator3"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator3");
+			ContentPlaceHolder1_RequiredFieldValidator3.controltovalidate = "ContentPlaceHolder1_txtAddress";
+			ContentPlaceHolder1_RequiredFieldValidator3.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator3.errormessage = "Enter Address";
+			ContentPlaceHolder1_RequiredFieldValidator3.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator3.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator3.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator3.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator4 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator4"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator4");
+			ContentPlaceHolder1_RequiredFieldValidator4.controltovalidate = "ContentPlaceHolder1_txtDistrict";
+			ContentPlaceHolder1_RequiredFieldValidator4.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator4.errormessage = "Enter District";
+			ContentPlaceHolder1_RequiredFieldValidator4.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator4.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator4.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator4.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator11 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator11"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator11");
+			ContentPlaceHolder1_RequiredFieldValidator11.controltovalidate = "ContentPlaceHolder1_txtState";
+			ContentPlaceHolder1_RequiredFieldValidator11.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator11.errormessage = "Select State";
+			ContentPlaceHolder1_RequiredFieldValidator11.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator11.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator11.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator11.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator5 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator5"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator5");
+			ContentPlaceHolder1_RequiredFieldValidator5.controltovalidate = "ContentPlaceHolder1_txtPin";
+			ContentPlaceHolder1_RequiredFieldValidator5.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator5.errormessage = "Enter PIN";
+			ContentPlaceHolder1_RequiredFieldValidator5.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator5.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator5.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator5.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount");
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.controltovalidate = "ContentPlaceHolder1_txtOpeningAmount";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.errormessage = "Enter Opening Amount";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator1 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator1"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator1");
+			ContentPlaceHolder1_RequiredFieldValidator1.controltovalidate = "ContentPlaceHolder1_txtAdvisorCode";
+			ContentPlaceHolder1_RequiredFieldValidator1.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator1.errormessage = "Enter Advisor/Collector Code";
+			ContentPlaceHolder1_RequiredFieldValidator1.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator1.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator1.initialvalue = "";
+			var ContentPlaceHolder1_RequiredFieldValidator2 = document.all ? document.all["ContentPlaceHolder1_RequiredFieldValidator2"]
+					: document
+							.getElementById("ContentPlaceHolder1_RequiredFieldValidator2");
+			ContentPlaceHolder1_RequiredFieldValidator2.controltovalidate = "ContentPlaceHolder1_txtAdvisorName";
+			ContentPlaceHolder1_RequiredFieldValidator2.focusOnError = "t";
+			ContentPlaceHolder1_RequiredFieldValidator2.errormessage = "Enter Advisor/Collector Name";
+			ContentPlaceHolder1_RequiredFieldValidator2.display = "Dynamic";
+			ContentPlaceHolder1_RequiredFieldValidator2.validationGroup = "A";
+			ContentPlaceHolder1_RequiredFieldValidator2.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+			ContentPlaceHolder1_RequiredFieldValidator2.initialvalue = "";
+			//]]>
+		</script>
 
-function ValidatorOnSubmit() {
-    if (Page_ValidationActive) {
-        return ValidatorCommonOnSubmit();
-    }
-    else {
-        return true;
-    }
-}
-        
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode'));
-}
+		<script type="text/javascript">
+			//<![CDATA[
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator12').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator12'));
-}
+			var Page_ValidationActive = false;
+			if (typeof (ValidatorOnLoad) == "function") {
+				ValidatorOnLoad();
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator8').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator8'));
-}
+			function ValidatorOnSubmit() {
+				if (Page_ValidationActive) {
+					return ValidatorCommonOnSubmit();
+				} else {
+					return true;
+				}
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator3').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator3'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorddlMemberCode'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator4').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator4'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator12').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator12'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator11').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator11'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator8').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator8'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator5').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator5'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator3').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator3'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator4').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator4'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator1').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator1'));
-}
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator11').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator11'));
+			}
 
-document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2').dispose = function() {
-    Array.remove(Page_Validators, document.getElementById('ContentPlaceHolder1_RequiredFieldValidator2'));
-}
-//]]>
-</script>
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator5').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator5'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidatorOpeningAmount'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator1').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator1'));
+			}
+
+			document
+					.getElementById('ContentPlaceHolder1_RequiredFieldValidator2').dispose = function() {
+				Array
+						.remove(
+								Page_Validators,
+								document
+										.getElementById('ContentPlaceHolder1_RequiredFieldValidator2'));
+			}
+			//]]>
+		</script>
 	</form>
 </body>
 </html>

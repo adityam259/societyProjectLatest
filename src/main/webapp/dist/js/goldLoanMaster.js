@@ -1186,6 +1186,68 @@ function displayLoanDetailsSelectedId() {
 	});
 }
 
+
+function displayLoanDetailsSelectedId2() {
+	var id = document.getElementById("searchLoanIDLoan");
+	var input = {
+		"id": id.value
+	}
+	$.ajax({
+		type: "post",
+		contentType: "application/json",
+		data: JSON.stringify(input),
+		url: 'fetchEmiRepayment',
+		asynch: false,
+		success: function(response) {
+
+var loanData = response.data.loan;
+ var loanMasterData = response.data.loanMaster;
+
+		document.getElementById("loanDate").value = loanData.loanDate;
+		document.getElementById("searchMemberCode").value = loanData.searchMemberCode;
+		document.getElementById("relativeDetails").value = loanData.relativeDetails;
+		document.getElementById("phoneno").value = loanData.phoneno;
+		document.getElementById("cspName").value = loanData.cspName;
+		document.getElementById("loanPlanName").value = loanData.loanPlanName;
+		document.getElementById("planTerm").value = loanData.planTerm;
+		document.getElementById("mode").value = loanData.mode;
+		document.getElementById("loanAmount").value = loanData.loanAmount;
+		document.getElementById("loanROI").value = loanData.loanROI;
+		document.getElementById("ROIType").value = loanData.roiType;
+		document.getElementById("emiAmount").value = loanData.emiAmount;
+//		document.getElementById("ContentPlaceHolder1_txtTotalInterest").value = loanData.loanDate;
+//		document.getElementById("ContentPlaceHolder1_txtTotalPrinciple").value = loanData.loanDate;
+//		document.getElementById("ContentPlaceHolder1_txtTotalPayble").value = loanData.loanDate;
+
+        document.getElementById("branchName").value = loanMasterData.branchName;
+        document.getElementById("payDate").value = loanData.payDate;
+        document.getElementById("emiAmount1").value = loanMasterData.emiAmount;
+        document.getElementById("loanAmount1").value = loanMasterData.loanAmount;
+        document.getElementById("paymode").value = loanData.paymode;
+        document.getElementById("advisorCode").value = loanMasterData.advisorCode;
+        document.getElementById("advisorName").value = loanMasterData.advisorName;
+        document.getElementById("remarks").value = loanData.remarks;
+        document.getElementById("id").value = loanData.id;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+//        document.getElementById("emiAmount").value = loanData.emiAmount;
+
+
+
+       document.getElementById("loanmasterID").value = loanMasterData.id;
+
+		},
+		error: function() {
+			alert("Device control failed");
+		}
+	});
+}
+
 function popUp() {
 	var popup = document.createElement('div');
 	popup.className = 'popup';

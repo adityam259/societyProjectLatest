@@ -244,8 +244,6 @@ public class HomeControler {
 		return data2;
 	}
 
-	
-
 	@GetMapping("/LoanCalculator")
 	public String LoanCalculator() {
 		return "Loan_Section/LoanCalculator";

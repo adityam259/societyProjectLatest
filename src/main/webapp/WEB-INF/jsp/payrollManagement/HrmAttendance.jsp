@@ -73,7 +73,7 @@
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="leaveDate" type="text" value="01/08/2022"
+												<input name="leaveDate" type="date" value="01/08/2022"
 													id="leaveDate" class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" /> <span
@@ -112,21 +112,15 @@
 										<table cellspacing="0" cellpadding="3" rules="all"
 											class="display nowrap table table-hover table-striped table-bordered"
 											border="1" style="width: 100%; border-collapse: collapse;">
-
+											<caption>Attendance List</caption>
 											<tr style="color: White; background-color: #008385;">
 												<th scope="col">Slno</th>
 												<th scope="col">Code</th>
 												<th scope="col">Leave Date</th>
 												<th scope="col">Leave Type</th>
 											</tr>
-										</table>
-										<table cellspacing="0" cellpadding="3" rules="all"
-											class="display nowrap table table-hover table-striped table-bordered"
-											border="1" id="ContentPlaceHolder1_gdvDataAttendenceMaster"
-											style="width: 100%; border-collapse: collapse;">
-											<tr>
-												<td>No Receord Found</td>
-											</tr>
+											<tbody id="ContentPlaceHolder1_gdvDataAttendenceMaster">
+											</tbody>
 										</table>
 									</div>
 								</div>

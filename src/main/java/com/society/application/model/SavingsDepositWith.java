@@ -53,6 +53,10 @@ public class SavingsDepositWith {
 	private String fDate;
 	
 	private String tDate;
+	
+	private String advisorCode;
+	
+	private String schemeName;
 
 	public String getFlag() {
 		return flag;
@@ -220,6 +224,22 @@ public class SavingsDepositWith {
 
 	public void settDate(String tDate) {
 		this.tDate = tDate;
+	}
+
+	public String getAdvisorCode() {
+		return advisorCode;
+	}
+
+	public void setAdvisorCode(String advisorCode) {
+		this.advisorCode = advisorCode;
+	}
+
+	public String getSchemeName() {
+		return schemeName;
+	}
+
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 	
 }

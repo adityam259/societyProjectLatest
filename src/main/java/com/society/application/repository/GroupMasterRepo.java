@@ -41,4 +41,6 @@ public interface GroupMasterRepo extends JpaRepository<GroupMaster, Integer> {
 
 	List<GroupMaster> findByadvisorCode(String advisorCode);
 	
+	List<GroupMaster> findBycsp(String csp);
+	
 }

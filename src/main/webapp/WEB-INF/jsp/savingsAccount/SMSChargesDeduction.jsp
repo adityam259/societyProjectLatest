@@ -5,10 +5,8 @@
 	<form method="post"
 		action="http://admin:eqfi%23123@eqfinidhi.eadmin.in/Admin/SMSChargesDeduction.aspx"
 		id="form1">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
-
 			<!-- Header Start-->
 			<jsp:include page="../menu.jsp" />
 			<!-- Header End -->
@@ -46,8 +44,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="payDate" type="date" id="payDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -57,6 +54,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									<div class="col-md-3">
 										<div class="form-group">
 											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+												onclick="getAllDataSMSCharges();"
 												class="btn btn-success margin-20"
 												href="javascript:__doPostBack(&#39;ctl00$ContentPlaceHolder1$btnSearch&#39;,&#39;&#39;)"><span
 												class="fa fa-search"></span> SEARCH</a>
@@ -69,6 +67,25 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 								style="box-shadow: none; height: 800px; overflow: auto !important;">
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
+									<table cellspacing="0" cellpadding="3" rules="all"
+										class="display nowrap table table-hover table-striped table-bordered"
+										border="1" style="width: 100%; border-collapse: collapse;">
+										<caption>Search</caption>
+										<tr style="color: White; background-color: #008385;">
+											<th scope="col">ID</th>
+											<th scope="col">BASIC</th>
+											<th scope="col">HRA</th>
+											<th scope="col">TA</th>
+											<th scope="col">ALLOWANCE</th>
+											<th scope="col">PF</th>
+											<th scope="col">ESI</th>
+											<th scope="col">NET PAY</th>
+											<th scope="col">EMP CODE</th>
+											<th scope="col">SMS CHARGES</th>
+										</tr>
+										<tbody id="tableBody">
+										</tbody>
+									</table>
 									<div></div>
 								</div>
 							</div>
@@ -79,11 +96,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -111,6 +126,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/SavingsAccount.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
@@ -158,6 +174,5 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
         </script>
 	</form>
 </body>
-
 <!-- Dk/Admin/SMSChargesDeduction.aspx EDB D 09:27:08 GMT -->
 </html>
