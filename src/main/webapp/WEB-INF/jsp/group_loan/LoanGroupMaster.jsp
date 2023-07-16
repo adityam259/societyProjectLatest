@@ -68,7 +68,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="opDate" type="text" value="01/08/2022"
+													<input name="opDate" type="date" value="01/08/2022"
 														id="opDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" /> <span id="opDateMsg"
@@ -139,7 +139,7 @@
 												<select name="employee" id="employee" class="form-control"
 													style="width: 100%;">
 													<option value="">Select Employee</option>
-												<%
+													<%
 													if (employeeList != null && !employeeList.isEmpty()) {
 														for (Employee emp : employeeList) {
 													%>
@@ -147,8 +147,8 @@
 													<%
 													}
 													}
-													%>	
-													
+													%>
+
 												</select> <span id="employeeMsg"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Group Address</span>
@@ -340,9 +340,9 @@
 								</div>
 							</div>
 						</div>
-					
+
 						<!--  -->
-					
+
 					</div>
 					<div class="row">
 						<div class="col-md-12">

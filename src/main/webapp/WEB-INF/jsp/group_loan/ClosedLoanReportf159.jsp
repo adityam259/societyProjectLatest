@@ -47,7 +47,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 										<div class="form-group">
 											<label>Branch</label> <select name="ctl00$ContentPlaceHolder1$ddlSearchLoanID"
 													id="searchGroupID1"
-													onchange="displayGroupLoanApplicationDetailsShowTable()"
+													onchange="displayGroupLoanApplicationDetailsShowTableinClosedLoanReport()"
 													
 													class="form-control select2" style="width: 100%;">
 													<option selected="selected" value=""></option>
@@ -70,8 +70,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtFDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtFDate"
+												<input name="fDate" type="date"
+													 id="fDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -85,8 +85,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="tDate" type="date"
+													 id="tDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -95,7 +95,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									</div>
 									<div class="col-md-2">
 										<div class="form-group">
-											<label></label> <a id="ContentPlaceHolder1_btnSearch"
+											<label></label> <a id="ContentPlaceHolder1_btnSearch" onclick="displayGroupLoanApplicationDetailsShowTableinClosedLoanReport()"
 												class="btn btn-success margin-20"><span
 												class="fa fa-search"></span> SEARCH</a>
 										</div>
@@ -111,17 +111,40 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
-									<table id="tableId" style="width:100%">
-        <tr>
-            <th>Group Name</th>
-            <th>Leader Name</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Employee</th>
-            <th>Day</th>
-            <th>Time</th>
-        </tr>
-    </table>
+<!-- 									<table id="tableId" style="width:100%"> -->
+<!--         <tr> -->
+<!--             <th>Group Name</th> -->
+<!--             <th>Leader Name</th> -->
+<!--             <th>Mobile</th> -->
+<!--             <th>Address</th> -->
+<!--             <th>Employee</th> -->
+<!--             <th>Day</th> -->
+<!--             <th>Time</th> -->
+<!--         </tr> -->
+<!--     </table> -->
+
+
+                                              <table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+												<th scope="col">Id</th>
+												<th scope="col">Group Name</th>
+												<th scope="col">Op Date</th>
+												<th scope="col">Branch Name</th>
+												<th scope="col">Group Leader Name</th>
+												<th scope="col">Mobile</th>
+												<th scope="col">GRoup Adress</th>
+												
+												<th scope="col">Employee</th>
+												<th scope="col">Created Time</th>
+												<th scope="col">Created Date</th>
+												
+											</tr>
+											<tbody id="tableBody">
+											</tbody>
+										</table>
 								</div>
 							</div>
 						</div>

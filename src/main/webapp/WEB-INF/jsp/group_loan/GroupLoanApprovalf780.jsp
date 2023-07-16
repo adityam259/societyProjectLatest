@@ -1,3 +1,5 @@
+<%@page import="com.society.application.model.BranchMaster"%>
+<%@page import="java.util.List"%>
 <jsp:include page="../header.jsp" />
 <body
 	onload="getAllLoanId();getAllLoanPlanName();getAllItemMasterName();getAllILockerName();getAllPurityMasterName();fetchAllMember()"
@@ -7,7 +9,6 @@
 	<form method="post" action="?Type=Payment"
 		onsubmit="javascript:return WebForm_OnSubmit();" id="form1"
 		enctype="multipart/form-data">
-
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -18,10 +19,28 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<script type="text/javascript">
-//<![CDATA[
-Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['tctl00$ContentPlaceHolder1$updtpnl','ContentPlaceHolder1_updtpnl','tctl00$ContentPlaceHolder1$uppnlGold','ContentPlaceHolder1_uppnlGold','tctl00$ContentPlaceHolder1$upguardian','ContentPlaceHolder1_upguardian','tctl00$ContentPlaceHolder1$upcoap','ContentPlaceHolder1_upcoap','tctl00$ContentPlaceHolder1$uppnlde','ContentPlaceHolder1_uppnlde','tctl00$ContentPlaceHolder1$uppnkad','ContentPlaceHolder1_uppnkad','tctl00$ContentPlaceHolder1$upduc','ContentPlaceHolder1_upduc','tctl00$ContentPlaceHolder1$uppnladname','ContentPlaceHolder1_uppnladname'], [], [], 90, 'ctl00');
-//]]>
-</script>
+				//<![CDATA[
+				Sys.WebForms.PageRequestManager._initialize(
+						'ctl00$ScriptManager1', 'form1', [
+								'tctl00$ContentPlaceHolder1$updtpnl',
+								'ContentPlaceHolder1_updtpnl',
+								'tctl00$ContentPlaceHolder1$uppnlGold',
+								'ContentPlaceHolder1_uppnlGold',
+								'tctl00$ContentPlaceHolder1$upguardian',
+								'ContentPlaceHolder1_upguardian',
+								'tctl00$ContentPlaceHolder1$upcoap',
+								'ContentPlaceHolder1_upcoap',
+								'tctl00$ContentPlaceHolder1$uppnlde',
+								'ContentPlaceHolder1_uppnlde',
+								'tctl00$ContentPlaceHolder1$uppnkad',
+								'ContentPlaceHolder1_uppnkad',
+								'tctl00$ContentPlaceHolder1$upduc',
+								'ContentPlaceHolder1_upduc',
+								'tctl00$ContentPlaceHolder1$uppnladname',
+								'ContentPlaceHolder1_uppnladname' ], [], [],
+						90, 'ctl00');
+				//]]>
+			</script>
 			<!-- Content Wrapper. Contains page content -->
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
@@ -32,6 +51,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 						<li class="active">Loan Details</li>
 					</ol>
 				</section>
+				<%
+				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
+				%>
 				<section class="content">
 					<div id="ContentPlaceHolder1_idSearch" class="row">
 						<div class="col-md-12">
@@ -75,7 +97,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="loanDate" type="text" value="01/08/2022"
+													<input name="loanDate" type="date" value="01/08/2022"
 														id="loanDate="
 														form-control" data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -199,7 +221,15 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 											<div class="col-sm-8">
 												<select name="cspName" id="cspName" class="form-control"
 													style="width: 100%;">
-													<option value="001">Main Office - 001</option>
+													<%
+													if (branchList != null && !branchList.isEmpty()) {
+														for (BranchMaster branch : branchList) {
+													%>
+													<option value="<%=branch.getId()%>"><%=branch.getName()%></option>
+													<%
+													}
+													}
+													%>
 												</select> <span id="cspNameMsg"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													PIN</span>
@@ -236,9 +266,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 													Term <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-													<select name="planTerm" id="planTerm" class="form-control"
-														style="width: 100%;">
-													</select> <span id="planTermMsg"
+													<input name="planTerm" type="text" readonly="readonly"
+														id="planTerm" class="form-control" PlaceHolder="Enter Plan Term" />
+													<span id="planTermMsg"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 														PIN</span>
 												</div>
@@ -484,7 +514,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 																	<i class="fa fa-calendar"></i>
 																</div>
 																<input name="ctl00$ContentPlaceHolder1$txtPayDate"
-																	type="text" value="01/08/2022"
+																	type="date" value="01/08/2022"
 																	id="ContentPlaceHolder1_txtPayDate"
 																	class="form-control"
 																	data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
@@ -541,11 +571,9 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -575,9 +603,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', ['t
 		<script src="dist/js/demo.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
-
 	</form>
 </body>
-
 <!-- Dk/Admin/GoldLoanApplication.aspx?Type=Payment EDB D 09:27:11 GMT -->
 </html>

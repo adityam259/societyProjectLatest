@@ -1,7 +1,6 @@
 <%@page import="com.society.application.model.BranchMaster"%>
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.GroupMaster"%>
-
 <jsp:include page="../header.jsp" />
 <body onload="getAllGroupLoanApplication()"
 	class="skin-blue sidebar-mini"
@@ -9,6 +8,18 @@
 	cz-shortcut-listen="true">
 	<form method="post" action="saveGroupMasterApplication" name="form1"
 		modelAttribute="saveGroupMasterApplication">
+		<%
+         String status = (String)request.getAttribute("status");
+         if(status!=null && "success".equals(status)){
+          %>
+		<script>
+         alert("Saved Successfully");
+      </script>
+		<%
+         }else{
+          
+         }
+         %>
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -19,12 +30,12 @@
 			<jsp:include page="../asideMenu.jsp" />
 			<!-- Aside Menu end -->
 			<!-- Content Wrapper. Contains page content -->
-							<%
-				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
-				%>
-				<%
-				List<GroupMaster> allGroupMaster = (List<GroupMaster>) request.getAttribute("allGroupMaster");
-				%>
+			<%
+			List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
+			%>
+			<%
+			List<GroupMaster> allGroupMaster = (List<GroupMaster>) request.getAttribute("allGroupMaster");
+			%>
 			<div class="content-wrapper" style="min-height: 1105.75px;">
 				<section class="content-header">
 					<h1 id="ContentPlaceHolder1_IdHeader">Group Loan Application</h1>
@@ -49,20 +60,19 @@
 													GroupID <strong style="color: Red">*</strong>
 												</label>
 												<div class="col-sm-8">
-												
 													<select name="searchGroupID" id="searchGroupID1"
 														onchange="javascript:displayGroupLoanApplicationDetails()"
 														class="form-control select2" style="width: 100%;">
 														<option selected="selected" value=""></option>
 														<%
-													if (allGroupMaster != null && !allGroupMaster.isEmpty()) {
-														for (GroupMaster group : allGroupMaster) {
-													%>
-													<option value="<%=group.getId()%>"><%=group.getId()%></option>
-													<%
-													}
-													}
-													%>
+														if (allGroupMaster != null && !allGroupMaster.isEmpty()) {
+															for (GroupMaster group : allGroupMaster) {
+														%>
+														<option value="<%=group.getId()%>"><%=group.getId()%></option>
+														<%
+														}
+														}
+														%>
 													</select> <span id="searchGroupIDMsg"
 														style="color: Red; font-size: X-Small; font-weight: bold; display: none;"></span>
 												</div>
@@ -73,14 +83,12 @@
 							</div>
 						</div>
 					</div>
-	
 					<div class="row">
 						<div class="col-md-12">
 							<div class="box box-success">
 								<div class="box-header with-border">
 									<h3 class="box-title">Group Details</h3>
 								</div>
-								
 								<div class="box-body">
 									<div class="col-md-6">
 										<div class="form-group row">
@@ -91,7 +99,7 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="loanDate" type="text" value="01/08/2022"
+													<input name="loanDate" type="date" value="01/08/2022"
 														id="ContentPlaceHolder1_txtLoanDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
@@ -118,7 +126,7 @@
 											<div class="col-sm-7">
 												<select name="csp" id="csp" class="form-control"
 													style="width: 100%;">
-												<option value="">Select Branch</option>
+													<option value="">Select Branch</option>
 
 													<%
 													if (branchList != null && !branchList.isEmpty()) {
@@ -206,20 +214,22 @@
 											</div>
 										</div>
 										<div class="box-footer">
-									<div class="row col-md-12">
-										<button type="button" name="ctl00$ContentPlaceHolder1$btnSave"
-											onclick="return validateGroupLoanApplication()" value="Save"
-											id="button" class="btn btn-success pull-right margin-r-5">Save
-										</button>
-									</div>
-								</div>
+											<div class="row col-md-12">
+												<button type="button"
+													name="ctl00$ContentPlaceHolder1$btnSave"
+													onclick="return validateGroupLoanApplication()"
+													value="Save" id="button"
+													class="btn btn-success pull-right margin-r-5">Save
+												</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
+
 					</div>
-					
+
 				</section>
 			</div>
 			<!-- /.content-wrapper -->
@@ -257,6 +267,7 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/groupMasterUtilsJs.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 	</form>

@@ -42,5 +42,12 @@ public interface GroupMasterRepo extends JpaRepository<GroupMaster, Integer> {
 	List<GroupMaster> findByadvisorCode(String advisorCode);
 	
 	List<GroupMaster> findBycsp(String csp);
+
+	@Query("SELECT l FROM GroupMaster l WHERE l.loanDate BETWEEN :getfDate AND :gettDate")
+	List<GroupMaster> findByloanDateBetweenmmmmm(@Param("getfDate") String getfDate,@Param("gettDate") String gettDate);
+
+	List<GroupMaster> findByplaneName(String planeName);
+
+	
 	
 }

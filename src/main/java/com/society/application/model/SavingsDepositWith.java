@@ -57,6 +57,16 @@ public class SavingsDepositWith {
 	private String advisorCode;
 	
 	private String schemeName;
+	
+	private String openingDate;
+	
+	private String closingDate;
+	
+	private String paidInterest;
+	
+	private String interestDue;
+	
+	private String netAmount;
 
 	public String getFlag() {
 		return flag;
@@ -240,6 +250,46 @@ public class SavingsDepositWith {
 
 	public void setSchemeName(String schemeName) {
 		this.schemeName = schemeName;
+	}
+
+	public String getOpeningDate() {
+		return openingDate;
+	}
+
+	public void setOpeningDate(String openingDate) {
+		this.openingDate = openingDate;
+	}
+
+	public String getClosingDate() {
+		return closingDate;
+	}
+
+	public void setClosingDate(String closingDate) {
+		this.closingDate = closingDate;
+	}
+
+	public String getPaidInterest() {
+		return paidInterest;
+	}
+
+	public void setPaidInterest(String paidInterest) {
+		this.paidInterest = paidInterest;
+	}
+
+	public String getInterestDue() {
+		return interestDue;
+	}
+
+	public void setInterestDue(String interestDue) {
+		this.interestDue = interestDue;
+	}
+
+	public String getNetAmount() {
+		return netAmount;
+	}
+
+	public void setNetAmount(String netAmount) {
+		this.netAmount = netAmount;
 	}
 	
 }

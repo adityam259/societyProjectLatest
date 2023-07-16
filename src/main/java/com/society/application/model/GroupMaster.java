@@ -99,7 +99,16 @@ public class GroupMaster {
 	private String totalNetWt;
 	private String totalEligibleAmt;
 	private String vFeesAmt;
+	private String planeName;
+	
+	
 
+	public String getPlaneName() {
+		return planeName;
+	}
+	public void setPlaneName(String planeName) {
+		this.planeName = planeName;
+	}
 	public String getEmiCollection() {
 		return emiCollection;
 	}

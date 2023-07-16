@@ -1,16 +1,20 @@
 package com.society.application.controler;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.society.application.model.BankMaster;
@@ -32,6 +36,8 @@ import com.society.application.repository.SavingAccountRepo;
 import com.society.application.repository.SavingsAccountApplicationRepo;
 import com.society.application.repository.SavingsDepositWithRepo;
 import com.society.application.repository.SavingsDepositWithdrawalRepo;
+
+import java.util.Optional;
 
 @Controller
 public class SavingAccountController {
@@ -215,10 +221,11 @@ public class SavingAccountController {
 	@PostMapping("/accountCloser") // think of id for update
 	public String accountCloser(@ModelAttribute("accountCloser") SavingsAccountApplication savingsAccountApplication,
 			Model model, HttpSession session) {
-		// SavingsAccountApplication savingAccountObj =
-		// savingsAccountApplicationRepo.save(savingsAccountApplication);
+		//SavingsAccountApplication savingAccountObj =
+		//savingsAccountApplicationRepo.save(savingsAccountApplication);
 		model.addAttribute("status", "ERROR");
-		List<Member> memberList = memberRepo.findAll();
+		//List<Member> memberList = memberRepo.findAll();
+		List<ClientMaster> memberList = clientMasterRepo.findAll();
 		model.addAttribute("memberList", memberList);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
@@ -319,4 +326,80 @@ public class SavingAccountController {
 		List<SalaryMaster> payDate = salaryMasterRepo.findBypayDate(salaryMaster.getPayDate());
 		return payDate;
 	}
+	
+	@PostMapping("/searchbyidforsavingacxx")
+	@ResponseBody
+	public SavingsAccountApplication getSavingDeailsById(@RequestBody GenericGetById id) {
+		Optional<SavingsAccountApplication> savingid = savingsAccountApplicationRepo
+				.findById(Integer.parseInt(id.getId()));
+		return savingid.get();
+	}
+
+	// Saving Transaction Entry
+	@PostMapping("/updateBySelectidForSavingtransc")
+	@ResponseBody
+	public ResponseEntity<String> updateBysavingtransictionid(@RequestParam(value = "id") Integer id,
+			@RequestParam(name = "transactionFor", required = false) String transactionFor,
+			@RequestParam(name = "remarks", required = false) String remarks,
+			@RequestParam(name = "transactionType", required = false) String transactionType,
+			@RequestParam(name = "txtAmount", required = false) String txtAmount,
+			@RequestParam(name = "paymode", required = false) String paymode,
+			@RequestParam(name = "txtTDate", required = false) String txtTDate,
+			@RequestParam(name = "cspName", required = false) String cspName,
+			@RequestParam(name = "accountNo", required = false) String accountNo) {
+		try {
+			// Optional<SavingsAccountApplication> add =
+			// savingsAccountApplicationRepo.findById(id);
+			Optional<SavingsAccountApplication> optionalApplication = savingsAccountApplicationRepo.findById(id);
+			List<SavingsAccountApplication> add = optionalApplication.map(Collections::singletonList)
+					.orElse(Collections.emptyList());
+
+			add.forEach(s -> {
+				if (!(txtAmount == null) && !(paymode == null)) {
+					try {
+						s.setTxtAmount(txtAmount);
+						s.setPaymode(paymode);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				s.setTransactionFor(transactionFor);
+				s.setTransactionType(transactionType);
+				s.setRemarks(remarks);
+				s.setTxtTDate(txtTDate);
+				s.setCspName(cspName);
+				s.setAccountNo(accountNo);
+				savingsAccountApplicationRepo.save(s);
+			});
+			return new ResponseEntity<>("Data Updated  successfully!!!!", HttpStatus.OK);
+		} catch (Exception ex) {
+			System.out.println(ex);
+			return new ResponseEntity<>("Data Updated Failed !!!!", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/savingfetchbranchacc")
+	@ResponseBody
+	List<SavingsAccountApplication>savingallmethod(){
+		return savingsAccountApplicationRepo.findAll();
+	}
+	
+	// 7.Account Closer
+	// getData on Fields
+	@PostMapping("/getDataOnFiledsAccountCloser")
+	@ResponseBody
+	public List<SavingsDepositWith> getDataOnFiledsAccountCloser(@RequestBody SavingsDepositWith savingsDepositWith) {
+		List<SavingsDepositWith> accNo = savingsDepositWithdrawalRepo
+				.findByaccountNo(savingsDepositWith.getAccountNo());
+		return accNo;
+	}
+	
+	// 7.Account closer
+	@GetMapping("/getAllBranchIndropdownAccountCloser")
+	@ResponseBody
+	public List<BranchMaster> getAllBranchIndropdownAccountCloser() {
+		return branchMasterRepo.findAll();
+	}
+
 }

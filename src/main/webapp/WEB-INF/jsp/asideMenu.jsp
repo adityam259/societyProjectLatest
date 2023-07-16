@@ -7,9 +7,8 @@
 			<div class="txt">
 				<% 
             	String userCompanyName = (String) session.getAttribute("userCompanyName");
-            %>
+           		 %>
 				<%=userCompanyName %>
-
 			</div>
 		</div>
 		<ul class="sidebar-menu tree" data-widget="tree">

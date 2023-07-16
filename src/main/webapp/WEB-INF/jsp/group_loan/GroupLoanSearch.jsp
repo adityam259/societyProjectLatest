@@ -72,8 +72,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtFDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtFDate"
+												<input name="fDate" type="date"
+													 id="fDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -87,8 +87,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 												<div class="input-group-addon">
 													<i class="fa fa-calendar"></i>
 												</div>
-												<input name="ctl00$ContentPlaceHolder1$txtTDate" type="text"
-													value="01/08/2022" id="ContentPlaceHolder1_txtTDate"
+												<input name="tDate" type="date"
+													 id="tDate"
 													class="form-control"
 													data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 													data-mask="" />
@@ -98,8 +98,8 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Applicant Name :</label> <input
-												name="ctl00$ContentPlaceHolder1$txtApplicantName"
-												type="text" id="ContentPlaceHolder1_txtApplicantName"
+												name="memberName"
+												type="text" id="memberName"
 												class="form-control" Placeholder="Enter Applicant Name"
 												autocomplete="off" />
 										</div>
@@ -128,25 +128,29 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', 'form1', [],
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Member Code :</label> <input
-												name="ctl00$ContentPlaceHolder1$txtMemberCode" type="text"
-												id="ContentPlaceHolder1_txtMemberCode" class="form-control"
-												Placeholder="Enter Member Code" autocomplete="off" />
+												name="searchMemberCode" type="text"
+												id="searchMemberCode" class="form-control"
+												Placeholder="Enter Member Code Example 001" autocomplete="off" />
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Plan Name :</label> <select
-												name="ctl00$ContentPlaceHolder1$ddlPlanName"
-												id="ContentPlaceHolder1_ddlPlanName" class="form-control"
+												name="planeName"
+												id="planeName" class="form-control"
 												style="width: 100%;">
+												<option value="" selected="selected">Select</option>
+												<option value="A">A</option>
+											<option value="B">B</option>
 											</select>
+											
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
 											<label>Advisor Code :</label> <input
-												name="ctl00$ContentPlaceHolder1$txtAdvisorCode" type="text"
-												id="ContentPlaceHolder1_txtAdvisorCode" class="form-control"
+												name="advisorCode" type="text"
+												id="advisorCode" class="form-control"
 												Placeholder="Enter Advisor Code" autocomplete="off" />
 										</div>
 									</div>

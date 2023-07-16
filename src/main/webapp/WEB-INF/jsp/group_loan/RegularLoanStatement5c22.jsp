@@ -42,9 +42,9 @@
 										<div class="col-md-3">
 											<div class="form-group">
 												<label>Select by Loan ID <strong style="color: Red">*</strong></label>
-												<select name="ctl00$ContentPlaceHolder1$ddlSearchLoanID"
+												<select name="searchGroupID1"
 													id="searchGroupID1"
-													onchange="displayGroupLoanApplicationDetailsShowTable()"
+													onchange="displayGroupLoanApplicationDetailsShowTableinRegularLoanStatement()"
 													
 													class="form-control select2" style="width: 100%;">
 													<option selected="selected" value=""></option>
@@ -72,17 +72,40 @@
 								</div>
 								<div class="box-body">
 									<div class="clearfix margin-bottom-10"></div>
-									 <table id="tableId" style="width:100%">
-        <tr>
-            <th>Group Name</th>
-            <th>Leader Name</th>
-            <th>Mobile</th>
-            <th>Address</th>
-            <th>Employee</th>
-            <th>Day</th>
-            <th>Time</th>
-        </tr>
-    </table>
+<!-- 									 <table id="tableId" style="width:100%"> -->
+<!--         <tr> -->
+<!--             <th>Group Name</th> -->
+<!--             <th>Leader Name</th> -->
+<!--             <th>Mobile</th> -->
+<!--             <th>Address</th> -->
+<!--             <th>Employee</th> -->
+<!--             <th>Day</th> -->
+<!--             <th>Time</th> -->
+<!--         </tr> -->
+<!--     </table> -->
+
+
+                                           <table cellspacing="0" cellpadding="3" rules="all"
+											class="display nowrap table table-hover table-striped table-bordered"
+											border="1" style="width: 100%; border-collapse: collapse;">
+											<caption></caption>
+											<tr style="color: White; background-color: #008385;">
+												<th scope="col">Id</th>
+												<th scope="col">Group Name</th>
+												<th scope="col">Op Date</th>
+												<th scope="col">Branch Name</th>
+												<th scope="col">Group Leader Name</th>
+												<th scope="col">Mobile</th>
+												<th scope="col">GRoup Adress</th>
+												
+												<th scope="col">Employee</th>
+												<th scope="col">Created Time</th>
+												<th scope="col">Created Date</th>
+												
+											</tr>
+											<tbody id="tableBody">
+											</tbody>
+										</table>
 								</div>
 							</div>
 						</div>

@@ -2,19 +2,11 @@
 <%@page import="java.util.List"%>
 <%@page import="com.society.application.model.BankMaster"%>
 <%@page import="com.society.application.model.BranchMaster"%>
-
 <body class="skin-blue sidebar-mini"
+	onload="getAllAccountNo(); getAllBranchAccountCloser();"
 	style="height: auto; min-height: 100%; background-color: rgba(36, 105, 92, 0.15);"
 	cz-shortcut-listen="true">
-	<form method="post"
-		action="accountCloser"
-		id="form1">
-<%
-				List<BankMaster> bankList = (List<BankMaster>) request.getAttribute("bankMaster");
-				%>
-				<%
-				List<BranchMaster> branchList = (List<BranchMaster>) request.getAttribute("branchList");
-				%>
+	<form method="post" action="accountCloser" id="form1">
 		<div
 			style="height: auto; min-height: 100%; border-radius: 30px; margin: 15px; background: url(dist/img/back.jpg);">
 			<!-- Header Start-->
@@ -48,20 +40,11 @@
 												class="col-sm-4 control-label">Select Acc.No.<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												 <select
-												name="ctl00$ContentPlaceHolder1$ddlSearchAccountNo"
-												id="ContentPlaceHolder1_ddlSearchAccountNo"
-												class="form-control select2" style="width: 100%;">
-												<%
-													if (bankList != null && !bankList.isEmpty()) {
-														for (BankMaster bank : bankList) {
-													%>
-													<option value="<%=bank.getId()%>"><%=bank.getAccountNo()%></option>
-													<%
-													}
-													}
-													%>
-											</select><span
+												<select name="accountNo" id="accountNo"
+													class="form-control select2" style="width: 100%;"
+													onchange="getDataOnFieldsSavingAccCloser();">
+
+												</select><span
 													id="ContentPlaceHolder1_RequiredFieldValidatorDebitSelectAccountNo"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Select
 													Account No</span>
@@ -71,10 +54,9 @@
 											<label class="col-sm-4 control-label">Member Code<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtDebitMemberNo"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtDebitMemberNo"
-													class="form-control" Placeholder="Enter Member Code" /> <span
+												<input name="memberCode" type="text" readonly="readonly"
+													id="memberCode" class="form-control"
+													Placeholder="Enter Member Code" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorDebitMemberNo"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Member No</span>
@@ -84,10 +66,9 @@
 											<label class="col-sm-4 control-label">Mobile Numder<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtMobileNumber"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtMobileNumber"
-													class="form-control" Placeholder="Enter Mobile No" /> <span
+												<input name="mobileNumber" type="text" readonly="readonly"
+													id="mobileNumber" class="form-control"
+													Placeholder="Enter Mobile No" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatortxtMobileNumber"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Account Branch</span>
@@ -97,11 +78,9 @@
 											<label class="col-sm-4 control-label">Opening Branch<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtOpeningBranch"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtOpeningBranch"
-													class="form-control" Placeholder="Enter Opening Branch" />
-												<span
+												<input name="branchName" type="text" readonly="readonly"
+													id="branchName" class="form-control"
+													Placeholder="Enter Opening Branch" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatortxtOpeningBranch"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Opening Branch</span>
@@ -111,10 +90,9 @@
 											<label class="col-sm-4 control-label">Opening Date<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtOpeningDate"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtOpeningDate"
-													class="form-control" Placeholder="Enter Opening Date" /> <span
+												<input name="openingDate" type="text" readonly="readonly"
+													id="openingDate" class="form-control"
+													Placeholder="Enter Opening Date" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatortxtOpeningDate"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Opening Date</span>
@@ -127,11 +105,9 @@
 												Balance<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtCurrentBalance"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtCurrentBalance"
-													class="form-control" Placeholder="Enter Current Balance" />
-												<span
+												<input name="avaBalance" type="text" readonly="readonly"
+													id="avaBalance" class="form-control"
+													Placeholder="Enter Current Balance" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorCurrentBalance"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Current Balance</span>
@@ -142,10 +118,8 @@
 												class="col-sm-4 control-label">Paid Interest<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtTotalInterestPaid"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtTotalInterestPaid"
-													class="form-control"
+												<input name="paidInterest" type="text" readonly="readonly"
+													id="paidInterest" class="form-control"
 													Placeholder="Enter Total Interest Paid" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorTotalInterestPaid"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -157,10 +131,9 @@
 												Due<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtInterestDue"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtInterestDue"
-													class="form-control" Placeholder="Enter Interest Due" /> <span
+												<input name="interestDue" type="text" readonly="readonly"
+													id="interestDue" class="form-control"
+													Placeholder="Enter Interest Due" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorInterestDue"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
 													Interest Due</span>
@@ -171,9 +144,8 @@
 												Amount<strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtNetAmount"
-													type="text" readonly="readonly"
-													id="ContentPlaceHolder1_txtNetAmount" class="form-control"
+												<input name="netAmount" type="text" readonly="readonly"
+													id="netAmount" class="form-control"
 													Placeholder="Enter Net Amount" /> <span
 													id="ContentPlaceHolder1_RequiredFieldValidatorNetAmount"
 													style="color: Red; font-size: X-Small; font-weight: bold; display: none;">Enter
@@ -194,20 +166,11 @@
 												class="col-sm-4 control-label">Closing Branch<strong
 												style="color: Red">*</strong></label>
 											<div class="col-sm-8">
-												<select
-													name="ctl00$ContentPlaceHolder1$ddlClosingBranchName"
-													id="ContentPlaceHolder1_ddlClosingBranchName"
+												<select name="branchName1" id="branchName1"
 													class="form-control select2" style="width: 100%;">
-														<%
-													if (branchList != null && !branchList.isEmpty()) {
-														for (BranchMaster bank : branchList) {
-													%>
-													<option value="<%=bank.getId()%>"><%=bank.getName()%></option>
-													<%
-													}
-													}
-													%>
+													<option>select</option>
 												</select>
+
 											</div>
 										</div>
 										<div class="form-group row">
@@ -218,10 +181,9 @@
 													<div class="input-group-addon">
 														<i class="fa fa-calendar"></i>
 													</div>
-													<input name="ctl00$ContentPlaceHolder1$txtTDate"
-														type="text" value="01/08/2022"
+													<input name="closingDate" type="date" value="01/08/2022"
 														onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;"
-														id="ContentPlaceHolder1_txtTDate" class="form-control"
+														id="closingDate" class="form-control"
 														data-inputmask="&#39;alias&#39;: &#39;dd/mm/yyyy&#39;"
 														data-mask="" />
 												</div>
@@ -232,8 +194,7 @@
 												By <strong style="color: Red">*</strong>
 											</label>
 											<div class="col-sm-8">
-												<select name="ctl00$ContentPlaceHolder1$ddlPaymode"
-													id="ContentPlaceHolder1_ddlPaymode" class="form-control"
+												<select name="paymentBy" id="paymentBy" class="form-control"
 													style="width: 100%;">
 													<option selected="selected" value="Cash">Cash</option>
 													<option value="Cheque">Cheque</option>
@@ -247,18 +208,15 @@
 										<div class="form-group row">
 											<label for="txtRemarks" class="col-sm-4 control-label">Remarks</label>
 											<div class="col-sm-8">
-												<input name="ctl00$ContentPlaceHolder1$txtRemarks"
-													type="text" id="ContentPlaceHolder1_txtRemarks"
+												<input name="remarks" type="text" id="remarks"
 													class="form-control" placeholder="Enter Remarks" />
 											</div>
 										</div>
 									</div>
 									<div class="box-footer">
 										<div class="row col-md-12">
-											 <input
-												type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
-												value="Close Account"
-												id="ContentPlaceHolder1_btnSave"
+											<input type="submit" name="ctl00$ContentPlaceHolder1$btnSave"
+												value="Close Account" id="ContentPlaceHolder1_btnSave"
 												class="btn btn-success pull-right margin-r-5" />
 										</div>
 									</div>
@@ -305,11 +263,9 @@
 			<!-- /.content-wrapper -->
 			<div class="control-sidebar-bg"></div>
 		</div>
-
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<!-- Bootstrap 3.3.7 -->
 		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 		<!-- InputMask -->
 		<script src="plugins/input-mask/jquery.inputmask.js"></script>
 		<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
@@ -337,6 +293,7 @@
 		<script src="dist/js/adminlte.min.js"></script>
 		<!-- AdminLTE for demo purposes -->
 		<script src="dist/js/demo.js"></script>
+		<script src="dist/js/SavingsAccount.js"></script>
 		<!-- Select2 -->
 		<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 		<script>
@@ -382,7 +339,7 @@
                 })
             })
         </script>
-        
+
 		<script type="text/javascript">
 //<![CDATA[
 var Page_Validators =  new Array(document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorDebitSelectAccountNo"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorDebitMemberNo"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtMobileNumber"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtOpeningBranch"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatortxtOpeningDate"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorCurrentBalance"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorTotalInterestPaid"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorInterestDue"), document.getElementById("ContentPlaceHolder1_RequiredFieldValidatorNetAmount"));
@@ -466,7 +423,6 @@ ContentPlaceHolder1_RequiredFieldValidatorNetAmount.initialvalue = "";
 //]]>
 </script>
 
-
 		<script type="text/javascript">
 //<![CDATA[
 
@@ -521,6 +477,6 @@ document.getElementById('ContentPlaceHolder1_RequiredFieldValidatorNetAmount').d
 }
 //]]>
 </script>
-	</form>
+</form>
 </body>
 </html>

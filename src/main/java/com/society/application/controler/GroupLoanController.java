@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.society.application.dto.LoanWithLoanMasterDTO;
+import com.society.application.dto.Response;
 import com.society.application.model.BranchMaster;
 import com.society.application.model.Employee;
 import com.society.application.model.GenericGetById;
@@ -101,19 +103,17 @@ public class GroupLoanController {
 
 	@PostMapping("/closeLoanRegularEMIRepaymentGroup")
 	public String closeLoanRegularEMIRepaymentGroup(@ModelAttribute("updateLoan") Loan loan, Model model) {
-
 		Loan loan1 = loanRepo.findByid(loan.getId());
-
 		loan1.setCloseLoan("close");
-
 		loanRepo.save(loan1);
-
 		model.addAttribute("status", "success");
 		return "group_loan/LoanPreSettlement5c22";
 	}
 
 	@GetMapping("/GroupLoanApprovalf780")
 	public String GroupLoanApprovalf780(Model model) {
+		List<BranchMaster> branchData = branchMasterRepo.findAll();
+		model.addAttribute("branchList", branchData);
 		return "group_loan/GroupLoanApprovalf780";
 	}
 
@@ -157,6 +157,8 @@ public class GroupLoanController {
 		model.addAttribute("allGroupMaster", allGroupMaster);
 		List<BranchMaster> branchData = branchMasterRepo.findAll();
 		model.addAttribute("branchList", branchData);
+		List<LoanMaster> loanPlanMaster = loanMasterRepo.findAll();
+		model.addAttribute("loanPlanMaster", loanPlanMaster);
 		return "group_loan/GroupLoanSearch";
 	}
 
@@ -166,7 +168,7 @@ public class GroupLoanController {
 		List<LoanMaster> allGroupLoan = loanMasterRepo.findAll();
 		List<LoanMaster> filterGroupLoan = allGroupLoan.stream().filter(p -> p.getType().equals("Group"))
 				.collect(Collectors.toList());
-		System.err.println(filterGroupLoan);
+		//System.err.println(filterGroupLoan);
 		return filterGroupLoan;
 	}
 
@@ -243,7 +245,7 @@ public class GroupLoanController {
 		model.addAttribute("branchList", branchData);
 		List<GroupMaster> allGroupMaster = groupMasterRepo.findAll();
 		model.addAttribute("allGroupMaster", allGroupMaster);
-		System.err.println(groupMasterApplication);
+		//System.err.println(groupMasterApplication);
 		GroupMasterApplication savedgroupMasterApplication = groupMasterApplicationRepo.save(groupMasterApplication);
 		if (savedgroupMasterApplication != null) {
 			model.addAttribute("status", "success");
@@ -262,25 +264,19 @@ public class GroupLoanController {
 			@RequestParam(name = "advisorName", required = false) String advisorName ) {
 
 		try {
-
-
 			List<LoanMaster> lm = loanMasterRepo.findByid(id);
-
 			lm.forEach(s -> {
 				s.setBranchName(branchName);
 				s.setEmiAmount(emiAmount1);
 				s.setLoanAmount(loanAmount1);
 				s.setAdvisorCode(advisorCode);
 				s.setAdvisorName(advisorName);
-
 				loanMasterRepo.save(s);
-
 			});
 			return new ResponseEntity<>("Data Saved Sucessfully!!!!", HttpStatus.OK);
 		} catch (Exception ex) {
 			return new ResponseEntity<>("Failed Data Saved Sucessfully!!!!", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-
 
 //		List<GroupMaster> allGroupMaster = groupMasterRepo.findAll();
 //		model.addAttribute("allGroupMaster", allGroupMaster);
@@ -337,5 +333,72 @@ public class GroupLoanController {
 	 * data5; } else if (!data6.isEmpty()) { return data6; } else
 	 * if(!data7.isEmpty()){ return data7; } else return null; }
 	 */
+	
+	
+	@PostMapping("/fetchEmiRepayment")
+	@ResponseBody
+	public Response fetchEmiRepayment (@RequestBody Loan loan) {
+		Response response = new Response<>();
+		response.setStatus("Not Success");
+		response.setMessage("Data Not Saved..!!");
+
+		Optional<LoanWithLoanMasterDTO> optionalLoan = loanRepo.findLoanWithLoanMasterById(loan.getId());
+
+		if(optionalLoan != null) {
+		response.setStatus("Success");
+			response.setMessage("Data Found !!!");
+			response.setData(optionalLoan); 
+		}
+		return response;
+
+	}
+
+	@PostMapping("/ByloanDate")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterByloanDate(@RequestBody GroupMaster obj)  {
+	
+		List<GroupMaster> list2 = groupMasterRepo.findByloanDateBetweenmmmmm(obj.getfDate(),obj.gettDate());
+		
+		return list2;
+		
+	}
+	
+	
+	@PostMapping("/getGroupMasterBysearchMemberCode")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterBysearchMemberCode(@RequestBody GroupMaster obj)  {
+	
+		List<GroupMaster> allGroupMasters = groupMasterRepo.findBysearchMemberCode(obj.getSearchMemberCode());
+
+	    return allGroupMasters;
+		
+	}
+	
+	@PostMapping("/getGroupMasterBymemberName")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterBymemberName(@RequestBody GroupMaster obj)  {
+	
+		List<GroupMaster> allGroupMasters = groupMasterRepo.findBymemberName(obj.getMemberName());
+
+	    return allGroupMasters;
+		}
+
+	@PostMapping("/getGroupMasterByadvisorCode")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterByadvisorCode(@RequestBody GroupMaster obj)  {
+	
+		List<GroupMaster> allGroupMasters = groupMasterRepo.findByadvisorCode(obj.getAdvisorCode());
+
+	    return allGroupMasters;
+		}
+	
+	@PostMapping("/getGroupMasterByplaneName")
+	@ResponseBody
+	public List<GroupMaster> getGroupMasterByplaneName(@RequestBody GroupMaster obj)  {
+	
+		List<GroupMaster> allGroupMasters = groupMasterRepo.findByplaneName(obj.getPlaneName());
+
+	    return allGroupMasters;
+		}
 
 }
